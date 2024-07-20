@@ -274,7 +274,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     position: relative;
     overflow: hidden;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -315,7 +315,7 @@ h1, h2, h3, h4, h5, h6 {
 .testimonial-cards-wrapper {
     overflow: hidden;
     width: 100%;
-    max-width: 800px; /* Adjust based on design needs */
+    max-width: 900px; /* Adjust based on design needs */
     position: relative; /* Ensure the chevrons position properly */
 }
 
@@ -333,7 +333,7 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bottom shadow */
     border: 1px solid #dddddd;
     border-radius: 16px;
-    margin: 10px 30px;
+    margin: 10px 40px;
 }
 
 .testimonial-left {
