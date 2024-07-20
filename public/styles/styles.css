@@ -279,10 +279,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .testimonial-title {
-    font-size: 24px;
+    font-size: 34px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     text-align: center;
+    color: #202124;
 }
 
 .chevron {
@@ -298,7 +299,7 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     user-select: none;
     position: absolute;
-    top: 55%;
+    top: 65%;
     transform: translateY(-50%);
     z-index: 10; /* Ensure it's above other elements */
 }
@@ -373,8 +374,8 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .testimonial-card {
-        flex: 0 0 100%; /* Each card takes full width of the container */
-        margin: 0; /* Remove margin for better fit on small screens */
+        flex: 0 0 50%; /* Each card takes full width of the container */
+        margin: 10px; /* Remove margin for better fit on small screens */
     }
 
     .chevron {

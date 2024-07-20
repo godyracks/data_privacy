@@ -1,6 +1,6 @@
 
 <section class="testimonials">
-<h2 class="testimonial-title">What our users say</h2>
+<h2 class="testimonial-title">See What Our Users Say</h2>
 <span class="material-symbols-outlined chevron chevron-left">chevron_left</span>
     <div class="testimonial-cards-wrapper">
    
