@@ -3,4 +3,5 @@
 <?= $this->section('content') ?>
 <?= $this->include('partials/_hero') ?>
 <?= $this->include('partials/_highlights') ?>
+<?= $this->include('partials/_testimonials') ?>
 <?= $this->endSection() ?>

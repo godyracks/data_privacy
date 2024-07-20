@@ -35,3 +35,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const chevronLeft = document.querySelector('.chevron-left');
+    const chevronRight = document.querySelector('.chevron-right');
+    const testimonialCards = document.querySelector('.testimonial-cards');
+
+    chevronLeft.addEventListener('click', function() {
+        testimonialCards.scrollBy({
+            left: -527, // Width of one card plus margin
+            behavior: 'smooth'
+        });
+    });
+
+    chevronRight.addEventListener('click', function() {
+        testimonialCards.scrollBy({
+            left: 527, // Width of one card plus margin
+            behavior: 'smooth'
+        });
+    });
+});
