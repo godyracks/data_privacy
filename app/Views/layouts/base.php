@@ -14,6 +14,9 @@
             <div class="logo">
                 <img src="<?= base_url('public/images/biometric-logo2.png') ?>" alt="MyLogo">
             </div>
+            <!-- Menu Icon -->
+            <span class="material-symbols-outlined menu-icon" id="menuToggle">menu</span>
+            <!-- Navigation Links -->
             <nav class="nav-links">
                 <a href="<?= base_url('/') ?>" class="nav-link <?= uri_string() == '' ? 'active' : '' ?>">Home</a>
                 <a href="<?= base_url('features') ?>" class="nav-link <?= uri_string() == 'features' ? 'active' : '' ?>">Features</a>
@@ -24,33 +27,19 @@
                 <a href="<?= base_url('about') ?>" class="nav-link <?= uri_string() == 'about' ? 'active' : '' ?>">About</a>
                 <a href="<?= base_url('contact') ?>" class="nav-link <?= uri_string() == 'contact' ? 'active' : '' ?>">Contact</a>
                 <a href="<?= base_url('login') ?>" class="nav-link <?= uri_string() == 'login' ? 'active' : '' ?>">Login</a>
-                <!-- Toggle Modal Button -->
-                <span class="nav-link-toggle" id="modalToggle">
-                <span class="material-symbols-outlined">
-menu
-</span>
-</span>
-
             </nav>
-        </div>
-        <!-- Modal Structure -->
-        <div class="modal" id="modal">
-            <div class="modal-header">
-                <span>Menu</span>
-                <span class="modal-close" id="modalClose">
-                    <span class="material-icons">close</span>
-                </span>
-            </div>
-            <div class="modal-links">
-                <a href="<?= base_url('/') ?>">Home</a>
-                <a href="<?= base_url('features') ?>">Features</a>
-                <a href="<?= base_url('map') ?>">Map</a>
-                <a href="<?= base_url('timeline') ?>">Timeline</a>
-                <a href="<?= base_url('search') ?>">Search</a>
-                <a href="<?= base_url('resources') ?>">Resources</a>
-                <a href="<?= base_url('about') ?>">About</a>
-                <a href="<?= base_url('contact') ?>">Contact</a>
-                <a href="<?= base_url('login') ?>">Login</a>
+            <!-- Modal Navigation for small screens -->
+            <div class="modal-nav" id="modalNav">
+                <span class="material-symbols-outlined modal-close" id="menuClose">close</span>
+                <a href="<?= base_url('/') ?>" class="nav-link <?= uri_string() == '' ? 'active' : '' ?>">Home</a>
+                <a href="<?= base_url('features') ?>" class="nav-link <?= uri_string() == 'features' ? 'active' : '' ?>">Features</a>
+                <a href="<?= base_url('map') ?>" class="nav-link <?= uri_string() == 'map' ? 'active' : '' ?>">Map</a>
+                <a href="<?= base_url('timeline') ?>" class="nav-link <?= uri_string() == 'timeline' ? 'active' : '' ?>">Timeline</a>
+                <a href="<?= base_url('search') ?>" class="nav-link <?= uri_string() == 'search' ? 'active' : '' ?>">Search</a>
+                <a href="<?= base_url('resources') ?>" class="nav-link <?= uri_string() == 'resources' ? 'active' : '' ?>">Resources</a>
+                <a href="<?= base_url('about') ?>" class="nav-link <?= uri_string() == 'about' ? 'active' : '' ?>">About</a>
+                <a href="<?= base_url('contact') ?>" class="nav-link <?= uri_string() == 'contact' ? 'active' : '' ?>">Contact</a>
+                <a href="<?= base_url('login') ?>" class="nav-link <?= uri_string() == 'login' ? 'active' : '' ?>">Login</a>
             </div>
         </div>
     </header>
@@ -107,6 +96,30 @@ location_on
         <p>&copy; 2024 Biometric Data Privacy. All rights reserved.</p>
     </div>
 </footer>
+
+ <script>
+ document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menuToggle');
+    const menuClose = document.getElementById('menuClose');
+    const modalNav = document.getElementById('modalNav');
+
+    menuToggle.addEventListener('click', () => {
+        modalNav.classList.add('open');
+    });
+
+    menuClose.addEventListener('click', () => {
+        modalNav.classList.remove('open');
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target !== menuToggle && event.target !== modalNav && !modalNav.contains(event.target)) {
+            modalNav.classList.remove('open');
+        }
+    });
+});
+
+</script>
+
 
 
     <script src="<?= base_url('public/scripts/scripts.js') ?>"></script>
