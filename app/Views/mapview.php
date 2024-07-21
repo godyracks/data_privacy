@@ -71,7 +71,7 @@
         const countryStyle = {
             color: 'orange',
             fillColor: 'orange',
-            fillOpacity: 0.5
+            fillOpacity: 0.1
         };
 
         const indiaCoords = [[8.4, 68.7], [37.6, 97.25]];
