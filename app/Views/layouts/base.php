@@ -68,24 +68,24 @@ menu
         <div class="footer-column">
             <h3>Home</h3>
             <ul>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Search</a></li>
+                <li><a href="<?= base_url('features') ?>">Features</a></li>
+                <li><a href="<?= base_url('about') ?>">About Us</a></li>
+                <li><a href="<?= base_url('search') ?>">Search</a></li>
             </ul>
         </div>
         <div class="footer-column">
             <h3>Categories</h3>
             <ul>
-                <li><a href="#">Maps</a></li>
-                <li><a href="#">Timelines</a></li>
+                <li><a href="<?= base_url('maps') ?>">Maps</a></li>
+                <li><a href="<?= base_url('timelines') ?>">Timelines</a></li>
             </ul>
         </div>
         <div class="footer-column">
             <h3>Quick Links</h3>
             <ul>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Ts & Co.</a></li>
-                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="<?= base_url('login') ?>">Login</a></li>
+                <li><a href="<?= base_url('terms-and-conditions') ?>">Ts & Co.</a></li>
+                <li><a href="<?= base_url('privacy-policy') ?>">Privacy Policy</a></li>
             </ul>
         </div>
         <div class="footer-column">
@@ -93,7 +93,7 @@ menu
             <ul>
                 <li><span class="material-symbols-outlined">
 call
-</span> +1-8124853066</li>
+</span> +91 8124 853 066</li>
                 <li><span class="material-symbols-outlined">
 mail
 </span> Monishavajji@gmail.com</li>
