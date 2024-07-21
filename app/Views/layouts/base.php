@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <title>Biometric Data Laws</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="<?= base_url('public/styles/styles.css') ?>">
 </head>
 <body>
@@ -123,5 +124,7 @@ location_on
 
 
     <script src="<?= base_url('public/scripts/scripts.js') ?>"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="<?= base_url('public/scripts/map.js') ?>"></script>
 </body>
 </html>
