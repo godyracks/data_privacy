@@ -8,6 +8,7 @@
     --button-color: #FFAC0C;
     --blue-overlay: rgba(90, 174, 214, 0.5);
     --footer-bg: #202124;
+    --big-title: #202124;
     --input-bg: rgba(206, 199, 199, 0.4);
     --heading-color: #FF5722;
     --card-box-shadow: #468EEE;
@@ -283,7 +284,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
     margin-bottom: 40px;
     text-align: center;
-    color: #202124;
+    color: var(--big-title);
 }
 
 .chevron {
@@ -389,6 +390,127 @@ h1, h2, h3, h4, h5, h6 {
 
     .chevron-right {
         right: 10px; /* Ensure visibility */
+    }
+}
+
+/* wwdo */
+.what-we-do {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.section-title {
+    font-size: 32px;
+    margin-bottom: 70px;
+    color: var(--big-title);
+}
+
+.blue-rectangle {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    background: linear-gradient(to bottom, #468EEE, #A4C8F6);
+    width: 600px;
+    height: 250px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: visible;
+    position: relative;
+}
+
+
+
+.left-div {
+    position: relative;
+    width: 30%;
+    /* margin: 0 auto; */
+    overflow: visible;
+}
+.rectangle-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    overflow: visible;
+    z-index: 10;
+    width: 80%;
+    height: 330px;
+    object-fit: cover;
+    transform: translateY(-10%); /* Adjust this value to control how much the image overflows at the top */
+}
+
+
+
+.right-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 15px;
+    padding-left: 40px;
+    width: 70%;
+    color: white;
+    text-align: left;
+}
+
+.right-div p {
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.get-started {
+    background-color: orange;
+    color: white;
+}
+
+.resources {
+    background-color: transparent;
+    color: white;
+    border: 3px solid white;
+}
+
+@media (max-width: 769px) {
+    .blue-rectangle {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+    }
+
+    .left-div, .right-div {
+        width: 100%;
+    }
+
+    .rectangle-image {
+        display: none;
+        width: 100%;
+        height: auto;
+    }
+
+    .right-div {
+        padding: 20px 10px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
     }
 }
 
