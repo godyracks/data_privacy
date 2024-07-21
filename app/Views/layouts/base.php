@@ -76,8 +76,8 @@ menu
         <div class="footer-column">
             <h3>Categories</h3>
             <ul>
-                <li><a href="<?= base_url('maps') ?>">Maps</a></li>
-                <li><a href="<?= base_url('timelines') ?>">Timelines</a></li>
+                <li><a href="<?= base_url('map') ?>">Maps</a></li>
+                <li><a href="<?= base_url('timeline') ?>">Timelines</a></li>
             </ul>
         </div>
         <div class="footer-column">
