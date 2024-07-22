@@ -83,10 +83,10 @@
             <ul>
                 <li><span class="material-symbols-outlined">
 call
-</span> +91 8124 853 066</li>
+</span> +447436199290</li>
                 <li><span class="material-symbols-outlined">
 mail
-</span> Monishavajji@gmail.com</li>
+</span>sivasakthivajjiravelu@gmail.com</li>
                 <li><span class="material-symbols-outlined">
 location_on
 </span> Name of Street, IN</li>
