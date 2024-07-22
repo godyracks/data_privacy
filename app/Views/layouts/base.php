@@ -82,13 +82,13 @@
         <div class="footer-column">
             <h3>Let's Connect</h3>
             <ul>
-                <li><span class="material-symbols-outlined">
+                <li><span class="material-symbols-outlined footer-icon">
 call
 </span> +447436199290</li>
-                <li><span class="material-symbols-outlined">
+                <li><span class="material-symbols-outlined footer-icon">
 mail
 </span>sivasakthivajjiravelu@gmail.com</li>
-                <li><span class="material-symbols-outlined">
+                <li><span class="material-symbols-outlined footer-icon">
 location_on
 </span> Name of Street, IN</li>
             </ul>

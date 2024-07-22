@@ -1,7 +1,7 @@
 
 <section class="testimonials">
 <h2 class="testimonial-title">See What Our Users Say</h2>
-<span class="material-symbols-outlined chevron chevron-left">chevron_left</span>
+<span class="material-symbols-outlined test-chevron chevron-left">chevron_left</span>
     <div class="testimonial-cards-wrapper">
    
         <div class="testimonial-cards">
@@ -80,5 +80,5 @@
         </div>
         
     </div>
-    <span class="material-symbols-outlined chevron chevron-right">chevron_right</span>
+    <span class="material-symbols-outlined test-chevron chevron-right">chevron_right</span>
 </section>

@@ -1,3 +1,5 @@
+
+
 <div class="scroll-to-top" id="scrollToTopBtn">
         <span class="material-symbols-outlined">keyboard_double_arrow_up</span>
     </div>
@@ -5,7 +7,7 @@
         const scrollToTopBtn = document.getElementById('scrollToTopBtn');
 
 window.addEventListener('scroll', () => {
-    // Show button when scrolled down 200px
+    // Show button when scrolled down 40px
     if (window.scrollY > 40) {
         scrollToTopBtn.classList.add('visible');
     } else {
