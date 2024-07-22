@@ -6,7 +6,7 @@
 
 window.addEventListener('scroll', () => {
     // Show button when scrolled down 200px
-    if (window.scrollY > 200) {
+    if (window.scrollY > 40) {
         scrollToTopBtn.classList.add('visible');
     } else {
         scrollToTopBtn.classList.remove('visible');

@@ -471,6 +471,13 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     gap: 10px;
 }
+.buttons a{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+.buttons a:visited{
+   color: #FFFFFF;
+}
 
 .btn {
     padding: 10px 20px;

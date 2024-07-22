@@ -7,8 +7,8 @@
         <div class="right-div">
             <p>Explore and compare UK and India biometric data privacy laws through interactive maps, timelines, and searchable databases.</p>
             <div class="buttons">
-                <button class="btn get-started">Get Started</button>
-                <button class="btn resources">Resources</button>
+               <button class="btn get-started"> <a href="<?= base_url('map')?>">Get Started</a></button>
+                <button class="btn resources"><a href="<?= base_url('resources')?>">Resources</a></button>
             </div>
         </div>
     </div>

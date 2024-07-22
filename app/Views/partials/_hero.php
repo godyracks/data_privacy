@@ -3,7 +3,7 @@
             <div class="hero-content">
                 <h1>Explore Biometric Data Privacy Laws: <br>UK vs. India</h1>
                 <p>An interactive platform to understand and compare biometric data privacy laws.</p>
-                <a href="#" class="cta-button">Get Started</a>
+                <a href="<?= base_url('map')?>" class="cta-button">Get Started</a>
             </div>
         </div>
     </section>
