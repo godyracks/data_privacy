@@ -2,43 +2,7 @@
 
 <?= $this->section('content') ?>
 <style>
-    #map {
-        height: 100vh;
-        width: 100%;
-    }
 
-    .map-modal {
-        display: none; 
-        position: fixed; 
-        z-index: 1001; 
-        left: 0; 
-        top: 0; 
-        width: 100%; 
-        height: 100%; 
-        overflow: auto; 
-        background-color: rgba(0, 0, 0, 0.8); 
-    }
-
-    .map-modal-content {
-        background-color: white; 
-        margin: 15% auto; 
-        padding: 20px; 
-        border: 1px solid #888; 
-        width: 80%; 
-    }
-
-    .map-modal-close {
-        color: #aaa; 
-        float: right; 
-        font-size: 28px; 
-        font-weight: bold; 
-    }
-
-    .map-modal-close:hover, .map-modal-close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
 </style>
 
 <?= $this->include('partials/_search-input') ?>

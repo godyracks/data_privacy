@@ -10,7 +10,7 @@
             <button class="tab-button" data-tab="case-studies">Case Studies</button>
         </div>
         <div class="tab-content">
-            <div class="tab-panel active" id="overview">
+            <div class="tab-panel" id="overview">
                 <p>Overview content goes here...</p>
             </div>
             <div class="tab-panel" id="specific-laws">
@@ -23,17 +23,18 @@
     </div>
 </div>
 
+
 <script>
 document.getElementById('panel-chevron-icon').addEventListener('click', function() {
     const content = document.getElementById('info-content');
     const chevron = document.getElementById('panel-chevron-icon');
 
-    if (content.classList.contains('expanded')) {
-        content.classList.remove('expanded');
-        chevron.textContent = 'chevron_right';
-    } else {
-        content.classList.add('expanded');
+    if (content.style.height === '0px' || content.style.height === '') {
+        content.style.height = 'auto';
         chevron.textContent = 'keyboard_arrow_up';
+    } else {
+        content.style.height = '0';
+        chevron.textContent = 'chevron_right';
     }
 });
 
@@ -55,5 +56,6 @@ tabs.forEach(tab => {
         document.getElementById(this.dataset.tab).classList.add('active');
     });
 });
+
 
 </script>
