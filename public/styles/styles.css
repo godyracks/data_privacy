@@ -816,9 +816,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .info-content {
-    width: 0;
+    height: 0;
     overflow: hidden;
-    transition: width 0.3s ease;
+    transition: height 0.3s ease;
 }
 
 .tabs {
@@ -852,16 +852,6 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
 }
 
-.panel-close-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #f00;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-}
 
 
 
