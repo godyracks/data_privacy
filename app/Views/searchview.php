@@ -131,6 +131,58 @@
                     </div>
                 </div>
                 <!-- Add more document cards as needed -->
+                <div class="document-card document">
+                    <div class="doc-content">
+                        <h3>Biometric Data Privacy Laws: UK vs. India</h3>
+                        <p>An overview of how biometric data privacy laws compare between the UK and India. This document </p>
+                        <div class="doc-footer">
+                            <div class="doc-info">
+                                <p class="date">Date: July 2024</p>
+                                <p>Tags: Privacy, Laws, UK, India</p>
+                            </div>
+                            <a href="#">View More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="document-card document">
+                    <div class="doc-content">
+                        <h3>Biometric Data Privacy Laws: UK vs. India</h3>
+                        <p>An overview of how biometric data privacy laws compare between the UK and India. This document </p>
+                        <div class="doc-footer">
+                            <div class="doc-info">
+                                <p class="date">Date: July 2024</p>
+                                <p>Tags: Privacy, Laws, UK, India</p>
+                            </div>
+                            <a href="#">View More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="document-card document">
+                    <div class="doc-content">
+                        <h3>Biometric Data Privacy Laws: UK vs. India</h3>
+                        <p>An overview of how biometric data privacy laws compare between the UK and India. This document </p>
+                        <div class="doc-footer">
+                            <div class="doc-info">
+                                <p class="date">Date: July 2024</p>
+                                <p>Tags: Privacy, Laws, UK, India</p>
+                            </div>
+                            <a href="#">View More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="document-card document">
+                    <div class="doc-content">
+                        <h3>Biometric Data Privacy Laws: UK vs. India</h3>
+                        <p>An overview of how biometric data privacy laws compare between the UK and India. This document </p>
+                        <div class="doc-footer">
+                            <div class="doc-info">
+                                <p class="date">Date: July 2024</p>
+                                <p>Tags: Privacy, Laws, UK, India</p>
+                            </div>
+                            <a href="#">View More</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
