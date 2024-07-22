@@ -816,9 +816,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .info-content {
-    height: 0;
+    max-height: 0;
     overflow: hidden;
-    transition: height 0.3s ease;
+    transition: max-height 0.5s ease, padding 0.3s ease;
+    padding: 0 10px;
+}
+
+.info-content.expanded {
+    max-height: 500px; /* Adjust this value according to the maximum content height */
 }
 
 .tabs {

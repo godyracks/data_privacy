@@ -24,37 +24,36 @@
 </div>
 
 <script>
-    document.getElementById('panel-chevron-icon').addEventListener('click', function() {
-        const content = document.getElementById('info-content');
-        const chevron = document.getElementById('panel-chevron-icon');
+document.getElementById('panel-chevron-icon').addEventListener('click', function() {
+    const content = document.getElementById('info-content');
+    const chevron = document.getElementById('panel-chevron-icon');
 
-        if (content.style.height === '0px' || content.style.height === '') {
-            content.style.height = 'auto'; // Set height to auto to allow content to expand
-            content.style.overflow = 'auto';
-            chevron.textContent = 'keyboard_arrow_up';
-        } else {
-            content.style.height = '0';
-            content.style.overflow = 'hidden';
-            chevron.textContent = 'chevron_right';
+    if (content.classList.contains('expanded')) {
+        content.classList.remove('expanded');
+        chevron.textContent = 'chevron_right';
+    } else {
+        content.classList.add('expanded');
+        chevron.textContent = 'keyboard_arrow_up';
+    }
+});
+
+const tabs = document.querySelectorAll('.tab-button');
+tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+        const activeTab = document.querySelector('.tab-button.active');
+        const activePanel = document.querySelector('.tab-panel.active');
+
+        if (activeTab) {
+            activeTab.classList.remove('active');
         }
+
+        if (activePanel) {
+            activePanel.classList.remove('active');
+        }
+
+        this.classList.add('active');
+        document.getElementById(this.dataset.tab).classList.add('active');
     });
+});
 
-    const tabs = document.querySelectorAll('.tab-button');
-    tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            const activeTab = document.querySelector('.tab-button.active');
-            const activePanel = document.querySelector('.tab-panel.active');
-
-            if (activeTab) {
-                activeTab.classList.remove('active');
-            }
-
-            if (activePanel) {
-                activePanel.classList.remove('active');
-            }
-
-            this.classList.add('active');
-            document.getElementById(this.dataset.tab).classList.add('active');
-        });
-    });
 </script>
