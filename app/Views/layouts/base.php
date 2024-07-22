@@ -47,6 +47,7 @@
 
     <main>
         <?= $this->renderSection('content') ?>
+        <?= $this->include('partials/_scroll-top') ?>
     </main>
 
     <footer class="footer">
