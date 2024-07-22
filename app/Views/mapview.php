@@ -42,6 +42,7 @@
 </style>
 
 <?= $this->include('partials/_search-input') ?>
+<?= $this->include('partials/_info-panel') ?>
 <div id="map"></div>
 
 <!-- Modal Structure -->

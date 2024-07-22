@@ -787,7 +787,81 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     color: #666;
 }
+/* info-panel */
+.info-panel {
+    width: 500px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    position: relative;
+    overflow: hidden;
+    transition: width 0.3s ease;
+}
 
+.info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.info-title {
+    font-weight: bold;
+}
+
+.material-symbols-outlined {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.info-content {
+    width: 0;
+    overflow: hidden;
+    transition: width 0.3s ease;
+}
+
+.tabs {
+    display: flex;
+    background-color: #eee;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px;
+    background-color: #ddd;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.tab-button.active {
+    background-color: orange;
+    color: #fff;
+}
+
+.tab-content {
+    padding: 10px;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+.panel-close-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #f00;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
 
 
 
