@@ -1156,17 +1156,40 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Timeline */
 #timeline {
-    width: 100%;
-    height: 500px;
-    border: 1px solid lightgray;
-    
+    width: 95%;
+    height: 450px;
+    border: 1px solid var(--hightlights);
+    top: 50%;
+    margin: 0 auto;
+  
+}
+.vis-item {
+    color: white !important;
+    background-color: var(--hightlights) !important;
+}
+.vis-label {
+    color: white !important;
+}
+.vis-group .vis-label {
+    color: white !important;
+}
+.vis-time-axis .vis-text {
+    color: white !important;
 }
 .vis-item.vis-selected {
     border-color: #ff5722;
-    background-color: #ff5722;
+    background-color: #ff5722 !important;
+}
+.vis-timeline .vis-panel .vis-grid .vis-major,
+.vis-timeline .vis-panel .vis-grid .vis-minor {
+    border-color: white !important;
+}
+.vis-timeline .vis-time-axis .vis-grid.vis-horizontal .vis-line {
+    border-color: white !important;
 }
 .timeline-section{
-    margin-top: 150px;
+    margin-top: 180px;
+    border: none;
 }
 
 /* UNDER DEV */
