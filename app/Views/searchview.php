@@ -187,6 +187,11 @@
         </div>
     </div>
     <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Initial state: Display all categories
+    document.querySelector('.filter-btn.active').click();
+});
+
 document.querySelectorAll('.filter-btn').forEach(button => {
     button.addEventListener('click', () => {
         document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
@@ -217,6 +222,7 @@ document.querySelectorAll('.page-number').forEach(page => {
         // Pagination logic can be added here
     });
 });
+
 </script>
 
 <?= $this->endSection() ?>
