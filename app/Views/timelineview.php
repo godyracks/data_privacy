@@ -2,5 +2,6 @@
 
 <?= $this->section('content') ?>
 
-<?= $this->include('partials/under_dev') ?>
+<?= $this->include('partials/_search-input') ?>
+<?= $this->include('partials/_info-panel') ?>
 <?= $this->endSection() ?>
