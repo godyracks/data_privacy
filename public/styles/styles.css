@@ -1154,6 +1154,21 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* Timeline */
+#timeline {
+    width: 100%;
+    height: 500px;
+    border: 1px solid lightgray;
+    
+}
+.vis-item.vis-selected {
+    border-color: #ff5722;
+    background-color: #ff5722;
+}
+.timeline-section{
+    margin-top: 150px;
+}
+
 /* UNDER DEV */
 .development-section {
     display: flex;
