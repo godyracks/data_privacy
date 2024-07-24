@@ -19,7 +19,7 @@
                 <div class="card case-study">
                     <img src="<?= base_url($caseStudy['Image']) ?>" alt="<?= esc($caseStudy['Title']) ?> Image">
                     <div class="card-content">
-                        <h3><?= esc($caseStudy['Title']) ?></h3>
+                        <h3><?= truncate_words(esc($caseStudy['Title']), 9 );?></h3>
                         <p><?= truncate_words(esc($caseStudy['Summary']), 20); ?></p>
                         <div class="card-footer">
                             <a href="#">View More</a>
@@ -44,8 +44,8 @@
             <?php foreach ($documents as $document): ?>
                 <div class="document-card document">
                     <div class="doc-content">
-                        <h3><?= esc($document['DocumentName']) ?></h3>
-                        <p><?= esc($document['Description']) ?></p>
+                        <h3><?= truncate_words(esc($document['DocumentName']), 12) ?></h3>
+                        <p><?= truncate_words(esc($document['Description']), 20) ?></p>
                         <div class="doc-footer">
                             <div class="doc-info">
                                 <p class="date">Date: <?= esc($document['Date']) ?></p>
