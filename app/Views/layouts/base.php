@@ -29,7 +29,7 @@
                 <a href="<?= base_url('resources') ?>" class="nav-link <?= uri_string() == 'resources' ? 'active' : '' ?>">Resources</a>
                 <a href="<?= base_url('about') ?>" class="nav-link <?= uri_string() == 'about' ? 'active' : '' ?>">About</a>
                 <a href="<?= base_url('contact') ?>" class="nav-link <?= uri_string() == 'contact' ? 'active' : '' ?>">Contact</a>
-                <a href="<?= base_url('login') ?>" class="nav-link <?= uri_string() == 'login' ? 'active' : '' ?>">Login</a>
+                <a href="<?= base_url('auth') ?>" class="nav-link <?= uri_string() == 'login' ? 'active' : '' ?>">Login</a>
             </nav>
             <!-- Modal Navigation for small screens -->
             <div class="modal-nav" id="modalNav">
@@ -42,7 +42,7 @@
                 <a href="<?= base_url('resources') ?>" class="nav-link <?= uri_string() == 'resources' ? 'active' : '' ?>">Resources</a>
                 <a href="<?= base_url('about') ?>" class="nav-link <?= uri_string() == 'about' ? 'active' : '' ?>">About</a>
                 <a href="<?= base_url('contact') ?>" class="nav-link <?= uri_string() == 'contact' ? 'active' : '' ?>">Contact</a>
-                <a href="<?= base_url('login') ?>" class="nav-link <?= uri_string() == 'login' ? 'active' : '' ?>">Login</a>
+                <a href="<?= base_url('auth') ?>" class="nav-link <?= uri_string() == 'login' ? 'active' : '' ?>">Login</a>
             </div>
         </div>
     </header>
@@ -76,7 +76,7 @@
         <div class="footer-column">
             <h3>Quick Links</h3>
             <ul>
-                <li><a href="<?= base_url('login') ?>">Login</a></li>
+                <li><a href="<?= base_url('auth') ?>">Login</a></li>
                 <li><a href="<?= base_url('terms-and-conditions') ?>">Ts & Co.</a></li>
                 <li><a href="<?= base_url('privacy-policy') ?>">Privacy Policy</a></li>
             </ul>
