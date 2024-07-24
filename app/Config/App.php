@@ -33,7 +33,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public string $indexPage = 'index.php ';
+    public string $indexPage = 'index.php';
 
     /**
      * URI Protocol
