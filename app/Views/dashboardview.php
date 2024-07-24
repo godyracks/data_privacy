@@ -15,7 +15,7 @@
     </ul>
 
     <h1>Laws</h1>
-    <form action="/dashboard/add-law" method="post">
+    <form action="<?= base_url('dashboard/add-law') ?>" method="post">
         <select name="CountryID">
             <?php foreach ($countries as $country): ?>
                 <option value="<?= $country['CountryID'] ?>"><?= $country['CountryName'] ?></option>
