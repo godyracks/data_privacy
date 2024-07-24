@@ -7,5 +7,5 @@ class LawModel extends Model
 {
     protected $table      = 'Laws';
     protected $primaryKey = 'LawID';
-    protected $allowedFields = ['CountryID', 'LawName', 'Description', 'KeyProvisions'];
+    protected $allowedFields = ['CountryID', 'LawName', 'Description', 'KeyProvisions', 'Date', 'Image'];
 }

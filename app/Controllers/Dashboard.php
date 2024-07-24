@@ -31,11 +31,30 @@ class Dashboard extends BaseController
     public function addLaw()
     {
         $lawModel = new LawModel();
+        
+        // Ensure uploads directory and subdirectory exist
+        $uploadPath = ROOTPATH . 'uploads/laws';
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0777, true);
+        }
+
+        // Handle file upload
+        $image = $this->request->getFile('Image');
+        if ($image && $image->isValid() && !$image->hasMoved()) {
+            $newName = $image->getRandomName();
+            $image->move($uploadPath, $newName);
+            $imagePath = 'uploads/laws/' . $newName;
+        } else {
+            $imagePath = null;
+        }
+
         $data = [
             'CountryID' => $this->request->getPost('CountryID'),
             'LawName' => $this->request->getPost('LawName'),
             'Description' => $this->request->getPost('Description'),
-            'KeyProvisions' => $this->request->getPost('KeyProvisions')
+            'KeyProvisions' => $this->request->getPost('KeyProvisions'),
+            'Date' => $this->request->getPost('Date'),
+            'Image' => $imagePath
         ];
         $lawModel->save($data);
         return redirect()->to('/dashboard');
@@ -44,12 +63,30 @@ class Dashboard extends BaseController
     public function addDocument()
     {
         $documentModel = new DocumentModel();
+        
+        // Ensure uploads directory and subdirectory exist
+        $uploadPath = ROOTPATH . 'uploads/documents';
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0777, true);
+        }
+
+        // Handle file upload
+        $image = $this->request->getFile('Image');
+        if ($image && $image->isValid() && !$image->hasMoved()) {
+            $newName = $image->getRandomName();
+            $image->move($uploadPath, $newName);
+            $imagePath = 'uploads/documents/' . $newName;
+        } else {
+            $imagePath = null;
+        }
+
         $data = [
             'CountryID' => $this->request->getPost('CountryID'),
             'DocumentName' => $this->request->getPost('DocumentName'),
             'Description' => $this->request->getPost('Description'),
             'Type' => $this->request->getPost('Type'),
-            'Date' => $this->request->getPost('Date')
+            'Date' => $this->request->getPost('Date'),
+            'Image' => $imagePath
         ];
         $documentModel->save($data);
         return redirect()->to('/dashboard');
@@ -58,11 +95,29 @@ class Dashboard extends BaseController
     public function addCaseStudy()
     {
         $caseStudyModel = new CaseStudyModel();
+        
+        // Ensure uploads directory and subdirectory exist
+        $uploadPath = ROOTPATH . 'uploads/case_studies';
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0777, true);
+        }
+
+        // Handle file upload
+        $image = $this->request->getFile('Image');
+        if ($image && $image->isValid() && !$image->hasMoved()) {
+            $newName = $image->getRandomName();
+            $image->move($uploadPath, $newName);
+            $imagePath = 'uploads/case_studies/' . $newName;
+        } else {
+            $imagePath = null;
+        }
+
         $data = [
             'CountryID' => $this->request->getPost('CountryID'),
             'Title' => $this->request->getPost('Title'),
             'Summary' => $this->request->getPost('Summary'),
-            'Date' => $this->request->getPost('Date')
+            'Date' => $this->request->getPost('Date'),
+            'Image' => $imagePath
         ];
         $caseStudyModel->save($data);
         return redirect()->to('/dashboard');
@@ -71,11 +126,30 @@ class Dashboard extends BaseController
     public function addResource()
     {
         $resourceModel = new ResourceModel();
+        
+        // Ensure uploads directory and subdirectory exist
+        $uploadPath = ROOTPATH . 'uploads/resources';
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0777, true);
+        }
+
+        // Handle file upload
+        $image = $this->request->getFile('Image');
+        if ($image && $image->isValid() && !$image->hasMoved()) {
+            $newName = $image->getRandomName();
+            $image->move($uploadPath, $newName);
+            $imagePath = 'uploads/resources/' . $newName;
+        } else {
+            $imagePath = null;
+        }
+
         $data = [
             'CountryID' => $this->request->getPost('CountryID'),
             'Title' => $this->request->getPost('Title'),
             'Type' => $this->request->getPost('Type'),
-            'URL' => $this->request->getPost('URL')
+            'URL' => $this->request->getPost('URL'),
+            'Date' => $this->request->getPost('Date'),
+            'Image' => $imagePath
         ];
         $resourceModel->save($data);
         return redirect()->to('/dashboard');

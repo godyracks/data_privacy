@@ -7,5 +7,5 @@ class CaseStudyModel extends Model
 {
     protected $table      = 'CaseStudies';
     protected $primaryKey = 'CaseStudyID';
-    protected $allowedFields = ['CountryID', 'Title', 'Summary', 'Date'];
+    protected $allowedFields = ['CountryID', 'Title', 'Summary', 'Date', 'Image'];
 }
