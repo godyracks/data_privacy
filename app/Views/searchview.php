@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 <?= $this->include('partials/_search-input') ?>
-<?= $this->include('partials/_info-panel') ?>
+
 
 <div class="card-items">
     <div class="filter-bar">
