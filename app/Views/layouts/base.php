@@ -29,7 +29,7 @@
                 <a href="<?= base_url('resources') ?>" class="nav-link <?= uri_string() == 'resources' ? 'active' : '' ?>">Resources</a>
                 <a href="<?= base_url('about') ?>" class="nav-link <?= uri_string() == 'about' ? 'active' : '' ?>">About</a>
                 <a href="<?= base_url('contact') ?>" class="nav-link <?= uri_string() == 'contact' ? 'active' : '' ?>">Contact</a>
-                <a href="<?= base_url('auth') ?>" class="nav-link <?= uri_string() == 'login' ? 'active' : '' ?>">Login</a>
+                <a href="<?= base_url('auth') ?>" class="nav-link <?= uri_string() == 'auth' ? 'active' : '' ?>">Login</a>
             </nav>
             <!-- Modal Navigation for small screens -->
             <div class="modal-nav" id="modalNav">
