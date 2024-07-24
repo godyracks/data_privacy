@@ -10,6 +10,7 @@ $routes->get('features', 'Features::index');
 $routes->get('map', 'Map::index');
 $routes->get('timeline', 'Timelines::index');
 $routes->get('search', 'Search::index');
+$routes->get('live-search/search', 'LiveSearchController::search');
 $routes->get('resources', 'Resources::index');
 $routes->get('about', 'About::index');
 $routes->get('contact', 'Contact::index');
