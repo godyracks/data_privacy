@@ -27,4 +27,6 @@ $routes->post('/dashboard/add-document', 'Dashboard::addDocument');
 $routes->post('/dashboard/add-case-study', 'Dashboard::addCaseStudy');
 $routes->post('/dashboard/add-resource', 'Dashboard::addResource');
 $routes->post('/dashboard/add-search-index', 'Dashboard::addSearchIndex');
+$routes->get('view-more/(:segment)/(:num)', 'ViewMoreController::index/$1/$2');
+
 

@@ -11,6 +11,7 @@
         border-radius: 5px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         display: none;
+        margin-top: 5px;
     }
 
     .search-results .result-item {
