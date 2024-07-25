@@ -30,7 +30,7 @@
                 <div class="similar-post">
                     <h3><?= esc($post['Title'] ?? $post['DocumentName'] ?? $post['LawName'] ?? '') ?></h3>
                     <p><?= truncate_words(esc($post['Summary'] ?? $post['Description'] ?? $post['KeyProvisions'] ?? ''), 15); ?></p>
-                    <a href="<?= site_url('view-more/' . $type . '/' . $post[$type === 'case-study' ? 'CaseStudyID' : ($type === 'document' ? 'DocumentID' : ($type === 'law' ? 'LawID' : 'ResourceID'))]) ?>">Read More</a>
+                    <a href="<?= site_url('view-more/' . $type . '/' . $post[$type === 'case-study' ? 'CaseStudyID' : ($type === 'document' ? 'DocumentID' : ($type === 'law' ? 'LawID' : 'ResourceID'))] . '/' . url_title($post['Title'] ?? $post['DocumentName'] ?? $post['LawName'], '-', true)) ?>">Read More</a>
                 </div>
                 <hr class="divider">
             <?php endforeach; ?>
@@ -99,6 +99,24 @@
 .divider {
     border: 1px solid #ccc;
 }
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 769px) {
+    .view-more-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .left-part,
+    .right-part {
+        flex: none;
+        width: 100%;
+    }
+}
+
+    
+
 </style>
 
 <?= $this->endSection() ?>

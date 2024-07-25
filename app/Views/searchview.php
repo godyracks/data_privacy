@@ -22,7 +22,7 @@
                         <h3><?= truncate_words(esc($caseStudy['Title']), 9 );?></h3>
                         <p><?= truncate_words(esc($caseStudy['Summary']), 20); ?></p>
                         <div class="card-footer">
-                        <a href="<?= site_url('view-more/case-study/' . $caseStudy['CaseStudyID']) ?>">View More</a>
+                        <a href="<?= site_url('view-more/case-study/' . $caseStudy['CaseStudyID'] . '/' . url_title($caseStudy['Title'], '-', true)) ?>">View More</a>
                             <span class="material-symbols-outlined">favorite</span>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                 <p class="date">Date: <?= esc($document['Date']) ?></p>
                                 <p>Tags: <?= esc($document['Type']) ?></p>
                             </div>
-                            <a href="<?= site_url('view-more/document/' . $document['DocumentID']) ?>">View More</a>
+                            <a href="<?= site_url('view-more/document/' . $document['DocumentID'] . '/' . url_title($document['DocumentName'], '-', true)) ?>">View More</a>
                         </div>
                     </div>
                 </div>

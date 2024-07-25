@@ -7,10 +7,11 @@ use App\Models\DocumentModel;
 use App\Models\LawModel;
 use App\Models\ResourceModel;
 use CodeIgniter\Controller;
+use CodeIgniter\HTTP\Exceptions\HTTPException;
 
 class ViewMoreController extends Controller
 {
-    public function index($type, $id)
+    public function index($type, $id, $title = null)
     {
         $content = null;
         $similarPosts = [];
@@ -54,6 +55,11 @@ class ViewMoreController extends Controller
 
         if (!$content) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException("Content not found with ID: " . $id);
+        }
+
+        $expectedTitle = url_title($content['Title'] ?? $content['DocumentName'] ?? $content['LawName'] ?? '', '-', true);
+        if ($title !== $expectedTitle) {
+            return redirect()->to(site_url('view-more/' . $type . '/' . $id . '/' . $expectedTitle));
         }
 
         return view('viewmoreview', [
