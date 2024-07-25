@@ -964,7 +964,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .filter-bar {
-    margin-top: 130px;
+    /* margin-top: 130px; */
     display: flex;
     align-items: center;
     margin-bottom: 20px;
