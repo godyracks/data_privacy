@@ -71,7 +71,7 @@ class ViewMoreController extends Controller
         }
 
         $reviewModel = new ReviewModel();
-        $reviews = $reviewModel->where('user_id', $id) // Adjusted query to use `user_id` for filtering
+        $reviews = $reviewModel->where('content_id', $id) // Adjusted query to use `content_id` for filtering
                                ->findAll();
 
         return view('viewmoreview', [
@@ -88,10 +88,11 @@ class ViewMoreController extends Controller
         $session = session();
     
         if (!$session->get('isLoggedIn')) {
-            return redirect()->to('/login');
+            $session->set('redirect_url', current_url());
+            return redirect()->to('/google-login');
         }
     
-        $userId = $session->get('userData')['id'];
+        $userId = $session->get('userData')['google_id']; // Ensure this is the correct field from session data
         $reviewText = $this->request->getPost('review_text');
         $rating = $this->request->getPost('rating');
         $contentId = $this->request->getPost('content_id');
@@ -100,7 +101,8 @@ class ViewMoreController extends Controller
         $reviewData = [
             'user_id' => $userId,
             'content' => $reviewText,
-            'rating' => $rating
+            'rating' => $rating,
+            'created_at' => date('Y-m-d H:i:s')
         ];
     
         $reviewModel->save($reviewData);
@@ -108,5 +110,4 @@ class ViewMoreController extends Controller
         // Redirect back to the original page
         return redirect()->to(site_url('view-more/' . $contentType . '/' . $contentId))->with('message', 'Review submitted successfully.');
     }
-    
 }

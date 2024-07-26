@@ -44,6 +44,8 @@
             <div class="submit-review">
                 <h2>Submit Your Review</h2>
                 <form action="<?= site_url('submit-review') ?>" method="post">
+                    <input type="hidden" name="content_id" value="<?= esc($content['id']) ?>"> <!-- Hidden field for content_id -->
+                    <input type="hidden" name="content_type" value="<?= esc($type) ?>"> <!-- Hidden field for content_type -->
                     <label for="review_text">Review:</label>
                     <textarea id="review_text" name="review_text" required></textarea>
 
