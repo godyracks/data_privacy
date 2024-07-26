@@ -2,20 +2,18 @@
 
 <?= $this->section('content') ?>
 <style>
-    /* body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-} */
+
 
 .tab {
     overflow: hidden;
-    background-color: #333;
+    background-color: rgba(206, 199, 199, 0.4);
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 20px;
 }
 
 .tab button {
-    background-color: inherit;
+    background-color: rgba(206, 199, 199, 0.8);
     float: left;
     border: none;
     outline: none;
@@ -23,7 +21,8 @@
     padding: 14px 16px;
     transition: 0.3s;
     font-size: 17px;
-    color: white;
+    color: #000;
+    width: 50%;
 }
 
 .tab button:hover {
@@ -31,7 +30,8 @@
 }
 
 .tab button.active {
-    background-color: #007bff;
+    background-color: #FF5722;
+    color: #fff;
 }
 
 .tabcontent {
@@ -40,14 +40,19 @@
     border-top: none;
     background-color: white;
     margin-top: -1px;
+    
+    
+    margin-top: 20px;
 }
 
 form {
-    background: #fff;
+    background-color: rgba(70, 142, 238, 0.1);
     padding: 20px;
     margin: 20px 0;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 form input[type="text"],
@@ -55,15 +60,21 @@ form input[type="date"],
 form select,
 form textarea,
 form input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+    width: 70%;
+    padding: 10px 20px;
+    /* margin: 10px 0; */
     border: 1px solid #ccc;
     border-radius: 5px;
+    display:block;
+    margin: 20px auto;
+}
+form input[type="text"],
+form input[type="date"]{
+    height: 50px;
 }
 
 form button {
-    background-color: #007bff;
+  background-color: #6A7BA0;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -76,15 +87,21 @@ form button:hover {
 }
 
 h1, h2 {
-    color: #333;
+    color: #FF5722;
+    max-width: 40%;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 5px;
 }
 
-ul {
+.ul-list {
     list-style-type: none;
     padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-ul li {
+.ul-list .list {
     background: #fff;
     padding: 10px;
     margin: 10px 0;
@@ -95,13 +112,13 @@ ul li {
     align-items: center;
 }
 
-ul li a {
+.ul-list .list a {
     color: #007bff;
     text-decoration: none;
     margin-left: 10px;
 }
 
-ul li a:hover {
+.ul-list .list a:hover {
     text-decoration: underline;
 }
 
@@ -133,6 +150,7 @@ ul li a:hover {
         </select>
         <input type="text" name="LawName" placeholder="Law Name" required>
         <textarea name="Description" placeholder="Description" id="description"></textarea>
+        <br><br>
         <textarea name="KeyProvisions" placeholder="Key Provisions" id="key-provisions"></textarea>
         <input type="date" name="Date" required>
         <input type="file" name="Image" accept="image/*">
@@ -169,7 +187,7 @@ ul li a:hover {
             <?php endforeach; ?>
         </select>
         <input type="text" name="Title" placeholder="Title" required>
-        <textarea name="Summary" placeholder="Summary" id="case-description"></textarea>
+        <textarea name="Summary" placeholder="Case study Content here..." id="case-description"></textarea>
         <input type="date" name="Date" required>
         <input type="file" name="Image" accept="image/*">
         <button type="submit">Add Case Study</button>
@@ -200,17 +218,17 @@ ul li a:hover {
 
     <!-- Countries Listing -->
     <h2>Countries</h2>
-    <ul>
+    <ul class="ul-list">
         <?php foreach ($countries as $country): ?>
-            <li><?= $country['CountryName'] ?> (<?= $country['CountryCode'] ?>)</li>
+            <li class="list"><?= $country['CountryName'] ?> (<?= $country['CountryCode'] ?>)</li>
         <?php endforeach; ?>
     </ul>
 
     <!-- Laws Listing -->
     <h2>Laws</h2>
-    <ul>
+    <ul class="ul-list">
         <?php foreach ($laws as $law): ?>
-            <li>
+            <li class="list">
                 <?= $law['LawName'] ?>
                 <a href="<?= base_url('dashboard/editLaw/'.$law['LawID']) ?>">Edit</a>
                 <a href="<?= base_url('dashboard/deleteLaw/'.$law['LawID']) ?>">Delete</a>
@@ -220,9 +238,9 @@ ul li a:hover {
 
     <!-- Documents Listing -->
     <h2>Documents</h2>
-    <ul>
+    <ul class="ul-list">
         <?php foreach ($documents as $document): ?>
-            <li>
+            <li class="list">
                 <?= $document['DocumentName'] ?>
                 <a href="<?= base_url('dashboard/editDocument/'.$document['DocumentID']) ?>">Edit</a>
                 <a href="<?= base_url('dashboard/deleteDocument/'.$document['DocumentID']) ?>">Delete</a>
@@ -232,9 +250,9 @@ ul li a:hover {
 
     <!-- Case Studies Listing -->
     <h2>Case Studies</h2>
-    <ul>
+    <ul class="ul-list">
         <?php foreach ($caseStudies as $caseStudy): ?>
-            <li>
+            <li class="list">
                 <?= $caseStudy['Title'] ?>
                 <a href="<?= base_url('dashboard/editCaseStudy/'.$caseStudy['CaseStudyID']) ?>">Edit</a>
                 <a href="<?= base_url('dashboard/deleteCaseStudy/'.$caseStudy['CaseStudyID']) ?>">Delete</a>
@@ -244,9 +262,9 @@ ul li a:hover {
 
     <!-- Resources Listing -->
     <h2>Resources</h2>
-    <ul>
+    <ul class="ul-list">
         <?php foreach ($resources as $resource): ?>
-            <li>
+            <li class="list">
                 <?= $resource['Title'] ?>
                 <a href="<?= base_url('dashboard/editResource/'.$resource['ResourceID']) ?>">Edit</a>
                 <a href="<?= base_url('dashboard/deleteResource/'.$resource['ResourceID']) ?>">Delete</a>
