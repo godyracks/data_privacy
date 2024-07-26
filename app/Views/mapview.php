@@ -11,18 +11,23 @@
 
 <!-- Modal Structure -->
 <div id="infoModal" class="map-modal">
-    <div class="map-modal-content">
+    <div class="map-modal-content" style="max-width: 600px;">
         <span class="map-modal-close">&times;</span>
-        <h2>Biometric Data Privacy Laws</h2>
-        <p>Country: <span id="modal-country"></span></p>
-        <h3>Major Legislation:</h3>
-        <ul id="modal-legislation"></ul>
-        <h3>Recent Updates:</h3>
-        <ul id="modal-updates"></ul>
-        <h3>Case Studies:</h3>
-        <ul id="modal-case-studies"></ul>
-        <h3>Related Resources:</h3>
-        <ul id="modal-resources"></ul>
+        <h2 style="font-weight: bold; color: black;">Country: <span id="modal-country"></span></h2>
+        
+        <h3 style="color: blue;">Major Legislation:</h3>
+        <div id="modal-legislation" style="color: black;"></div>
+        <div id="modal-legislation-snippet"></div>
+        <a id="modal-legislation-link" style="display: none;" href="#" target="_blank">Read full document</a>
+
+        <h3 style="color: blue;">Recent Updates:</h3>
+        <div id="modal-updates" style="color: black;"></div>
+
+        <h3 style="color: blue;">Case Studies:</h3>
+        <div id="modal-case-studies"></div>
+
+        <h3 style="color: blue;">Related Resources:</h3>
+        <div id="modal-resources"></div>
     </div>
 </div>
 
@@ -63,71 +68,94 @@
     L.rectangle(ukCoords, countryStyle).addTo(map).bindPopup('UK');
 
     // Prepare laws data from PHP
-    const laws = <?= json_encode($laws) ?>; // Pass the laws from PHP to JavaScript
+    const laws = <?= json_encode($laws) ?>;
+    const ukCaseStudies = <?= json_encode($ukCaseStudies) ?>;
+    const indiaCaseStudies = <?= json_encode($indiaCaseStudies) ?>;
+    const ukResources = <?= json_encode($ukResources) ?>;
+    const indiaResources = <?= json_encode($indiaResources) ?>;
 
     const markersLayer = L.layerGroup().addTo(map);
 
-    // Define the coordinates for markers based on CountryID
     const lawCoordinates = {
-        1: [ // UK coordinates
-            [51.5074, -0.1278], // Marker 1 for UK
-            [55.9533, -3.1883], // Marker 2 for UK
-            [53.483959, -2.244644], // Marker 3 for UK
-            [52.4862, -1.8904], // Marker 4 for UK
-            [54.9784, -1.6174], // Marker 5 for UK
-            [51.4816, -3.1791]  // Marker 6 for UK
+        1: [
+            [51.5074, -0.1278],
+            [55.9533, -3.1883],
+            [53.483959, -2.244644],
+            [52.4862, -1.8904],
+            [54.9784, -1.6174],
+            [51.4816, -3.1791]
         ],
-        2: [ // India coordinates
-            [22.9734, 78.6569], // Marker 1 for India
-            [28.7041, 77.1025], // Marker 2 for India
-            [19.0760, 72.8777], // Marker 3 for India
-            [15.2993, 74.1240], // Marker 4 for India
-            [12.9716, 77.5946], // Marker 5 for India
-            [26.9124, 75.7873]  // Marker 6 for India
+        2: [
+            [22.9734, 78.6569],
+            [28.7041, 77.1025],
+            [19.0760, 72.8777],
+            [15.2993, 74.1240],
+            [12.9716, 77.5946],
+            [26.9124, 75.7873]
         ]
     };
 
-    // Create an array to store used coordinates
-    const usedCoordinates = {
-        1: [],
-        2: []
-    };
-
-    // Limit the number of markers to 6
+    const usedCoordinates = { 1: [], 2: [] };
     const maxMarkers = 6;
-
-    // Counter for markers
     let markerCount = 0;
 
     laws.forEach(law => {
-        if (markerCount >= maxMarkers) return; // Stop if we reach the limit
+        if (markerCount >= maxMarkers) return;
 
         const countryId = law.CountryID;
-
-        // Use the next available coordinate for the respective country
         const latlng = lawCoordinates[countryId][usedCoordinates[countryId].length % lawCoordinates[countryId].length];
 
-        // Add the marker to the map
         L.marker(latlng).addTo(markersLayer)
             .bindTooltip(law.LawName)
             .bindPopup(`<b>${law.LawName}</b><br>Click for more info`)
             .on('click', () => {
-                showModal(law);
+                showModal(law, countryId);
             });
 
-        // Track used coordinates
         usedCoordinates[countryId].push(latlng);
-        markerCount++; // Increment the marker count
+        markerCount++;
     });
 
-    function showModal(data) {
-        document.getElementById('modal-country').innerText = data.CountryID == 1 ? 'UK' : 'India';
-        document.getElementById('modal-legislation').innerHTML = `
-            <li>${data.LawName}</li>
-        `;
-        // Populate other modal sections similarly...
-        document.getElementById('infoModal').style.display = 'block';
-    }
+    function showModal(data, countryId) {
+    document.getElementById('modal-country').innerText = countryId == 1 ? 'UK' : 'India';
+    document.getElementById('modal-legislation').innerHTML = `<strong>${data.LawName}</strong>`;
+    
+    const legislationContent = data.Content || ''; 
+    const legislationSnippet = legislationContent.split(' ').slice(0, 6).join(' ') + '...';
+    document.getElementById('modal-legislation-snippet').innerText = legislationSnippet;
+
+ 
+    console.log("DocumentID:", data.DocumentID); // Log DocumentID to console
+
+const documentId = data.DocumentID; // Ensure this is correct
+document.getElementById('modal-legislation-link').href = '<?= site_url('view-more/document/') ?>' + documentId + '/<?= url_title("LawNamePlaceholder", "-", true) ?>'.replace('LawNamePlaceholder', data.LawName);
+
+document.getElementById('modal-legislation-link').style.display = 'block';
+
+    const recentUpdates = countryId == 1 ? (data.UKUpdates || []) : (data.IndiaUpdates || []);
+    document.getElementById('modal-updates').innerHTML = recentUpdates.length > 0 ? recentUpdates.join(', ') : 'None';
+
+    const caseStudies = countryId == 1 ? ukCaseStudies : indiaCaseStudies;
+    const caseStudiesList = caseStudies.map((cs, index) => `
+    <div>
+        <strong>Case Study ${index + 1}:</strong> ${cs.Title}<br>
+        <a href="<?= site_url('view-more/case-study/') ?>${cs.CaseStudyID}/<?= url_title('${cs.Title}', '-', true) ?>" target="_blank">View More</a>
+    </div>
+`).join('');
+
+      
+    document.getElementById('modal-case-studies').innerHTML = caseStudiesList;
+
+    const resources = countryId == 1 ? ukResources : indiaResources;
+    const resourcesList = resources.map(r => `
+        <div style="text-decoration: underline;">
+            <a href="${r.URL}" target="_blank">${r.Title}</a>
+        </div>
+    `).join('');
+    document.getElementById('modal-resources').innerHTML = resourcesList;
+
+    document.getElementById('infoModal').style.display = 'block';
+}
 
     document.querySelector('.map-modal-close').onclick = function() {
         document.getElementById('infoModal').style.display = 'none';
