@@ -135,6 +135,9 @@ h1, h2 {
     <!-- Countries Form -->
     <h2>Countries</h2>
     <form action="<?= base_url('sivasakthi-dashboard/add-country') ?>" method="post">
+        NB(Country IDs): UK = 1, INDIA = 2 <br>
+        No need to add them, they already exist in the database
+
         <input type="text" name="CountryName" placeholder="Country Name" required>
         <input type="text" name="CountryCode" placeholder="Country Code" required>
         <button type="submit">Add Country</button>
