@@ -43,7 +43,7 @@
         <?php if (session()->get('isLoggedIn')): ?>
             <div class="submit-review">
                 <h2>Submit Your Review</h2>
-                <form action="<?= site_url('view-more/submit-review') ?>" method="post">
+                <form action="<?= site_url('/submit-review') ?>" method="post">
                     <label for="review_text">Review:</label>
                     <textarea id="review_text" name="review_text" required></textarea>
 
