@@ -83,43 +83,51 @@ class ViewMoreController extends Controller
     }
 
     public function submitReview()
-    {
-        $reviewModel = new ReviewModel();
-    
-        if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/google-login')->with('warning', 'Please log in to submit a review.');
-        }
-    
-        $userID = session()->get('user_id');
-        if (!$userID) {
-            return redirect()->back()->with('error', 'User not found.');
-        }
-    
-        $reviewText = $this->request->getPost('review_text');
-        $rating = $this->request->getPost('rating');
-    
-        // Debugging: Check if the form data is received
-        echo "User ID: " . $userID . "<br>";
-        echo "Review Text: " . $reviewText . "<br>";
-        echo "Rating: " . $rating . "<br>";
-    
-        log_message('debug', "User ID: " . $userID);
-        log_message('debug', "Review Text: " . $reviewText);
-        log_message('debug', "Rating: " . $rating);
-    
-        $reviewData = [
-            'user_id' => $userID,
-            'content' => $reviewText,
-            'rating' => $rating,
-        ];
-    
-        if ($reviewModel->insert($reviewData)) {
-            log_message('debug', 'Review inserted successfully.');
-            return redirect()->back()->with('success', 'Review submitted successfully.');
-        } else {
-            log_message('error', 'Failed to insert review.');
-            return redirect()->back()->with('error', 'Failed to submit review.');
-        }
+{
+    $reviewModel = new ReviewModel();
+
+    // Debugging: Check if the user is logged in
+    if (!session()->get('isLoggedIn')) {
+        log_message('error', 'User not logged in.');
+        return redirect()->to('/google-login')->with('warning', 'Please log in to submit a review.');
     }
+
+    // Debugging: Check the session data
+    log_message('debug', 'Session Data: ' . json_encode(session()->get()));
+
+    $userID = session()->get('userData')['id'];
+    if (!$userID) {
+        log_message('error', 'User ID not found in session.');
+        return redirect()->back()->with('error', 'User not found.');
+    }
+
+    $reviewText = $this->request->getPost('review_text');
+    $rating = $this->request->getPost('rating');
+
+    // Debugging: Check if the form data is received
+    log_message('debug', "User ID: " . $userID);
+    log_message('debug', "Review Text: " . $reviewText);
+    log_message('debug', "Rating: " . $rating);
+
+    if (!$reviewText || !$rating) {
+        log_message('error', 'Review text or rating is missing.');
+        return redirect()->back()->with('error', 'Review text or rating is missing.');
+    }
+
+    $reviewData = [
+        'user_id' => $userID,
+        'content' => $reviewText,
+        'rating' => $rating,
+    ];
+
+    if ($reviewModel->insert($reviewData)) {
+        log_message('debug', 'Review inserted successfully.');
+        return redirect()->back()->with('success', 'Review submitted successfully.');
+    } else {
+        log_message('error', 'Failed to insert review.');
+        return redirect()->back()->with('error', 'Failed to submit review.');
+    }
+}
+
     
 }
