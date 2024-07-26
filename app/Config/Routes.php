@@ -50,7 +50,8 @@ $routes->get('view-more/(:any)/(:num)/(:any)', 'ViewMoreController::index/$1/$2/
   $routes->post('monisha-dashboard/updateResource/(:num)', 'Dashboard::updateResource/$1');
   $routes->get('monisha-dashboard/deleteResource/(:num)', 'Dashboard::deleteResource/$1');
 
-  $routes->post('/submit-review', 'ViewMoreController:submitReview');
+  $routes->post('submit-review', 'ViewMoreController::submitReview');
+
 
 
 

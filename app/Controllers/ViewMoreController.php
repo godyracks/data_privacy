@@ -86,23 +86,27 @@ class ViewMoreController extends Controller
     {
         $reviewModel = new ReviewModel();
         $session = session();
-
+    
         if (!$session->get('isLoggedIn')) {
             return redirect()->to('/login');
         }
-
+    
         $userId = $session->get('userData')['id'];
         $reviewText = $this->request->getPost('review_text');
         $rating = $this->request->getPost('rating');
-
+        $contentId = $this->request->getPost('content_id');
+        $contentType = $this->request->getPost('content_type');
+    
         $reviewData = [
             'user_id' => $userId,
             'content' => $reviewText,
             'rating' => $rating
         ];
-
+    
         $reviewModel->save($reviewData);
-
-        return redirect()->back()->with('message', 'Review submitted successfully.');
+    
+        // Redirect back to the original page
+        return redirect()->to(site_url('view-more/' . $contentType . '/' . $contentId))->with('message', 'Review submitted successfully.');
     }
+    
 }
