@@ -30,4 +30,24 @@ $routes->post('/dashboard/add-search-index', 'Dashboard::addSearchIndex');
 $routes->get('view-more/(:any)/(:num)/(:any)', 'ViewMoreController::index/$1/$2/$3');
 
 
+  // Routes for Laws
+  $routes->get('editLaw/(:num)', 'Dashboard::editLaw/$1');
+  $routes->post('updateLaw/(:num)', 'Dashboard::updateLaw/$1');
+  $routes->get('deleteLaw/(:num)', 'Dashboard::deleteLaw/$1');
+
+  // Routes for Documents
+  $routes->get('editDocument/(:num)', 'Dashboard::editDocument/$1');
+  $routes->post('updateDocument/(:num)', 'Dashboard::updateDocument/$1');
+  $routes->get('deleteDocument/(:num)', 'Dashboard::deleteDocument/$1');
+
+  // Routes for Case Studies
+  $routes->get('editCaseStudy/(:num)', 'Dashboard::editCaseStudy/$1');
+  $routes->post('updateCaseStudy/(:num)', 'Dashboard::updateCaseStudy/$1');
+  $routes->get('deleteCaseStudy/(:num)', 'Dashboard::deleteCaseStudy/$1');
+
+  // Routes for Resources
+  $routes->get('editResource/(:num)', 'Dashboard::editResource/$1');
+  $routes->post('updateResource/(:num)', 'Dashboard::updateResource/$1');
+  $routes->get('deleteResource/(:num)', 'Dashboard::deleteResource/$1');
+
 

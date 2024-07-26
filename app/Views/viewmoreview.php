@@ -26,14 +26,18 @@
     <div class="right-part">
         <h2>Similar Posts</h2>
         <div class="similar-posts">
-            <?php foreach ($similarPosts as $post): ?>
-                <div class="similar-post">
-                    <h3><?= esc($post['Title'] ?? $post['DocumentName'] ?? $post['LawName'] ?? '') ?></h3>
-                    <p><?= truncate_words(esc($post['Summary'] ?? $post['Description'] ?? $post['KeyProvisions'] ?? ''), 15); ?></p>
-                    <a href="<?= site_url('view-more/' . $type . '/' . $post[$type === 'case-study' ? 'CaseStudyID' : ($type === 'document' ? 'DocumentID' : ($type === 'law' ? 'LawID' : 'ResourceID'))] . '/' . url_title($post['Title'] ?? $post['DocumentName'] ?? $post['LawName'], '-', true)) ?>">Read More</a>
-                </div>
-                <hr class="divider">
-            <?php endforeach; ?>
+            <?php if (!empty($similarPosts)): ?>
+                <?php foreach ($similarPosts as $post): ?>
+                    <div class="similar-post">
+                        <h3><?= esc($post['Title'] ?? $post['DocumentName'] ?? $post['LawName'] ?? $post['CaseStudyTitle'] ?? '') ?></h3>
+                        <p><?= truncate_words(esc($post['Summary'] ?? $post['Description'] ?? $post['KeyProvisions'] ?? $post['CaseStudySummary'] ?? ''), 15); ?></p>
+                        <a href="<?= site_url('view-more/' . $type . '/' . $post[$type === 'case-study' ? 'CaseStudyID' : ($type === 'document' ? 'DocumentID' : ($type === 'law' ? 'LawID' : 'ResourceID'))] . '/' . url_title($post['Title'] ?? $post['DocumentName'] ?? $post['LawName'] ?? $post['CaseStudyTitle'], '-', true)) ?>">Read More</a>
+                    </div>
+                    <hr class="divider">
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No similar posts found.</p>
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -114,9 +118,6 @@
         width: 100%;
     }
 }
-
-    
-
 </style>
 
 <?= $this->endSection() ?>
