@@ -124,26 +124,22 @@
     const legislationSnippet = legislationContent.split(' ').slice(0, 6).join(' ') + '...';
     document.getElementById('modal-legislation-snippet').innerText = legislationSnippet;
 
- 
-    console.log("DocumentID:", data.DocumentID); // Log DocumentID to console
-
-const documentId = data.DocumentID; // Ensure this is correct
-document.getElementById('modal-legislation-link').href = '<?= site_url('view-more/document/') ?>' + documentId + '/<?= url_title("LawNamePlaceholder", "-", true) ?>'.replace('LawNamePlaceholder', data.LawName);
-
-document.getElementById('modal-legislation-link').style.display = 'block';
+    const lawId = data.LawID; // Use LawID here
+    document.getElementById('modal-legislation-link').href = `<?= site_url('view-more/law/') ?>${lawId}/<?= url_title('LawNamePlaceholder', '-', true) ?>`.replace('LawNamePlaceholder', data.LawName);
+    
+    document.getElementById('modal-legislation-link').style.display = 'block';
 
     const recentUpdates = countryId == 1 ? (data.UKUpdates || []) : (data.IndiaUpdates || []);
     document.getElementById('modal-updates').innerHTML = recentUpdates.length > 0 ? recentUpdates.join(', ') : 'None';
 
     const caseStudies = countryId == 1 ? ukCaseStudies : indiaCaseStudies;
     const caseStudiesList = caseStudies.map((cs, index) => `
-    <div>
-        <strong>Case Study ${index + 1}:</strong> ${cs.Title}<br>
-        <a href="<?= site_url('view-more/case-study/') ?>${cs.CaseStudyID}/<?= url_title('${cs.Title}', '-', true) ?>" target="_blank">View More</a>
-    </div>
-`).join('');
+        <div>
+            <strong>Case Study ${index + 1}:</strong> ${cs.Title}<br>
+            <a href="<?= site_url('view-more/case-study/') ?>${cs.CaseStudyID}/<?= url_title('${cs.Title}', '-', true) ?>" target="_blank">View More</a>
+        </div>
+    `).join('');
 
-      
     document.getElementById('modal-case-studies').innerHTML = caseStudiesList;
 
     const resources = countryId == 1 ? ukResources : indiaResources;
