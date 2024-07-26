@@ -10,8 +10,8 @@
 <div id="map"></div>
 
 <!-- Modal Structure -->
-<div id="infoModal" class="map-modal">
-    <div class="map-modal-content" style="max-width: 600px;">
+<div id="infoModal" class="map-modal" style="">
+    <div class="map-modal-content" style="max-width: 600px; border-radius: 18px;">
         <span class="map-modal-close">&times;</span>
         <h2 style="font-weight: bold; color: black;">Country: <span id="modal-country"></span></h2>
         
