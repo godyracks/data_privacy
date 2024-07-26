@@ -4,7 +4,7 @@
 <div class="container">
     <h1 class="heading">Edit Document</h1>
 
-    <form action="<?= site_url('monisha-dashboard/updateDocument/' . $document['DocumentID']) ?>" method="post" enctype="multipart/form-data" class="form">
+    <form action="<?= site_url('sivasakthi-dashboard/updateDocument/' . $document['DocumentID']) ?>" method="post" enctype="multipart/form-data" class="form">
         <input type="hidden" name="existingImage" value="<?= esc($document['Image']) ?>">
 
         <label for="CountryID" class="form-label">Country ID:</label>

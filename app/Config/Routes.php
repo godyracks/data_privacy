@@ -20,35 +20,35 @@ $routes->get('/google-callback', 'GoogleAuthController::callback');
 $routes->get('/profile', 'Profile::index');
 $routes->get('terms-and-conditions', 'Terms::index');
 $routes->get('privacy-policy', 'PrivacyPolicy::index');
-$routes->get('/monisha-dashboard', 'Dashboard::index');
-$routes->post('monisha-dashboard/add-country', 'Dashboard::addCountry');
-$routes->post('monisha-dashboard/add-law', 'Dashboard::addLaw');
-$routes->post('monisha-dashboard/add-document', 'Dashboard::addDocument');
-$routes->post('monisha-dashboard/add-case-study', 'Dashboard::addCaseStudy');
-$routes->post('monisha-dashboard/add-resource', 'Dashboard::addResource');
-$routes->post('monisha-dashboard/add-search-index', 'Dashboard::addSearchIndex');
+$routes->get('/sivasakthi-dashboard', 'Dashboard::index');
+$routes->post('sivasakthi-dashboard/add-country', 'Dashboard::addCountry');
+$routes->post('sivasakthi-dashboard/add-law', 'Dashboard::addLaw');
+$routes->post('sivasakthi-dashboard/add-document', 'Dashboard::addDocument');
+$routes->post('sivasakthi-dashboard/add-case-study', 'Dashboard::addCaseStudy');
+$routes->post('sivasakthi-dashboard/add-resource', 'Dashboard::addResource');
+$routes->post('sivasakthi-dashboard/add-search-index', 'Dashboard::addSearchIndex');
 $routes->get('view-more/(:any)/(:num)/(:any)', 'ViewMoreController::index/$1/$2/$3');
 
 
   // Routes for Laws
-  $routes->get('monisha-dashboard/editLaw/(:num)', 'Dashboard::editLaw/$1');
-  $routes->post('monisha-dashboard/updateLaw/(:num)', 'Dashboard::updateLaw/$1');
-  $routes->get('monisha-dashboard/deleteLaw/(:num)', 'Dashboard::deleteLaw/$1');
+  $routes->get('sivasakthi-dashboard/editLaw/(:num)', 'Dashboard::editLaw/$1');
+  $routes->post('sivasakthi-dashboard/updateLaw/(:num)', 'Dashboard::updateLaw/$1');
+  $routes->get('sivasakthi-dashboard/deleteLaw/(:num)', 'Dashboard::deleteLaw/$1');
 
   // Routes for Documents
-  $routes->get('monisha-dashboard/editDocument/(:num)', 'Dashboard::editDocument/$1');
-  $routes->post('monisha-dashboard/updateDocument/(:num)', 'Dashboard::updateDocument/$1');
-  $routes->get('monisha-dashboard/deleteDocument/(:num)', 'Dashboard::deleteDocument/$1');
+  $routes->get('sivasakthi-dashboard/editDocument/(:num)', 'Dashboard::editDocument/$1');
+  $routes->post('sivasakthi-dashboard/updateDocument/(:num)', 'Dashboard::updateDocument/$1');
+  $routes->get('sivasakthi-dashboard/deleteDocument/(:num)', 'Dashboard::deleteDocument/$1');
 
   // Routes for Case Studies
-  $routes->get('monisha-dashboard/editCaseStudy/(:num)', 'Dashboard::editCaseStudy/$1');
-  $routes->post('monisha-dashboard/updateCaseStudy/(:num)', 'Dashboard::updateCaseStudy/$1');
-  $routes->get('monisha-dashboard/deleteCaseStudy/(:num)', 'Dashboard::deleteCaseStudy/$1');
+  $routes->get('sivasakthi-dashboard/editCaseStudy/(:num)', 'Dashboard::editCaseStudy/$1');
+  $routes->post('sivasakthi-dashboard/updateCaseStudy/(:num)', 'Dashboard::updateCaseStudy/$1');
+  $routes->get('sivasakthi-dashboard/deleteCaseStudy/(:num)', 'Dashboard::deleteCaseStudy/$1');
 
   // Routes for Resources
-  $routes->get('monisha-dashboard/editResource/(:num)', 'Dashboard::editResource/$1');
-  $routes->post('monisha-dashboard/updateResource/(:num)', 'Dashboard::updateResource/$1');
-  $routes->get('monisha-dashboard/deleteResource/(:num)', 'Dashboard::deleteResource/$1');
+  $routes->get('sivasakthi-dashboard/editResource/(:num)', 'Dashboard::editResource/$1');
+  $routes->post('sivasakthi-dashboard/updateResource/(:num)', 'Dashboard::updateResource/$1');
+  $routes->get('sivasakthi-dashboard/deleteResource/(:num)', 'Dashboard::deleteResource/$1');
 
   $routes->post('submit-review', 'ViewMoreController::submitReview');
 

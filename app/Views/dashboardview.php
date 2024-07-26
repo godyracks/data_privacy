@@ -134,7 +134,7 @@ h1, h2 {
 
     <!-- Countries Form -->
     <h2>Countries</h2>
-    <form action="<?= base_url('monisha-dashboard/add-country') ?>" method="post">
+    <form action="<?= base_url('sivasakthi-dashboard/add-country') ?>" method="post">
         <input type="text" name="CountryName" placeholder="Country Name" required>
         <input type="text" name="CountryCode" placeholder="Country Code" required>
         <button type="submit">Add Country</button>
@@ -142,7 +142,7 @@ h1, h2 {
 
     <!-- Laws Form -->
     <h2>Laws</h2>
-    <form action="<?= base_url('monisha-dashboard/add-law') ?>" method="post" enctype="multipart/form-data">
+    <form action="<?= base_url('sivasakthi-dashboard/add-law') ?>" method="post" enctype="multipart/form-data">
         <select name="CountryID">
             <?php foreach ($countries as $country): ?>
                 <option value="<?= $country['CountryID'] ?>"><?= $country['CountryName'] ?></option>
@@ -159,7 +159,7 @@ h1, h2 {
 
     <!-- Documents Form -->
     <h2>Documents</h2>
-    <form action="<?= base_url('monisha-dashboard/add-document') ?>" method="post" enctype="multipart/form-data">
+    <form action="<?= base_url('sivasakthi-dashboard/add-document') ?>" method="post" enctype="multipart/form-data">
         <select name="CountryID">
             <?php foreach ($countries as $country): ?>
                 <option value="<?= $country['CountryID'] ?>"><?= $country['CountryName'] ?></option>
@@ -180,7 +180,7 @@ h1, h2 {
 
     <!-- Case Studies Form -->
     <h2>Case Studies</h2>
-    <form action="<?= base_url('monisha-dashboard/add-case-study') ?>" method="post" enctype="multipart/form-data">
+    <form action="<?= base_url('sivasakthi-dashboard/add-case-study') ?>" method="post" enctype="multipart/form-data">
         <select name="CountryID">
             <?php foreach ($countries as $country): ?>
                 <option value="<?= $country['CountryID'] ?>"><?= $country['CountryName'] ?></option>
@@ -195,7 +195,7 @@ h1, h2 {
 
     <!-- Resources Form -->
     <h2>Resources</h2>
-    <form action="<?= base_url('monisha-dashboard/add-resource') ?>" method="post" enctype="multipart/form-data">
+    <form action="<?= base_url('sivasakthi-dashboard/add-resource') ?>" method="post" enctype="multipart/form-data">
         <select name="CountryID">
             <?php foreach ($countries as $country): ?>
                 <option value="<?= $country['CountryID'] ?>"><?= $country['CountryName'] ?></option>
@@ -230,8 +230,8 @@ h1, h2 {
         <?php foreach ($laws as $law): ?>
             <li class="list">
                 <?= $law['LawName'] ?>
-                <a href="<?= base_url('monisha-dashboard/editLaw/'.$law['LawID']) ?>">Edit</a>
-                <a href="<?= base_url('monisha-dashboard/deleteLaw/'.$law['LawID']) ?>">Delete</a>
+                <a href="<?= base_url('sivasakthi-dashboard/editLaw/'.$law['LawID']) ?>">Edit</a>
+                <a href="<?= base_url('sivasakthi-dashboard/deleteLaw/'.$law['LawID']) ?>">Delete</a>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -242,8 +242,8 @@ h1, h2 {
         <?php foreach ($documents as $document): ?>
             <li class="list">
                 <?= $document['DocumentName'] ?>
-                <a href="<?= base_url('monisha-dashboard/editDocument/'.$document['DocumentID']) ?>">Edit</a>
-                <a href="<?= base_url('monisha-dashboard/deleteDocument/'.$document['DocumentID']) ?>">Delete</a>
+                <a href="<?= base_url('sivasakthi-dashboard/editDocument/'.$document['DocumentID']) ?>">Edit</a>
+                <a href="<?= base_url('sivasakthi-dashboard/deleteDocument/'.$document['DocumentID']) ?>">Delete</a>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -254,8 +254,8 @@ h1, h2 {
         <?php foreach ($caseStudies as $caseStudy): ?>
             <li class="list">
                 <?= $caseStudy['Title'] ?>
-                <a href="<?= base_url('monisha-dashboard/editCaseStudy/'.$caseStudy['CaseStudyID']) ?>">Edit</a>
-                <a href="<?= base_url('monisha-dashboard/deleteCaseStudy/'.$caseStudy['CaseStudyID']) ?>">Delete</a>
+                <a href="<?= base_url('sivasakthi-dashboard/editCaseStudy/'.$caseStudy['CaseStudyID']) ?>">Edit</a>
+                <a href="<?= base_url('sivasakthi-dashboard/deleteCaseStudy/'.$caseStudy['CaseStudyID']) ?>">Delete</a>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -266,8 +266,8 @@ h1, h2 {
         <?php foreach ($resources as $resource): ?>
             <li class="list">
                 <?= $resource['Title'] ?>
-                <a href="<?= base_url('monisha-dashboard/editResource/'.$resource['ResourceID']) ?>">Edit</a>
-                <a href="<?= base_url('monisha-dashboard/deleteResource/'.$resource['ResourceID']) ?>">Delete</a>
+                <a href="<?= base_url('sivasakthi-dashboard/editResource/'.$resource['ResourceID']) ?>">Edit</a>
+                <a href="<?= base_url('sivasakthi-dashboard/deleteResource/'.$resource['ResourceID']) ?>">Delete</a>
             </li>
         <?php endforeach; ?>
     </ul>
