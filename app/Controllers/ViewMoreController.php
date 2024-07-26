@@ -90,14 +90,21 @@ class ViewMoreController extends Controller
             return redirect()->to('/google-login')->with('warning', 'Please log in to submit a review.');
         }
 
+        $userID = session()->get('user_id');
+        if (!$userID) {
+            return redirect()->back()->with('error', 'User not found.');
+        }
+
         $reviewData = [
-            'user_id' => session()->get('user_id'),
+            'user_id' => $userID,
             'content' => $this->request->getPost('review_text'),
             'rating' => $this->request->getPost('rating'),
         ];
 
-        $reviewModel->insert($reviewData);
-
-        return redirect()->back()->with('success', 'Review submitted successfully.');
+        if ($reviewModel->insert($reviewData)) {
+            return redirect()->back()->with('success', 'Review submitted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Failed to submit review.');
+        }
     }
 }

@@ -41,6 +41,7 @@ class GoogleAuthController extends Controller
                 $session = session();
                 $session->set('isLoggedIn', true);
                 $session->set('userData', $existingUser);
+                $session->set('user_id', $existingUser['id']); // Ensure user_id is set
 
                 return redirect()->to('/profile');
             } else {
@@ -59,6 +60,7 @@ class GoogleAuthController extends Controller
                 $session = session();
                 $session->set('isLoggedIn', true);
                 $session->set('userData', $newUser);
+                $session->set('user_id', $newUser['id']); // Ensure user_id is set
 
                 return redirect()->to('/profile');
             }

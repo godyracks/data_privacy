@@ -26,36 +26,35 @@
         </div>
         
         <div class="reviews-container">
-            <h2>Reviews</h2>
-            <div class="submit-review">
-                <h2>Submit Your Review</h2>
-                <form action="<?= site_url('submit-review') ?>" method="post">
-                    <input type="hidden" name="content_id" value="<?= esc($contentID) ?>"> <!-- Hidden field for content_id -->
-              
-                    <label for="review_text">Review:</label>
-                    <textarea id="review_text" name="review_text" required></textarea>
+    <h2>Reviews</h2>
+    <div class="submit-review">
+        <h2>Submit Your Review</h2>
+        <form action="<?= site_url('submit-review') ?>" method="post">
+            <label for="review_text">Review:</label>
+            <textarea id="review_text" name="review_text" required></textarea>
 
-                    <label for="rating">Rating:</label>
-                    <input type="number" id="rating" name="rating" min="1" max="5" required>
+            <label for="rating">Rating:</label>
+            <input type="number" id="rating" name="rating" min="1" max="5" required>
 
-                    <button type="submit">Submit Review</button>
-                </form>
-                <?php if (!session()->get('isLoggedIn')): ?>
-                    <p>Please <a href="<?= site_url('/google-login') ?>">continue with Google</a> to submit a review.</p>
-                <?php endif; ?>
+            <button type="submit">Submit Review</button>
+        </form>
+        <?php if (!session()->get('isLoggedIn')): ?>
+            <p>Please <a href="<?= site_url('/google-login') ?>">continue with Google</a> to submit a review.</p>
+        <?php endif; ?>
+    </div>
+
+    <?php if (isset($reviews) && count($reviews) > 0): ?>
+        <?php foreach ($reviews as $review): ?>
+            <div class="review">
+                <p><strong><?= esc($review['user_id']) ?></strong> (Rating: <?= esc($review['rating']) ?>)</p>
+                <p><?= esc($review['content']) ?></p>
             </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>No reviews yet.</p>
+    <?php endif; ?>
+</div>
 
-            <?php if (isset($reviews) && count($reviews) > 0): ?>
-                <?php foreach ($reviews as $review): ?>
-                    <div class="review">
-                        <p><strong><?= esc($review['user_id']) ?></strong> (Rating: <?= esc($review['rating']) ?>)</p>
-                        <p><?= esc($review['content']) ?></p>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>No reviews yet.</p>
-            <?php endif; ?>
-        </div>
     </div>
     <div class="right-part">
         <h2>Similar Posts</h2>
