@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <h1>Edit Document</h1>
 
-<form action="<?= site_url('dashboard/updateDocument/' . $document['id']) ?>" method="post" enctype="multipart/form-data">
+<form action="<?= site_url('dashboard/updateDocument/' . $document['DocumentID']) ?>" method="post" enctype="multipart/form-data">
     <input type="hidden" name="existingImage" value="<?= $document['Image'] ?>">
 
     <label for="CountryID">Country ID:</label>
@@ -13,7 +13,7 @@
     <input type="text" name="DocumentName" value="<?= $document['DocumentName'] ?>" required>
 
     <label for="Description">Description:</label>
-    <textarea name="Description" required><?= $document['Description'] ?></textarea>
+    <textarea id="edit-doc" name="Description" required><?= $document['Description'] ?></textarea>
 
     <label for="Type">Type:</label>
     <input type="text" name="Type" value="<?= $document['Type'] ?>" required>

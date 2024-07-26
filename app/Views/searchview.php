@@ -3,7 +3,6 @@
 <?= $this->section('content') ?>
 <?= $this->include('partials/_search-input') ?>
 
-
 <div class="card-items">
     <div class="filter-bar">
         <span class="material-symbols-outlined filter-icon">filter_alt</span>
@@ -19,10 +18,10 @@
                 <div class="card case-study">
                     <img src="<?= base_url($caseStudy['Image']) ?>" alt="<?= esc($caseStudy['Title']) ?> Image">
                     <div class="card-content">
-                        <h3><?= truncate_words(esc($caseStudy['Title']), 9 );?></h3>
-                        <p><?= truncate_words(esc($caseStudy['Summary']), 20); ?></p>
+                        <h3><?= esc(truncate_words($caseStudy['Title'], 9)) ?></h3>
+                        <p><?= htmlspecialchars_decode(truncate_words($caseStudy['Summary'], 20)) ?></p>
                         <div class="card-footer">
-                        <a href="<?= site_url('view-more/case-study/' . $caseStudy['CaseStudyID'] . '/' . url_title($caseStudy['Title'], '-', true)) ?>">View More</a>
+                            <a href="<?= site_url('view-more/case-study/' . $caseStudy['CaseStudyID'] . '/' . url_title($caseStudy['Title'], '-', true)) ?>">View More</a>
                             <span class="material-symbols-outlined">favorite</span>
                         </div>
                     </div>
@@ -44,8 +43,8 @@
             <?php foreach ($documents as $document): ?>
                 <div class="document-card document">
                     <div class="doc-content">
-                        <h3><?= truncate_words(esc($document['DocumentName']), 12) ?></h3>
-                        <p><?= truncate_words(esc($document['Description']), 20) ?></p>
+                        <h3><?= esc(truncate_words($document['DocumentName'], 12)) ?></h3>
+                        <p><?= htmlspecialchars_decode(truncate_words($document['Description'], 20)) ?></p>
                         <div class="doc-footer">
                             <div class="doc-info">
                                 <p class="date">Date: <?= esc($document['Date']) ?></p>

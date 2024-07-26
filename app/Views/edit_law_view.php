@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <h1>Edit Law</h1>
 
-<form action="<?= site_url('dashboard/updateLaw/' . $law['id']) ?>" method="post" enctype="multipart/form-data">
+<form action="<?= site_url('dashboard/updateLaw/' . $law['LawID']) ?>" method="post" enctype="multipart/form-data">
     <input type="hidden" name="existingImage" value="<?= $law['Image'] ?>">
 
     <label for="CountryID">Country ID:</label>
@@ -13,10 +13,10 @@
     <input type="text" name="LawName" value="<?= $law['LawName'] ?>" required>
 
     <label for="Description">Description:</label>
-    <textarea name="Description" required><?= $law['Description'] ?></textarea>
+    <textarea id="edit-law" name="Description" required><?= $law['Description'] ?></textarea>
 
     <label for="KeyProvisions">Key Provisions:</label>
-    <textarea name="KeyProvisions"><?= $law['KeyProvisions'] ?></textarea>
+    <textarea id="edit-provision" name="KeyProvisions"><?= $law['KeyProvisions'] ?></textarea>
 
     <label for="Date">Date:</label>
     <input type="date" name="Date" value="<?= $law['Date'] ?>" required>

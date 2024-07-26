@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <h1>Edit Resource</h1>
 
-<form action="<?= site_url('dashboard/updateResource/' . $resource['id']) ?>" method="post" enctype="multipart/form-data">
+<form action="<?= site_url('dashboard/updateResource/' . $resource['ResourceID']) ?>" method="post" enctype="multipart/form-data">
     <input type="hidden" name="existingImage" value="<?= $resource['Image'] ?>">
 
     <label for="CountryID">Country ID:</label>

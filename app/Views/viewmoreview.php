@@ -5,7 +5,7 @@
 <div class="view-more-container">
     <div class="left-part">
         <div class="image-container">
-            <img src="<?= base_url($content['Image']) ?>" alt="<?= esc($content['Title'] ?? $content['DocumentName'] ?? $content['LawName'] ?? '') ?> Image">
+            <img src="<?= base_url($content['Image'] ?? '') ?>" alt="<?= esc($content['Title'] ?? $content['DocumentName'] ?? $content['LawName'] ?? '') ?> Image">
         </div>
         <div class="date-container">
             <p class="date"><?= esc($content['Date']) ?></p>
@@ -20,26 +20,29 @@
             <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
         </div>
         <div class="content-container">
-            <p><?= esc($content['Description'] ?? $content['Summary'] ?? $content['KeyProvisions'] ?? '') ?></p>
+            <!-- Directly output HTML content -->
+            <?= $content['Description'] ?? $content['Summary'] ?? $content['KeyProvisions'] ?? '' ?>
         </div>
     </div>
     <div class="right-part">
-        <h2>Similar Posts</h2>
-        <div class="similar-posts">
-            <?php if (!empty($similarPosts)): ?>
-                <?php foreach ($similarPosts as $post): ?>
-                    <div class="similar-post">
-                        <h3><?= esc($post['Title'] ?? $post['DocumentName'] ?? $post['LawName'] ?? $post['CaseStudyTitle'] ?? '') ?></h3>
-                        <p><?= truncate_words(esc($post['Summary'] ?? $post['Description'] ?? $post['KeyProvisions'] ?? $post['CaseStudySummary'] ?? ''), 15); ?></p>
-                        <a href="<?= site_url('view-more/' . $type . '/' . $post[$type === 'case-study' ? 'CaseStudyID' : ($type === 'document' ? 'DocumentID' : ($type === 'law' ? 'LawID' : 'ResourceID'))] . '/' . url_title($post['Title'] ?? $post['DocumentName'] ?? $post['LawName'] ?? $post['CaseStudyTitle'], '-', true)) ?>">Read More</a>
-                    </div>
-                    <hr class="divider">
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>No similar posts found.</p>
-            <?php endif; ?>
-        </div>
+    <h2>Similar Posts</h2>
+    <div class="similar-posts">
+        <?php if (!empty($similarPosts)): ?>
+            <?php foreach ($similarPosts as $post): ?>
+                <div class="similar-post">
+                    <h3><?= esc($post['Title'] ?? $post['DocumentName'] ?? $post['LawName'] ?? $post['CaseStudyTitle'] ?? '') ?></h3>
+                    <p><?= htmlspecialchars_decode(truncate_words($post['Summary'] ?? $post['Description'] ?? $post['KeyProvisions'] ?? $post['CaseStudySummary'] ?? '', 15)); ?></p>
+                    <a href="<?= site_url('view-more/' . $type . '/' . $post[$type === 'case-study' ? 'CaseStudyID' : ($type === 'document' ? 'DocumentID' : ($type === 'law' ? 'LawID' : 'ResourceID'))] . '/' . url_title($post['Title'] ?? $post['DocumentName'] ?? $post['LawName'] ?? $post['CaseStudyTitle'], '-', true)) ?>">Read More</a>
+                </div>
+                <hr class="divider">
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No similar posts found.</p>
+        <?php endif; ?>
     </div>
+</div>
+
+
 </div>
 
 <style>

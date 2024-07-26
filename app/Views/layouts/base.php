@@ -9,6 +9,18 @@
     <link href="https://unpkg.com/vis-timeline/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
     <script src="https://unpkg.com/vis-timeline/standalone/umd/vis-timeline-graph2d.min.js"></script>
     <link rel="stylesheet" href="<?= base_url('public/styles/styles.css') ?>">
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
+ <style>
+        #container {
+            width: 800px;
+            margin: 20px auto;
+        }
+
+        .ck-editor__editable[role="textbox"] {
+            /* editing area */
+            min-height: 300px;
+        }
+    </style> 
 </head>
 <body>
     <header class="navbar">
@@ -129,5 +141,43 @@ location_on
     <script src="<?= base_url('public/scripts/scripts.js') ?>"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="<?= base_url('public/scripts/map.js') ?>"></script>
+    <script>
+        ClassicEditor.create(document.querySelector('#description'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+            })
+            ClassicEditor.create(document.querySelector('#doc-description'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+            })
+            ClassicEditor.create(document.querySelector('#case-description'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+            })
+            ClassicEditor.create(document.querySelector('#key-provisions'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+            })
+            ClassicEditor.create(document.querySelector('#edit-summary'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+            })
+            ClassicEditor.create(document.querySelector('#edit-law'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+            })
+            ClassicEditor.create(document.querySelector('#edit-provision'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+            })
+            ClassicEditor.create(document.querySelector('#edit-doc'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+            })
+            .catch(error => {
+                console.error('There was an error initializing the editor:', error);
+            });
+           
+    </script>
 </body>
 </html>

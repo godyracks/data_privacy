@@ -1,6 +1,111 @@
 <?= $this->extend('layouts/base') ?>
 
 <?= $this->section('content') ?>
+<style>
+    /* body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+} */
+
+.tab {
+    overflow: hidden;
+    background-color: #333;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    color: white;
+}
+
+.tab button:hover {
+    background-color: #555;
+}
+
+.tab button.active {
+    background-color: #007bff;
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px;
+    border-top: none;
+    background-color: white;
+    margin-top: -1px;
+}
+
+form {
+    background: #fff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"],
+form input[type="date"],
+form select,
+form textarea,
+form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background: #fff;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul li a {
+    color: #007bff;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+</style>
 
 <div class="tab">
     <button class="tablinks" onclick="openTab(event, 'DataEntry')">Data Entry</button>
@@ -27,8 +132,8 @@
             <?php endforeach; ?>
         </select>
         <input type="text" name="LawName" placeholder="Law Name" required>
-        <textarea name="Description" placeholder="Description"></textarea>
-        <textarea name="KeyProvisions" placeholder="Key Provisions"></textarea>
+        <textarea name="Description" placeholder="Description" id="description"></textarea>
+        <textarea name="KeyProvisions" placeholder="Key Provisions" id="key-provisions"></textarea>
         <input type="date" name="Date" required>
         <input type="file" name="Image" accept="image/*">
         <button type="submit">Add Law</button>
@@ -43,7 +148,7 @@
             <?php endforeach; ?>
         </select>
         <input type="text" name="DocumentName" placeholder="Document Name" required>
-        <textarea name="Description" placeholder="Description"></textarea>
+        <textarea name="Description" placeholder="Description" id="doc-description"></textarea>
         <select name="Type">
             <option value="Amendment">Amendment</option>
             <option value="Ruling">Ruling</option>
@@ -64,7 +169,7 @@
             <?php endforeach; ?>
         </select>
         <input type="text" name="Title" placeholder="Title" required>
-        <textarea name="Summary" placeholder="Summary"></textarea>
+        <textarea name="Summary" placeholder="Summary" id="case-description"></textarea>
         <input type="date" name="Date" required>
         <input type="file" name="Image" accept="image/*">
         <button type="submit">Add Case Study</button>
