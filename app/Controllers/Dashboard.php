@@ -36,7 +36,7 @@ class Dashboard extends BaseController
             'CountryCode' => $this->request->getPost('CountryCode')
         ];
         $countryModel->save($data);
-        return redirect()->to('/dashboard');
+        return redirect()->to('/monisha-dashboard');
     }
 
     public function addLaw()
@@ -68,7 +68,7 @@ class Dashboard extends BaseController
             'Image' => $imagePath
         ];
         $lawModel->save($data);
-        return redirect()->to('/dashboard');
+        return redirect()->to('/monisha-dashboard');
     }
 
     public function addDocument()
@@ -100,7 +100,7 @@ class Dashboard extends BaseController
             'Image' => $imagePath
         ];
         $documentModel->save($data);
-        return redirect()->to('/dashboard');
+        return redirect()->to('/monisha-dashboard');
     }
 
     public function addCaseStudy()
@@ -131,7 +131,7 @@ class Dashboard extends BaseController
             'Image' => $imagePath
         ];
         $caseStudyModel->save($data);
-        return redirect()->to('/dashboard');
+        return redirect()->to('/monisha-dashboard');
     }
 
     public function addResource()
@@ -163,7 +163,7 @@ class Dashboard extends BaseController
             'Image' => $imagePath
         ];
         $resourceModel->save($data);
-        return redirect()->to('/dashboard');
+        return redirect()->to('/monisha-dashboard');
     }
 
     public function addSearchIndex()
@@ -175,7 +175,7 @@ class Dashboard extends BaseController
             'Content' => $this->request->getPost('Content')
         ];
         $searchIndexModel->save($data);
-        return redirect()->to('/dashboard');
+        return redirect()->to('/monisha-dashboard');
     }
 
     public function editLaw($id)
@@ -213,7 +213,7 @@ class Dashboard extends BaseController
             'Image' => $imagePath
         ];
         $lawModel->update($id, $data);
-        return redirect()->to('/dashboard');
+        return redirect()->to('/monisha-dashboard');
     }
     public function deleteLaw($id)
     {
@@ -225,7 +225,7 @@ class Dashboard extends BaseController
         }
     
         $lawModel->delete($id);
-        return redirect()->to('/dashboard');
+        return redirect()->to('/monisha-dashboard');
     }
 
     public function editDocument($id)
@@ -263,7 +263,7 @@ public function updateDocument($id)
         'Image' => $imagePath
     ];
     $documentModel->update($id, $data);
-    return redirect()->to('/dashboard');
+    return redirect()->to('/monisha-dashboard');
 }
 public function deleteDocument($id)
 {
@@ -275,7 +275,7 @@ public function deleteDocument($id)
     }
 
     $documentModel->delete($id);
-    return redirect()->to('/dashboard');
+    return redirect()->to('/monisha-dashboard');
 }
 public function editCaseStudy($id)
 {
@@ -311,7 +311,7 @@ public function updateCaseStudy($id)
         'Image' => $imagePath
     ];
     $caseStudyModel->update($id, $data);
-    return redirect()->to('/dashboard');
+    return redirect()->to('/monisha-dashboard');
 }
 public function deleteCaseStudy($id)
 {
@@ -362,7 +362,7 @@ public function updateResource($id)
         'Image' => $imagePath
     ];
     $resourceModel->update($id, $data);
-    return redirect()->to('/dashboard');
+    return redirect()->to('/monisha-dashboard');
 }
 
 public function deleteResource($id)
@@ -375,7 +375,7 @@ public function deleteResource($id)
     }
 
     $resourceModel->delete($id);
-    return redirect()->to('/dashboard');
+    return redirect()->to('/monisha-dashboard');
 }
 
 }
