@@ -95,8 +95,8 @@ class ViewMoreController extends Controller
         $userId = $session->get('userData')['google_id']; // Ensure this is the correct field from session data
         $reviewText = $this->request->getPost('review_text');
         $rating = $this->request->getPost('rating');
-        $contentId = $this->request->getPost('content_id');
-        $contentType = $this->request->getPost('content_type');
+        $contentId = $this->request->getPost('id');
+        $contentType = $this->request->getPost('content');
     
         $reviewData = [
             'user_id' => $userId,
