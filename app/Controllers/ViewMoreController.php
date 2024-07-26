@@ -14,11 +14,13 @@ class ViewMoreController extends Controller
     {
         $content = null;
         $similarPosts = [];
+        $contentID = null;
 
         switch ($type) {
             case 'case-study':
                 $model = new CaseStudyModel();
                 $content = $model->find($id);
+                $contentID = $content['CaseStudyID'] ?? null;
                 if ($content) {
                     $similarPosts = $model->getSimilarCaseStudies($id);
                 }
@@ -27,6 +29,7 @@ class ViewMoreController extends Controller
             case 'document':
                 $model = new DocumentModel();
                 $content = $model->find($id);
+                $contentID = $content['DocumentID'] ?? null;
                 if ($content) {
                     $similarPosts = $model->getSimilarDocuments($content['CountryID'], $id);
                 }
@@ -35,6 +38,7 @@ class ViewMoreController extends Controller
             case 'law':
                 $model = new LawModel();
                 $content = $model->find($id);
+                $contentID = $content['LawID'] ?? null;
                 if ($content) {
                     $similarPosts = $model->where('CountryID', $content['CountryID'])
                                           ->where('LawID !=', $id)
@@ -45,6 +49,7 @@ class ViewMoreController extends Controller
             case 'resource':
                 $model = new ResourceModel();
                 $content = $model->find($id);
+                $contentID = $content['ResourceID'] ?? null;
                 if ($content) {
                     $similarPosts = $model->where('CountryID', $content['CountryID'])
                                           ->where('ResourceID !=', $id)
@@ -53,61 +58,46 @@ class ViewMoreController extends Controller
                 break;
 
             default:
-                throw new PageNotFoundException("Content type not found: " . $type);
+                throw new PageNotFoundException("Invalid type: $type");
         }
 
-        if (!$content) {
-            throw new PageNotFoundException("Content not found with ID: " . $id);
+        if (!$content || !$contentID) {
+            throw new PageNotFoundException("Content not found");
         }
 
-        $similarPosts = array_filter($similarPosts, function($post) use ($id, $type) {
-            $postIdKey = $type === 'case-study' ? 'CaseStudyID' : ($type === 'document' ? 'DocumentID' : ($type === 'law' ? 'LawID' : 'ResourceID'));
-            return $post[$postIdKey] != $id;
-        });
+        $reviewModel = new ReviewModel();
+        $reviews = $reviewModel->where('id', $contentID)->findAll();
 
         $expectedTitle = url_title($content['Title'] ?? $content['DocumentName'] ?? $content['LawName'] ?? '', '-', true);
         if ($title !== $expectedTitle) {
             return redirect()->to(site_url('view-more/' . $type . '/' . $id . '/' . $expectedTitle));
         }
 
-        $reviewModel = new ReviewModel();
-        $reviews = $reviewModel->where('content_id', $id) // Adjusted query to use `content_id` for filtering
-                               ->findAll();
-
         return view('viewmoreview', [
             'content' => $content,
-            'similarPosts' => $similarPosts,
             'type' => $type,
-            'reviews' => $reviews
+            'similarPosts' => $similarPosts,
+            'reviews' => $reviews,
+            'contentID' => $contentID,
         ]);
     }
 
     public function submitReview()
     {
         $reviewModel = new ReviewModel();
-        $session = session();
-    
-        if (!$session->get('isLoggedIn')) {
-            $session->set('redirect_url', current_url());
-            return redirect()->to('/google-login');
+
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/google-login')->with('warning', 'Please log in to submit a review.');
         }
-    
-        $userId = $session->get('userData')['google_id']; // Ensure this is the correct field from session data
-        $reviewText = $this->request->getPost('review_text');
-        $rating = $this->request->getPost('rating');
-        $contentId = $this->request->getPost('id');
-        $contentType = $this->request->getPost('content');
-    
+
         $reviewData = [
-            'user_id' => $userId,
-            'content' => $reviewText,
-            'rating' => $rating,
-            'created_at' => date('Y-m-d H:i:s')
+            'user_id' => session()->get('user_id'),
+            'content' => $this->request->getPost('review_text'),
+            'rating' => $this->request->getPost('rating'),
         ];
-    
-        $reviewModel->save($reviewData);
-    
-        // Redirect back to the original page
-        return redirect()->to(site_url('view-more/' . $contentType . '/' . $contentId))->with('message', 'Review submitted successfully.');
+
+        $reviewModel->insert($reviewData);
+
+        return redirect()->back()->with('success', 'Review submitted successfully.');
     }
 }
