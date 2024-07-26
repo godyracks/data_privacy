@@ -91,7 +91,7 @@ class ViewMoreController extends Controller
         // Check if the user is logged in
         $session = session();
         if (!$session->get('isLoggedIn')) {
-            return redirect()->to('/login'); // Redirect to login if not logged in
+            return redirect()->to('/auth'); // Redirect to login if not logged in
         }
     
         // Get user data from session

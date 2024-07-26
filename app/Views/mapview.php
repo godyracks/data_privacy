@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 <style>
-
+    /* Add your custom styles here */
 </style>
 
 <?= $this->include('partials/_search-input') ?>
@@ -62,64 +62,70 @@
     L.rectangle(indiaCoords, countryStyle).addTo(map).bindPopup('India');
     L.rectangle(ukCoords, countryStyle).addTo(map).bindPopup('UK');
 
-    const markers = [
-        { latlng: [22.9734, 78.6569], country: 'India', type: 'law', info: 'Information Technology Act (2000)' },
-        { latlng: [28.7041, 77.1025], country: 'India', type: 'law', info: 'Aadhaar Act (2016)' },
-        { latlng: [19.0760, 72.8777], country: 'India', type: 'law', info: 'Personal Data Protection Bill (2019)' },
-        { latlng: [15.2993, 74.1240], country: 'India', type: 'law', info: 'Data Protection Law (2021)' },
-        { latlng: [12.9716, 77.5946], country: 'India', type: 'law', info: 'Digital Information Security in Healthcare Act (DISHA)' },
-        { latlng: [51.5074, -0.1278], country: 'UK', type: 'law', info: 'Data Protection Act (2018)' },
-        { latlng: [55.9533, -3.1883], country: 'UK', type: 'law', info: 'General Data Protection Regulation (GDPR)' },
-        { latlng: [53.483959, -2.244644], country: 'UK', type: 'law', info: 'Surveillance Camera Code of Practice (2013)' },
-        { latlng: [51.4816, -3.1791], country: 'UK', type: 'law', info: 'Biometrics and Surveillance Camera Commissioner (2020)' },
-        { latlng: [54.9784, -1.6174], country: 'UK', type: 'law', info: 'Protection of Freedoms Act (2012)' }
-    ];
-
-    const scales = [
-        { latlng: [26.9124, 75.7873], country: 'India', type: 'scale', info: 'Amendment to the IT Act (2021)' },
-        { latlng: [25.3176, 82.9739], country: 'India', type: 'scale', info: 'Supreme Court Ruling (2018)' },
-        { latlng: [13.0827, 80.2707], country: 'India', type: 'scale', info: 'Digital India Programme (2015)' },
-        { latlng: [52.4862, -1.8904], country: 'UK', type: 'scale', info: 'ICO Guidance on Biometrics (2021)' },
-        { latlng: [53.4084, -2.9916], country: 'UK', type: 'scale', info: 'Court of Appeal Ruling on Police Use of Facial Recognition (2020)' },
-        { latlng: [51.4545, -2.5879], country: 'UK', type: 'scale', info: 'ICO Regulatory Action Policy (2018)' }
-    ];
+    // Prepare laws data from PHP
+    const laws = <?= json_encode($laws) ?>; // Pass the laws from PHP to JavaScript
 
     const markersLayer = L.layerGroup().addTo(map);
 
-    markers.forEach(marker => {
-        L.marker(marker.latlng).addTo(markersLayer)
-            .bindTooltip(marker.info)
-            .bindPopup(`<b>${marker.info}</b><br>Click for more info`)
-            .on('click', () => {
-                showModal(marker);
-            });
-    });
+    // Define the coordinates for markers based on CountryID
+    const lawCoordinates = {
+        1: [ // UK coordinates
+            [51.5074, -0.1278], // Marker 1 for UK
+            [55.9533, -3.1883], // Marker 2 for UK
+            [53.483959, -2.244644], // Marker 3 for UK
+            [52.4862, -1.8904], // Marker 4 for UK
+            [54.9784, -1.6174], // Marker 5 for UK
+            [51.4816, -3.1791]  // Marker 6 for UK
+        ],
+        2: [ // India coordinates
+            [22.9734, 78.6569], // Marker 1 for India
+            [28.7041, 77.1025], // Marker 2 for India
+            [19.0760, 72.8777], // Marker 3 for India
+            [15.2993, 74.1240], // Marker 4 for India
+            [12.9716, 77.5946], // Marker 5 for India
+            [26.9124, 75.7873]  // Marker 6 for India
+        ]
+    };
 
-    scales.forEach(scale => {
-        L.circleMarker(scale.latlng, { radius: 10, fillColor: "orange", color: "orange", weight: 1 }).addTo(markersLayer)
-            .bindTooltip(scale.info)
-            .bindPopup(`<b>${scale.info}</b><br>Click for more info`)
+    // Create an array to store used coordinates
+    const usedCoordinates = {
+        1: [],
+        2: []
+    };
+
+    // Limit the number of markers to 6
+    const maxMarkers = 6;
+
+    // Counter for markers
+    let markerCount = 0;
+
+    laws.forEach(law => {
+        if (markerCount >= maxMarkers) return; // Stop if we reach the limit
+
+        const countryId = law.CountryID;
+
+        // Use the next available coordinate for the respective country
+        const latlng = lawCoordinates[countryId][usedCoordinates[countryId].length % lawCoordinates[countryId].length];
+
+        // Add the marker to the map
+        L.marker(latlng).addTo(markersLayer)
+            .bindTooltip(law.LawName)
+            .bindPopup(`<b>${law.LawName}</b><br>Click for more info`)
             .on('click', () => {
-                showModal(scale);
+                showModal(law);
             });
+
+        // Track used coordinates
+        usedCoordinates[countryId].push(latlng);
+        markerCount++; // Increment the marker count
     });
 
     function showModal(data) {
-        document.getElementById('modal-country').innerText = data.country;
-        document.getElementById('modal-legislation').innerHTML = data.type === 'law' ? `
-            <li>${data.info}</li>
-        ` : '';
-        document.getElementById('modal-updates').innerHTML = data.type === 'scale' ? `
-            <li>${data.info}</li>
-        ` : '';
-        document.getElementById('modal-case-studies').innerHTML = `
-            <li>Case Study 1: Overview of the privacy issues raised by the Aadhaar system</li>
-            <li>Case Study 2: Details of a significant data breach and its implications</li>
+        document.getElementById('modal-country').innerText = data.CountryID == 1 ? 'UK' : 'India';
+        document.getElementById('modal-legislation').innerHTML = `
+            <li>${data.LawName}</li>
         `;
-        document.getElementById('modal-resources').innerHTML = `
-            <li>Whitepaper: Biometric Data Privacy in ${data.country}</li>
-            <li>Video: Understanding ${data.info.split(' ')[0]}</li>
-        `;
+        // Populate other modal sections similarly...
         document.getElementById('infoModal').style.display = 'block';
     }
 

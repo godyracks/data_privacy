@@ -8,15 +8,15 @@
             <img src="<?= base_url($content['Image'] ?? '') ?>" alt="<?= esc($content['Title'] ?? $content['DocumentName'] ?? $content['LawName'] ?? '') ?> Image">
         </div>
         <div class="date-container">
-            <p class="date"><?= esc($content['Date']) ?> <span>By ~Sivasakthi Vajjiravelu</span></p> 
+            <p class="date"><?= esc($content['Date']) ?> <span>By Sivasakthi Vajjiravelu</span></p> 
         </div>
         <div class="title-container">
             <h1><?= esc($content['Title'] ?? $content['DocumentName'] ?? $content['LawName'] ?? '') ?></h1>
         </div>
         <p>Social Links</p>
         <div class="social-icons">
-            <a href="https://www.linkedin.com/in/sivasakthi-vajjiravelu-571792195?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://wa.me/447436199290?text=Hello%2C%20I%20have%20a%20question%21" class="social-icon" target="_blank">
+            <a target="_blank" href="https://www.linkedin.com/in/sivasakthi-vajjiravelu-571792195?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            <a  target="_blank"  href="https://wa.me/447436199290?text=Hello%2C%20I%20have%20a%20question%21" class="social-icon" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
 
