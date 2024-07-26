@@ -56,7 +56,7 @@
         <?php else: ?>
             <p>Please <a href="<?= site_url('/google-login') ?>">continue with Google</a> to submit a review.</p>
         <?php endif; ?>
-    </div>
+
     </div>
     <div class="right-part">
         <h2>Similar Posts</h2>
