@@ -85,26 +85,41 @@ class ViewMoreController extends Controller
     public function submitReview()
     {
         $reviewModel = new ReviewModel();
-
+    
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/google-login')->with('warning', 'Please log in to submit a review.');
         }
-
+    
         $userID = session()->get('user_id');
         if (!$userID) {
             return redirect()->back()->with('error', 'User not found.');
         }
-
+    
+        $reviewText = $this->request->getPost('review_text');
+        $rating = $this->request->getPost('rating');
+    
+        // Debugging: Check if the form data is received
+        echo "User ID: " . $userID . "<br>";
+        echo "Review Text: " . $reviewText . "<br>";
+        echo "Rating: " . $rating . "<br>";
+    
+        log_message('debug', "User ID: " . $userID);
+        log_message('debug', "Review Text: " . $reviewText);
+        log_message('debug', "Rating: " . $rating);
+    
         $reviewData = [
             'user_id' => $userID,
-            'content' => $this->request->getPost('review_text'),
-            'rating' => $this->request->getPost('rating'),
+            'content' => $reviewText,
+            'rating' => $rating,
         ];
-
+    
         if ($reviewModel->insert($reviewData)) {
+            log_message('debug', 'Review inserted successfully.');
             return redirect()->back()->with('success', 'Review submitted successfully.');
         } else {
+            log_message('error', 'Failed to insert review.');
             return redirect()->back()->with('error', 'Failed to submit review.');
         }
     }
+    
 }
