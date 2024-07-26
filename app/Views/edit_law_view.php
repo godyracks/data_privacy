@@ -4,7 +4,7 @@
 <div class="container">
     <h1 class="heading">Edit Law</h1>
 
-    <form action="<?= site_url('dashboard/updateLaw/' . $law['LawID']) ?>" method="post" enctype="multipart/form-data" class="form">
+    <form action="<?= site_url('monisha-dashboard/updateLaw/' . $law['LawID']) ?>" method="post" enctype="multipart/form-data" class="form">
         <input type="hidden" name="existingImage" value="<?= esc($law['Image']) ?>">
 
         <label for="CountryID" class="form-label">Country ID:</label>

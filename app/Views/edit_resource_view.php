@@ -4,7 +4,7 @@
 <div class="container">
     <h1 class="heading">Edit Resource</h1>
 
-    <form action="<?= site_url('dashboard/updateResource/' . $resource['ResourceID']) ?>" method="post" enctype="multipart/form-data" class="form">
+    <form action="<?= site_url('monisha-dashboard/updateResource/' . $resource['ResourceID']) ?>" method="post" enctype="multipart/form-data" class="form">
         <input type="hidden" name="existingImage" value="<?= esc($resource['Image']) ?>">
 
         <label for="CountryID" class="form-label">Country ID:</label>
