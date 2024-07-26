@@ -54,7 +54,7 @@
                 </form>
             </div>
         <?php else: ?>
-            <p>Please <a href="<?= site_url('login') ?>">log in</a> to submit a review.</p>
+            <p>Please <a href="<?= site_url('/google-login') ?>">continue with Google</a> to submit a review.</p>
         <?php endif; ?>
     </div>
     </div>
