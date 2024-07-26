@@ -18,7 +18,7 @@
         <h3 style="color: blue;">Major Legislation:</h3>
         <div id="modal-legislation" style="color: black;"></div>
         <div id="modal-legislation-snippet"></div>
-        <a id="modal-legislation-link" style="display: none;" href="#" target="_blank">Read full document</a>
+        <a id="modal-legislation-link" style="display: none;" href="#" target="_blank">Read full law document</a>
 
         <h3 style="color: blue;">Recent Updates:</h3>
         <div id="modal-updates" style="color: black;"></div>
