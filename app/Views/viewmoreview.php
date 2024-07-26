@@ -24,6 +24,39 @@
             <!-- Directly output HTML content -->
             <?= $content['Description'] ?? $content['Summary'] ?? $content['KeyProvisions'] ?? '' ?>
         </div>
+        
+        <div class="reviews-container">
+            <h2>Reviews</h2>
+            <?php if (isset($reviews) && count($reviews) > 0): ?>
+                <?php foreach ($reviews as $review): ?>
+                    <div class="review">
+                        <p><strong><?= esc($review['user_id']) ?></strong> (Rating: <?= esc($review['rating']) ?>/5)</p>
+                        <p><?= esc($review['content']) ?></p>
+                    </div>
+                    <hr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No reviews yet.</p>
+            <?php endif; ?>
+        </div>
+
+        <?php if (session()->get('isLoggedIn')): ?>
+            <div class="submit-review">
+                <h2>Submit Your Review</h2>
+                <form action="<?= site_url('view-more/submit-review') ?>" method="post">
+                    <label for="review_text">Review:</label>
+                    <textarea id="review_text" name="review_text" required></textarea>
+
+                    <label for="rating">Rating:</label>
+                    <input type="number" id="rating" name="rating" min="1" max="5" required>
+
+                    <button type="submit">Submit Review</button>
+                </form>
+            </div>
+        <?php else: ?>
+            <p>Please <a href="<?= site_url('login') ?>">log in</a> to submit a review.</p>
+        <?php endif; ?>
+    </div>
     </div>
     <div class="right-part">
         <h2>Similar Posts</h2>
@@ -48,14 +81,13 @@
 .view-more-container {
     display: flex;
     gap: 20px;
-    margin: 20px;
-    padding: 0 20px; /* Padding for better spacing */
+    margin-top: 20px;
 }
 
 .left-part {
     flex: 7; /* 70% width */
     max-width: 70%;
-    padding: 20px; /* Padding around content */
+    padding: 20px;
 }
 
 .right-part {
@@ -64,7 +96,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 20px; /* Padding around content */
+    padding: 20px;
 }
 
 .image-container img {
@@ -78,7 +110,7 @@
     font-weight: bold;
 }
 .date-container span {
-    margin-left: 10px; /* Adjust spacing for smaller screens */
+    margin-left: 40px;
     font-style: italic;
     font-size: 14px;
 }
@@ -102,6 +134,66 @@
     margin-top: 20px;
 }
 
+.reviews-container {
+    margin-top: 40px;
+}
+
+.reviews-list {
+    margin-bottom: 20px;
+}
+
+.review {
+    margin-bottom: 20px;
+}
+
+.review-author {
+    font-weight: bold;
+}
+
+.review-date {
+    font-size: 14px;
+    font-style: italic;
+    margin-left: 10px;
+}
+
+.review-content {
+    margin-top: 10px;
+}
+
+.review-form {
+    margin-top: 20px;
+}
+
+.review-form .form-group {
+    margin-bottom: 10px;
+}
+
+.review-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.review-form input,
+.review-form textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.review-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #468EEE;
+    color: #fff;
+    cursor: pointer;
+}
+
+.review-form button:hover {
+    background-color: #357AE8;
+}
+
 .similar-posts {
     display: flex;
     flex-direction: column;
@@ -121,10 +213,8 @@
 /* Media queries for responsiveness */
 @media screen and (max-width: 769px) {
     .view-more-container {
-        display: flex;
         flex-direction: column;
         gap: 20px;
-        margin: 10px; /* Adjust margin for smaller screens */
     }
 
     .left-part,
@@ -132,7 +222,6 @@
         flex: none;
         width: 100%;
         max-width: 100%;
-        padding: 10px; /* Adjust padding for smaller screens */
     }
 }
 </style>
