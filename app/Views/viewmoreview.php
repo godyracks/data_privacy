@@ -30,6 +30,8 @@
     <div class="submit-review">
         <h2>Submit Your Review</h2>
         <form action="<?= site_url('submit-review') ?>" method="post">
+            <input type="hidden" name="post_id" value="<?= esc($contentID) ?>">
+            <input type="hidden" name="post_type" value="<?= esc($type) ?>">
             <label for="review_text">Review:</label>
             <textarea name="content" required></textarea>
 
@@ -54,6 +56,8 @@
         <p>No reviews yet.</p>
     <?php endif; ?>
 </div>
+
+
 
     </div>
     <div class="right-part">

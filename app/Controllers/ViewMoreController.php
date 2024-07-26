@@ -11,76 +11,80 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class ViewMoreController extends Controller
 {
     public function index($type, $id, $title = null)
-    {
-        $content = null;
-        $similarPosts = [];
-        $contentID = null;
+{
+    $content = null;
+    $similarPosts = [];
+    $contentID = null;
 
-        switch ($type) {
-            case 'case-study':
-                $model = new CaseStudyModel();
-                $content = $model->find($id);
-                $contentID = $content['CaseStudyID'] ?? null;
-                if ($content) {
-                    $similarPosts = $model->getSimilarCaseStudies($id);
-                }
-                break;
+    switch ($type) {
+        case 'case-study':
+            $model = new CaseStudyModel();
+            $content = $model->find($id);
+            $contentID = $content['CaseStudyID'] ?? null;
+            if ($content) {
+                $similarPosts = $model->getSimilarCaseStudies($id);
+            }
+            break;
 
-            case 'document':
-                $model = new DocumentModel();
-                $content = $model->find($id);
-                $contentID = $content['DocumentID'] ?? null;
-                if ($content) {
-                    $similarPosts = $model->getSimilarDocuments($content['CountryID'], $id);
-                }
-                break;
+        case 'document':
+            $model = new DocumentModel();
+            $content = $model->find($id);
+            $contentID = $content['DocumentID'] ?? null;
+            if ($content) {
+                $similarPosts = $model->getSimilarDocuments($content['CountryID'], $id);
+            }
+            break;
 
-            case 'law':
-                $model = new LawModel();
-                $content = $model->find($id);
-                $contentID = $content['LawID'] ?? null;
-                if ($content) {
-                    $similarPosts = $model->where('CountryID', $content['CountryID'])
-                                          ->where('LawID !=', $id)
-                                          ->findAll(5);
-                }
-                break;
+        case 'law':
+            $model = new LawModel();
+            $content = $model->find($id);
+            $contentID = $content['LawID'] ?? null;
+            if ($content) {
+                $similarPosts = $model->where('CountryID', $content['CountryID'])
+                                      ->where('LawID !=', $id)
+                                      ->findAll(5);
+            }
+            break;
 
-            case 'resource':
-                $model = new ResourceModel();
-                $content = $model->find($id);
-                $contentID = $content['ResourceID'] ?? null;
-                if ($content) {
-                    $similarPosts = $model->where('CountryID', $content['CountryID'])
-                                          ->where('ResourceID !=', $id)
-                                          ->findAll(5);
-                }
-                break;
+        case 'resource':
+            $model = new ResourceModel();
+            $content = $model->find($id);
+            $contentID = $content['ResourceID'] ?? null;
+            if ($content) {
+                $similarPosts = $model->where('CountryID', $content['CountryID'])
+                                      ->where('ResourceID !=', $id)
+                                      ->findAll(5);
+            }
+            break;
 
-            default:
-                throw new PageNotFoundException("Invalid type: $type");
-        }
-
-        if (!$content || !$contentID) {
-            throw new PageNotFoundException("Content not found");
-        }
-
-        $reviewModel = new ReviewModel();
-        $reviews = $reviewModel->where('id', $contentID)->findAll();
-
-        $expectedTitle = url_title($content['Title'] ?? $content['DocumentName'] ?? $content['LawName'] ?? '', '-', true);
-        if ($title !== $expectedTitle) {
-            return redirect()->to(site_url('view-more/' . $type . '/' . $id . '/' . $expectedTitle));
-        }
-
-        return view('viewmoreview', [
-            'content' => $content,
-            'type' => $type,
-            'similarPosts' => $similarPosts,
-            'reviews' => $reviews,
-            'contentID' => $contentID,
-        ]);
+        default:
+            throw new PageNotFoundException("Invalid type: $type");
     }
+
+    if (!$content || !$contentID) {
+        throw new PageNotFoundException("Content not found");
+    }
+
+    // Fetch reviews associated with the current content
+    $reviewModel = new ReviewModel();
+    $reviews = $reviewModel->where('post_id', $contentID)
+                           ->where('post_type', $type) // Use the post type to filter reviews
+                           ->findAll();
+
+    $expectedTitle = url_title($content['Title'] ?? $content['DocumentName'] ?? $content['LawName'] ?? '', '-', true);
+    if ($title !== $expectedTitle) {
+        return redirect()->to(site_url('view-more/' . $type . '/' . $id . '/' . $expectedTitle));
+    }
+
+    return view('viewmoreview', [
+        'content' => $content,
+        'type' => $type,
+        'similarPosts' => $similarPosts,
+        'reviews' => $reviews, // Pass the filtered reviews to the view
+        'contentID' => $contentID,
+    ]);
+}
+
 
     public function submitReview()
     {
