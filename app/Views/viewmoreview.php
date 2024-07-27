@@ -228,7 +228,12 @@
         width: 100%;
         max-width: 100%;
     }
+    .image-container img {
+    width: 60%;
+    height: auto;
+    border-radius: 10px;
+}
 }
 </style>
-<script async data-id="1655353366" id="chatling-embed-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
+
 <?= $this->endSection() ?>

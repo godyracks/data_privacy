@@ -99,5 +99,5 @@
         <p>For more information on biometric data privacy laws and compliance, explore our <a href="<?= base_url('/resources ')?>">resources</a> or <a href="<?= base_url('/contact ')?>">contact us</a> for personalized assistance.</p>
     </div>
 </section>
-<script async data-id="1655353366" id="chatling-embed-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
+
 <?= $this->endSection() ?>
