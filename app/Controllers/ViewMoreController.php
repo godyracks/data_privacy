@@ -86,39 +86,41 @@ class ViewMoreController extends Controller
 }
 
 
-    public function submitReview()
-    {
-        // Check if the user is logged in
-        $session = session();
-        if (!$session->get('isLoggedIn')) {
-            return redirect()->to('/auth'); // Redirect to login if not logged in
-        }
-    
-        // Get user data from session
-        $userData = $session->get('userData');
-    
-        // Prepare review data
-        $reviewData = [
-            'user_id' => $userData['google_id'], // Use google_id as user_id
-            'content' => $this->request->getPost('content'),
-            'rating' => $this->request->getPost('rating'),
-        ];
-    
-        // Debugging: Check the data being inserted
-        log_message('debug', 'Review Data: ' . json_encode($reviewData));
-    
-        // Insert review into the database
-        $reviewModel = new ReviewModel();
-        if ($reviewModel->insert($reviewData) === false) {
-            // Debugging: Log any errors that occur
-            log_message('error', 'Review Insertion Error: ' . json_encode($reviewModel->errors()));
-            return redirect()->back()->with('error', 'Failed to submit review.'); // Show error message
-        }
-    
-        // Redirect after successful insertion
-        return redirect()->to('/profile')->with('success', 'Review submitted successfully.');
+public function submitReview()
+{
+    // Check if the user is logged in
+    $session = session();
+    if (!$session->get('isLoggedIn')) {
+        return redirect()->to('/auth'); // Redirect to login if not logged in
     }
-    
+
+    // Get user data from session
+    $userData = $session->get('userData');
+
+    // Prepare review data
+    $reviewData = [
+        'user_id' => $userData['google_id'], // Use google_id as user_id
+        'content' => $this->request->getPost('content'),
+        'rating' => $this->request->getPost('rating'),
+        'post_id' => $this->request->getPost('post_id'), // Correctly include post_id
+        'post_type' => $this->request->getPost('post_type'), // Correctly include post_type
+    ];
+
+    // Debugging: Check the data being inserted
+    log_message('debug', 'Review Data: ' . json_encode($reviewData));
+
+    // Insert review into the database
+    $reviewModel = new ReviewModel();
+    if ($reviewModel->insert($reviewData) === false) {
+        // Debugging: Log any errors that occur
+        log_message('error', 'Review Insertion Error: ' . json_encode($reviewModel->errors()));
+        return redirect()->back()->with('error', 'Failed to submit review.'); // Show error message
+    }
+
+    // Redirect after successful insertion
+    return redirect()->to('/profile')->with('success', 'Review submitted successfully.');
+}
+
 
     
 }

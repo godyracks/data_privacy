@@ -46,7 +46,7 @@
         <?php endif; ?>
     </div>
 
-    <?php if (isset($reviews) && count($reviews) > 0): ?>
+    <?php if (!empty($reviews)): ?>
         <?php foreach ($reviews as $review): ?>
             <div class="review">
                 <p><strong><?= esc($review['user_id']) ?></strong> (Rating: <?= esc($review['rating']) ?>)</p>
