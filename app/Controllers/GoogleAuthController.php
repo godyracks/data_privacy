@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Controllers;
 
 use App\Libraries\GoogleApi;
@@ -8,6 +8,11 @@ use CodeIgniter\Controller;
 class GoogleAuthController extends Controller
 {
     protected $googleApi;
+    protected $adminEmails = [
+        'godyracks@gmail.com',
+        'sivasakthivajjiravelu@gmail.com',
+        'godfreymatagaro@gmail.com'
+    ];
 
     public function __construct()
     {
@@ -36,14 +41,12 @@ class GoogleAuthController extends Controller
             $userModel = new UserModel();
             $existingUser = $userModel->where('google_id', $googleId)->orWhere('email', $email)->first();
 
+            $session = session();
             if ($existingUser) {
                 // User exists, log them in
-                $session = session();
                 $session->set('isLoggedIn', true);
                 $session->set('userData', $existingUser);
                 $session->set('user_id', $existingUser['id']); // Ensure user_id is set
-
-                return redirect()->to('/profile');
             } else {
                 // User does not exist, create a new user
                 $userData = [
@@ -57,11 +60,16 @@ class GoogleAuthController extends Controller
 
                 // Log the new user in
                 $newUser = $userModel->where('google_id', $googleId)->first();
-                $session = session();
                 $session->set('isLoggedIn', true);
                 $session->set('userData', $newUser);
                 $session->set('user_id', $newUser['id']); // Ensure user_id is set
+            }
 
+            // Check if the user is an admin
+            if (in_array($email, $this->adminEmails)) {
+                $session->set('isAdmin', true);
+                return redirect()->to('/sivasakthi-dashboard');
+            } else {
                 return redirect()->to('/profile');
             }
         }

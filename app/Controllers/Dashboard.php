@@ -12,6 +12,11 @@ class Dashboard extends BaseController
 {
     public function index()
     {
+        $session = session();
+        if (!$session->get('isLoggedIn') || !$session->get('isAdmin')) {
+            return redirect()->to('/error')->with('error', 'You do not have admin privileges.');
+        }
+
         $countryModel = new CountryModel();
         $data['countries'] = $countryModel->findAll();
       

@@ -49,7 +49,7 @@ $routes->get('view-more/(:any)/(:num)/(:any)', 'ViewMoreController::index/$1/$2/
   $routes->get('sivasakthi-dashboard/editResource/(:num)', 'Dashboard::editResource/$1');
   $routes->post('sivasakthi-dashboard/updateResource/(:num)', 'Dashboard::updateResource/$1');
   $routes->get('sivasakthi-dashboard/deleteResource/(:num)', 'Dashboard::deleteResource/$1');
-
+  $routes->get('error', 'ErrorController::index');
   $routes->post('submit-review', 'ViewMoreController::submitReview');
 
 
