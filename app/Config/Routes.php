@@ -15,6 +15,7 @@ $routes->get('resources', 'Resources::index');
 $routes->get('about', 'About::index');
 $routes->get('contact', 'Contact::index');
 $routes->get('auth', 'Login::index');
+$routes->get('logout', 'Login::logout');
 $routes->get('/google-login', 'GoogleAuthController::login');
 $routes->get('/google-callback', 'GoogleAuthController::callback');
 $routes->get('/profile', 'Profile::index');

@@ -41,7 +41,12 @@
                 <a href="<?= base_url('resources') ?>" class="nav-link <?= uri_string() == 'resources' ? 'active' : '' ?>">Resources</a>
                 <a href="<?= base_url('about') ?>" class="nav-link <?= uri_string() == 'about' ? 'active' : '' ?>">About</a>
                 <a href="<?= base_url('contact') ?>" class="nav-link <?= uri_string() == 'contact' ? 'active' : '' ?>">Contact</a>
-                <a href="<?= base_url('auth') ?>" class="nav-link <?= uri_string() == 'auth' ? 'active' : '' ?>">Login</a>
+                <?php if (session()->get('isLoggedIn')): ?>
+                    <img src="<?= session()->get('profile_image') ?>" alt="User Image" class="profile-image">
+                    <a href="<?= base_url('logout') ?>" class="nav-link">Logout</a>
+                <?php else: ?>
+                    <a href="<?= base_url('auth') ?>" class="nav-link <?= uri_string() == 'auth' ? 'active' : '' ?>">Login</a>
+                <?php endif; ?>
             </nav>
             <!-- Modal Navigation for small screens -->
             <div class="modal-nav" id="modalNav">
@@ -54,7 +59,12 @@
                 <a href="<?= base_url('resources') ?>" class="nav-link <?= uri_string() == 'resources' ? 'active' : '' ?>">Resources</a>
                 <a href="<?= base_url('about') ?>" class="nav-link <?= uri_string() == 'about' ? 'active' : '' ?>">About</a>
                 <a href="<?= base_url('contact') ?>" class="nav-link <?= uri_string() == 'contact' ? 'active' : '' ?>">Contact</a>
-                <a href="<?= base_url('auth') ?>" class="nav-link <?= uri_string() == 'login' ? 'active' : '' ?>">Login</a>
+                <?php if (session()->get('isLoggedIn')): ?>
+                    <img src="<?= session()->get('profile_image') ?>" alt="User Image" class="profile-image">
+                    <a href="<?= base_url('logout') ?>" class="nav-link">Logout</a>
+                <?php else: ?>
+                    <a href="<?= base_url('auth') ?>" class="nav-link <?= uri_string() == 'auth' ? 'active' : '' ?>">Login</a>
+                <?php endif; ?>
             </div>
         </div>
     </header>
@@ -88,7 +98,11 @@
         <div class="footer-column">
             <h3>Quick Links</h3>
             <ul>
-                <li><a href="<?= base_url('auth') ?>">Login</a></li>
+            <?php if (session()->get('isLoggedIn')): ?>
+                    <li><a href="<?= base_url('logout') ?>">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="<?= base_url('auth') ?>">Login</a></li>
+                <?php endif; ?>
                 <li><a href="<?= base_url('terms-and-conditions') ?>">Ts & Co.</a></li>
                 <li><a href="<?= base_url('privacy-policy') ?>">Privacy Policy</a></li>
             </ul>
