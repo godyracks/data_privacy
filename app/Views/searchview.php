@@ -2,14 +2,14 @@
 
 <?= $this->section('content') ?>
 <?= $this->include('partials/_search-input') ?>
-<div class="user-info">
+<!-- <div class="user-info">
     <?php if (session()->get('isLoggedIn')): ?>
         <p>Logged in as User ID: <?= esc(session()->get('google_id')) ?></p>
     <?php endif; ?>
-</div>
+</div> -->
 
 <!-- Display Post IDs and Titles for Debugging -->
-<div class="post-ids">
+<!-- <div class="post-ids">
     <h3>Post IDs</h3>
     <ul>
         <?php foreach ($caseStudies as $caseStudy): ?>
@@ -19,7 +19,7 @@
             <li>Document ID: <?= esc($document['DocumentID']) ?> - Title: <?= esc($document['DocumentName']) ?></li>
         <?php endforeach; ?>
     </ul>
-</div>
+</div> -->
 
 <div class="card-items">
     <div class="filter-bar">
