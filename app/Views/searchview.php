@@ -2,6 +2,24 @@
 
 <?= $this->section('content') ?>
 <?= $this->include('partials/_search-input') ?>
+<div class="user-info">
+    <?php if (session()->get('isLoggedIn')): ?>
+        <p>Logged in as User ID: <?= esc(session()->get('google_id')) ?></p>
+    <?php endif; ?>
+</div>
+
+<!-- Display Post IDs and Titles for Debugging -->
+<div class="post-ids">
+    <h3>Post IDs</h3>
+    <ul>
+        <?php foreach ($caseStudies as $caseStudy): ?>
+            <li>Case Study ID: <?= esc($caseStudy['CaseStudyID']) ?> - Title: <?= esc($caseStudy['Title']) ?></li>
+        <?php endforeach; ?>
+        <?php foreach ($documents as $document): ?>
+            <li>Document ID: <?= esc($document['DocumentID']) ?> - Title: <?= esc($document['DocumentName']) ?></li>
+        <?php endforeach; ?>
+    </ul>
+</div>
 
 <div class="card-items">
     <div class="filter-bar">
@@ -22,7 +40,7 @@
                         <p><?= htmlspecialchars_decode(truncate_words($caseStudy['Summary'], 20)) ?></p>
                         <div class="card-footer">
                             <a href="<?= site_url('view-more/case-study/' . $caseStudy['CaseStudyID'] . '/' . url_title($caseStudy['Title'], '-', true)) ?>">View More</a>
-                            <span class="material-symbols-outlined">favorite</span>
+                            <span class="material-symbols-outlined favorite-icon" data-post-id="<?= $caseStudy['CaseStudyID'] ?>" data-post-type="case-study">favorite</span>
                         </div>
                     </div>
                 </div>
@@ -51,6 +69,7 @@
                                 <p>Tags: <?= esc($document['Type']) ?></p>
                             </div>
                             <a href="<?= site_url('view-more/document/' . $document['DocumentID'] . '/' . url_title($document['DocumentName'], '-', true)) ?>">View More</a>
+                            <span class="material-symbols-outlined favorite-icon" data-post-id="<?= $document['DocumentID'] ?>" data-post-type="document">favorite</span>
                         </div>
                     </div>
                 </div>
@@ -61,38 +80,81 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('.filter-btn.active').click();
+    // Automatically click the active filter button on page load
+    const activeFilterButton = document.querySelector('.filter-btn.active');
+    if (activeFilterButton) {
+        activeFilterButton.click();
+    }
 });
 
+// Handle filter button clicks
 document.querySelectorAll('.filter-btn').forEach(button => {
     button.addEventListener('click', () => {
+        // Update active filter button
         document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
 
         const filter = button.getAttribute('data-filter');
 
-        if (filter === 'all') {
-            document.querySelectorAll('.category').forEach(category => {
+        // Show/hide categories based on selected filter
+        document.querySelectorAll('.category').forEach(category => {
+            if (filter === 'all' || category.classList.contains(`${filter}-category`)) {
                 category.classList.add('active');
-            });
-        } else {
-            document.querySelectorAll('.category').forEach(category => {
-                if (category.classList.contains(filter + '-category')) {
-                    category.classList.add('active');
-                } else {
-                    category.classList.remove('active');
-                }
-            });
-        }
+            } else {
+                category.classList.remove('active');
+            }
+        });
     });
 });
 
+// Handle page number clicks
 document.querySelectorAll('.page-number').forEach(page => {
     page.addEventListener('click', () => {
+        // Update active page number
         document.querySelectorAll('.page-number').forEach(pg => pg.classList.remove('active'));
         page.classList.add('active');
     });
 });
+
+// Handle favorite icon clicks
+document.querySelectorAll('.favorite-icon').forEach(icon => {
+    icon.addEventListener('click', () => {
+        const postId = icon.getAttribute('data-post-id');
+        const postType = icon.getAttribute('data-post-type');
+        fetch('<?= site_url('profile/addFavorite') ?>', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+    },
+    body: JSON.stringify({
+        post_id: postId,
+        post_type: postType
+    })
+})
+.then(response => {
+    if (response.redirected) {
+        // Handle the redirect (optional)
+        window.location.href = response.url;
+    } else {
+        return response.json();
+    }
+})
+.then(data => {
+    if (data && data.status === 'success') {
+        alert('Added to favorites!');
+    } else {
+        alert('Failed to add to favorites.');
+    }
+})
+.catch(error => {
+    console.error('Error adding to favorites:', error);
+    alert('An error occurred while adding to favorites.');
+});
+
+    });
+});
 </script>
+
 
 <?= $this->endSection() ?>

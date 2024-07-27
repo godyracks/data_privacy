@@ -47,6 +47,7 @@ class GoogleAuthController extends Controller
                 $session->set('isLoggedIn', true);
                 $session->set('userData', $existingUser);
                 $session->set('user_id', $existingUser['id']); // Ensure user_id is set
+                $session->set('google_id', $existingUser['google_id']); // Store google_id in session
                 $session->set('profile_image', $existingUser['profile_image']); // Set profile image
             } else {
                 // User does not exist, create a new user
@@ -64,6 +65,7 @@ class GoogleAuthController extends Controller
                 $session->set('isLoggedIn', true);
                 $session->set('userData', $newUser);
                 $session->set('user_id', $newUser['id']); // Ensure user_id is set
+                $session->set('google_id', $newUser['google_id']); // Store google_id in session
                 $session->set('profile_image', $newUser['profile_image']); // Set profile image
             }
 

@@ -53,6 +53,7 @@ $routes->get('view-more/(:any)/(:num)/(:any)', 'ViewMoreController::index/$1/$2/
   $routes->get('error', 'ErrorController::index');
   $routes->post('submit-review', 'ViewMoreController::submitReview');
 
+  $routes->post('profile/addFavorite', 'Profile::addFavorite');
 
 
 
