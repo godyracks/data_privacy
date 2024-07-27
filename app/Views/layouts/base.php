@@ -24,6 +24,10 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
+           
+        }
+        .user-img{
+            top: 0;
         }
     </style> 
 </head>
@@ -47,7 +51,7 @@
                 <a href="<?= base_url('about') ?>" class="nav-link <?= uri_string() == 'about' ? 'active' : '' ?>">About</a>
                 <a href="<?= base_url('contact') ?>" class="nav-link <?= uri_string() == 'contact' ? 'active' : '' ?>">Contact</a>
                 <?php if (session()->get('isLoggedIn')): ?>
-                    <img src="<?= session()->get('profile_image') ?>" alt="User Image" class="profile-image">
+                    <a href="<?= base_url('google-login') ?>" class=""><img src="<?= session()->get('profile_image') ?>" alt="User Image" class="profile-image"></a>
                     <a href="<?= base_url('logout') ?>" class="nav-link">Logout</a>
                 <?php else: ?>
                     <a href="<?= base_url('auth') ?>" class="nav-link <?= uri_string() == 'auth' ? 'active' : '' ?>">Login</a>
@@ -65,7 +69,7 @@
                 <a href="<?= base_url('about') ?>" class="nav-link <?= uri_string() == 'about' ? 'active' : '' ?>">About</a>
                 <a href="<?= base_url('contact') ?>" class="nav-link <?= uri_string() == 'contact' ? 'active' : '' ?>">Contact</a>
                 <?php if (session()->get('isLoggedIn')): ?>
-                    <img src="<?= session()->get('profile_image') ?>" alt="User Image" class="profile-image">
+                    <a href="<?= base_url('google-login') ?>" class="user-img"><img src="<?= session()->get('profile_image') ?>" alt="User Image" class="profile-image"></a>
                     <a href="<?= base_url('logout') ?>" class="nav-link">Logout</a>
                 <?php else: ?>
                     <a href="<?= base_url('auth') ?>" class="nav-link <?= uri_string() == 'auth' ? 'active' : '' ?>">Login</a>

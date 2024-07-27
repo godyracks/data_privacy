@@ -47,6 +47,7 @@ class GoogleAuthController extends Controller
                 $session->set('isLoggedIn', true);
                 $session->set('userData', $existingUser);
                 $session->set('user_id', $existingUser['id']); // Ensure user_id is set
+                $session->set('profile_image', $existingUser['profile_image']); // Set profile image
             } else {
                 // User does not exist, create a new user
                 $userData = [
@@ -63,6 +64,7 @@ class GoogleAuthController extends Controller
                 $session->set('isLoggedIn', true);
                 $session->set('userData', $newUser);
                 $session->set('user_id', $newUser['id']); // Ensure user_id is set
+                $session->set('profile_image', $newUser['profile_image']); // Set profile image
             }
 
             // Check if the user is an admin
