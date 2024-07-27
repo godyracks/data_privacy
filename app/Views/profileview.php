@@ -153,7 +153,7 @@
 
     <header class="profile-header">
         <h1>User Profile</h1>
-        <img src="user-profile-image.jpg" alt="Profile Image" class="profile-image">
+        <img src="<?= session()->get('profile_image') ?>" alt="Profile Image" class="profile-image">
     </header>
     <nav class="profile-nav">
         <a href="#favorites" class="tab-link active">Favorites</a>
