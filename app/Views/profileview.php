@@ -261,7 +261,7 @@
 
     confirmLogout.addEventListener('click', () => {
         // Perform the logout action, e.g., redirect to the logout route
-        window.location.href = '/auth/logout';
+        window.location.href = '/logout';
     });
 
     cancelLogout.addEventListener('click', () => {
