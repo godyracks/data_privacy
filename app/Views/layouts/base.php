@@ -20,6 +20,11 @@
             /* editing area */
             min-height: 300px;
         }
+        .profile-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
     </style> 
 </head>
 <body>
