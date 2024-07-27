@@ -2,11 +2,18 @@
 
 namespace App\Controllers;
 
-class Profile extends BaseController
+use CodeIgniter\Controller;
+
+class Profile extends Controller
 {
     public function index()
     {
+        $session = session();
         
-       return view('profileview');
+        if (!$session->get('google_id') && !$session->get('user_id')) {
+            return redirect()->to('/auth');
+        }
+
+        return view('profileview');
     }
 }

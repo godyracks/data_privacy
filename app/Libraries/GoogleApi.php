@@ -26,6 +26,9 @@ class GoogleApi
         
         $this->client->addScope('email');
         $this->client->addScope('profile');
+        $this->client->setHttpClient(new \GuzzleHttp\Client([
+            'verify' => false, // Disable SSL verification//remove this on production
+        ]));
     }
 
     public function getClient()
