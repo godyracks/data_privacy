@@ -168,7 +168,7 @@
     <?php else: ?>
         <?php foreach ($favorites as $favorite): ?>
             <div class="favorite-item">
-                <a href="<?= site_url($favorite['post_type'] . '/' . $favorite['post_id'] . '/' . url_title($favorite['details']['Title'], '-', true)) ?>" class="favorite-link">
+                <a href="<?= site_url('view-more/'.$favorite['post_type'] . '/' . $favorite['post_id'] . '/' . url_title($favorite['details']['Title'], '-', true)) ?>" class="favorite-link">
                     <img src="<?= base_url($favorite['details']['Image']) ?>" class="favorite-image" style="width: 50px; height: auto; border-radius: 5px;">
                     <div class="favorite-info">
                         <h3 class="favorite-title"><?= esc($favorite['details']['Title']) ?></h3>
