@@ -287,7 +287,7 @@
 
 
 
-    </div>
+   
     <div class="right-part">
         <h2>Similar Posts</h2>
         <div class="similar-posts">
