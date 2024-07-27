@@ -9,7 +9,6 @@ class GoogleAuthController extends Controller
 {
     protected $googleApi;
     protected $adminEmails = [
-        'godyracks@gmail.com',
         'sivasakthivajjiravelu@gmail.com',
         'godfreymatagaro@gmail.com'
     ];

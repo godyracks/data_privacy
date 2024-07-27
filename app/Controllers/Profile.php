@@ -1,23 +1,56 @@
 <?php
-
 namespace App\Controllers;
 
-use CodeIgniter\Controller;
 use App\Models\FavoritesModel;
+use App\Models\CaseStudyModel;
+use App\Models\DocumentModel;
 
-class Profile extends Controller
+class Profile extends BaseController
 {
     public function index()
     {
-        $session = session();
+        $favoritesModel = new FavoritesModel();
+        $caseStudyModel = new CaseStudyModel();
+        $documentModel = new DocumentModel();
+    
+        $googleId = session()->get('google_id');
+    
+        // Debugging output for user ID
+       // log_message('debug', 'User ID from session: ' . $googleId);
         
-        if (!$session->get('google_id') && !$session->get('user_id')) {
-            return redirect()->to('/auth');
+        if (!$googleId) {
+            log_message('error', 'No user ID found in session');
+            return view('profileview', [
+                'favorites' => [],
+            ]);
         }
-
-        return view('profileview');
+    
+        $favorites = $favoritesModel->where('user_id', $googleId)->findAll();
+    
+        // Debugging output for favorites
+       // log_message('debug', 'Favorites for user ' . $googleId . ': ' . print_r($favorites, true));
+    
+        // Prepare favorite details
+        foreach ($favorites as &$favorite) {
+            if ($favorite['post_type'] === 'case-study') {
+                $favorite['details'] = $caseStudyModel->find($favorite['post_id']);
+            } elseif ($favorite['post_type'] === 'document') {
+                $favorite['details'] = $documentModel->find($favorite['post_id']);
+            }
+        }
+    
+        // Log the prepared favorites with details
+      //  log_message('debug', 'Prepared favorites with details: ' . print_r($favorites, true));
+    
+        return view('profileview', [
+            'favorites' => $favorites,
+        ]);
     }
+    
+    
+    
 
+    
     public function addFavorite() {
         // Check if the request is an AJAX request
         if ($this->request->isAJAX()) {
@@ -48,5 +81,22 @@ class Profile extends Controller
     
         return $this->response->setStatus(400);
     }
+    public function deleteFavorite($postId, $postType)
+    {
+        // Assume you have a model for favorites
+        $favoriteModel = new FavoritesModel();
+    
+        // Perform the deletion based on your database structure
+        $result = $favoriteModel->deleteFavorite($postId, $postType);
+    
+        if ($result) {
+            // Redirect back to the profile page with a success message
+            return redirect()->to('/profile')->with('message', 'Favorite deleted successfully.');
+        } else {
+            // Handle failure
+            return redirect()->to('/profile')->with('error', 'Could not delete favorite.');
+        }
+    }
+    
     
 }

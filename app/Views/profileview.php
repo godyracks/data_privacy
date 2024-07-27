@@ -150,6 +150,7 @@
 </style>
 
 <div class="profile-container">
+
     <header class="profile-header">
         <h1>User Profile</h1>
         <img src="user-profile-image.jpg" alt="Profile Image" class="profile-image">
@@ -160,32 +161,29 @@
         <a href="#logout" class="tab-link" id="logoutLink">Logout</a>
     </nav>
     <main class="profile-main">
-        <section id="favorites" class="tab-content active">
-            <h2>Your Favorites</h2>
+    <section id="favorites" class="tab-content active">
+    <h2>Your Favorites</h2>
+    <?php if (empty($favorites)): ?>
+        <p>You have no favorites yet.</p>
+    <?php else: ?>
+        <?php foreach ($favorites as $favorite): ?>
             <div class="favorite-item">
-                <div class="icon-circle">R</div>
+                <img src="<?= base_url($favorite['details']['Image']) ?>" class="favorite-image" style="width: 50px; height: auto; border-radius: 5px;">
                 <div class="favorite-info">
-                    <h3 class="favorite-title">Article Title Here</h3>
-                    <p class="favorite-time">5 days ago</p>
+                    <p class="favorite-title"><?= isset($favorite['details']['Title']) ? esc($favorite['details']['Title']) : 'Untitled' ?></p>
+                    <p class="favorite-time"><?= esc($favorite['details']['Date']) ?></p>
                 </div>
-                <button class="delete-btn">
+                <a href="<?= base_url('/profile/deleteFavorite/' . esc($favorite['post_id']) . '/' . esc($favorite['post_type'])) ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this article? This action is permanent.');">
                     <span class="material-symbols-outlined">delete_forever</span>
                     Delete
-                </button>
+                </a>
             </div>
-            <div class="favorite-item">
-                <div class="icon-circle">L</div>
-                <div class="favorite-info">
-                    <h3 class="favorite-title">Another Article Title</h3>
-                    <p class="favorite-time">21 hrs ago</p>
-                </div>
-                <button class="delete-btn">
-                    <span class="material-symbols-outlined">delete_forever</span>
-                    Delete
-                </button>
-            </div>
-            <!-- Add more favorite items as needed -->
-        </section>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</section>
+
+
+
         <section id="settings" class="tab-content">
             <h2>Settings</h2>
             <p>Manage your profile settings here.</p>
@@ -212,18 +210,31 @@
     const confirmLogout = document.getElementById('confirmLogout');
     const cancelLogout = document.getElementById('cancelLogout');
 
-    // Handle delete button clicks
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            const favoriteItem = e.target.closest('.favorite-item');
-            const deleteConfirmation = confirm("Are you sure you want to delete this article? This action is forever.");
-            overlay.style.display = 'none'; // Hide overlay after confirmation dialog
+    document.addEventListener('DOMContentLoaded', () => {
+    const deleteLinks = document.querySelectorAll('.delete-btn');
+
+    deleteLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent the default link behavior
+            const deleteConfirmation = confirm("Are you sure you want to delete this article? This action is permanent.");
+
             if (deleteConfirmation) {
-                favoriteItem.remove(); // Remove the item from the DOM
-                // Additional logic to handle deletion from the database can be added here
+                // Proceed with the deletion
+                window.location.href = link.getAttribute('href'); // Redirect to the delete route
             }
         });
     });
+
+    // Optionally, show success/error messages
+    const message = '<?= session()->getFlashdata('message') ?>';
+    const error = '<?= session()->getFlashdata('error') ?>';
+
+    if (message) {
+        alert(message); // Show success message
+    } else if (error) {
+        alert(error); // Show error message
+    }
+});
 
     // Handle tab switching
     tabLinks.forEach(link => {

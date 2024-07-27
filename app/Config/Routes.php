@@ -54,6 +54,8 @@ $routes->get('view-more/(:any)/(:num)/(:any)', 'ViewMoreController::index/$1/$2/
   $routes->post('submit-review', 'ViewMoreController::submitReview');
 
   $routes->post('profile/addFavorite', 'Profile::addFavorite');
+  $routes->get('profile/deleteFavorite/(:any)/(:any)', 'Profile::deleteFavorite/$1/$2');
+
 
 
 
