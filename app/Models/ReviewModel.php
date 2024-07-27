@@ -7,7 +7,7 @@ class ReviewModel extends Model
 {
     protected $table = 'reviews';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['user_id', 'content', 'rating', 'post_id', 'post_type', 'created_at'];
+    protected $allowedFields = ['user_id', 'content', 'rating', 'post_id', 'post_type', 'created_at', 'username'];
 
      // Disable automatic timestamp handling for updated_at
      protected $useTimestamps = true;

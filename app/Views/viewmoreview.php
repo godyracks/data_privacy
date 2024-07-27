@@ -49,7 +49,7 @@
     <?php if (!empty($reviews)): ?>
         <?php foreach ($reviews as $review): ?>
             <div class="review">
-                <p><strong><?= esc($review['user_id']) ?></strong> (Rating: <?= esc($review['rating']) ?>)</p>
+            <p><strong><?= esc($review['username']) ?></strong> (Rating: <?= esc($review['rating']) ?>)</p>
                 <p><?= esc($review['content']) ?></p>
             </div>
         <?php endforeach; ?>

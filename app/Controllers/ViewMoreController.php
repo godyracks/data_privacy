@@ -100,6 +100,7 @@ public function submitReview()
     // Prepare review data
     $reviewData = [
         'user_id' => $userData['google_id'], // Use google_id as user_id
+        'username' => $userData['username'], // Capture username
         'content' => $this->request->getPost('content'),
         'rating' => $this->request->getPost('rating'),
         'post_id' => $this->request->getPost('post_id'), // Correctly include post_id
