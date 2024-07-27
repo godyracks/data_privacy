@@ -144,7 +144,7 @@ document.querySelectorAll('.favorite-icon').forEach(icon => {
     if (data && data.status === 'success') {
         alert('Added to favorites!');
     } else {
-        alert('Failed to add to favorites.');
+        alert('Kindly, Log In! Failed to add to favorites.');
     }
 })
 .catch(error => {
