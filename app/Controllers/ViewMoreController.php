@@ -108,13 +108,13 @@ public function submitReview()
     ];
 
     // Debugging: Check the data being inserted
-    log_message('debug', 'Review Data: ' . json_encode($reviewData));
+  //  log_message('debug', 'Review Data: ' . json_encode($reviewData));
 
     // Insert review into the database
     $reviewModel = new ReviewModel();
     if ($reviewModel->insert($reviewData) === false) {
         // Debugging: Log any errors that occur
-        log_message('error', 'Review Insertion Error: ' . json_encode($reviewModel->errors()));
+       // log_message('error', 'Review Insertion Error: ' . json_encode($reviewModel->errors()));
         return redirect()->back()->with('error', 'Failed to submit review.'); // Show error message
     }
 
