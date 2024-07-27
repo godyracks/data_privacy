@@ -168,11 +168,13 @@
     <?php else: ?>
         <?php foreach ($favorites as $favorite): ?>
             <div class="favorite-item">
-                <img src="<?= base_url($favorite['details']['Image']) ?>" class="favorite-image" style="width: 50px; height: auto; border-radius: 5px;">
-                <div class="favorite-info">
-                    <p class="favorite-title"><?= isset($favorite['details']['Title']) ? esc($favorite['details']['Title']) : 'Untitled' ?></p>
-                    <p class="favorite-time"><?= esc($favorite['details']['Date']) ?></p>
-                </div>
+                <a href="<?= site_url($favorite['post_type'] . '/' . $favorite['post_id'] . '/' . url_title($favorite['details']['Title'], '-', true)) ?>" class="favorite-link">
+                    <img src="<?= base_url($favorite['details']['Image']) ?>" class="favorite-image" style="width: 50px; height: auto; border-radius: 5px;">
+                    <div class="favorite-info">
+                        <h3 class="favorite-title"><?= esc($favorite['details']['Title']) ?></h3>
+                        <p class="favorite-time"><?= esc($favorite['details']['Date']) ?></p>
+                    </div>
+                </a>
                 <a href="<?= base_url('/profile/deleteFavorite/' . esc($favorite['post_id']) . '/' . esc($favorite['post_type'])) ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this article? This action is permanent.');">
                     <span class="material-symbols-outlined">delete_forever</span>
                     Delete
@@ -181,6 +183,7 @@
         <?php endforeach; ?>
     <?php endif; ?>
 </section>
+
 
 
 

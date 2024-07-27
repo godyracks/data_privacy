@@ -69,7 +69,7 @@
                                 <p>Tags: <?= esc($document['Type']) ?></p>
                             </div>
                             <a href="<?= site_url('view-more/document/' . $document['DocumentID'] . '/' . url_title($document['DocumentName'], '-', true)) ?>">View More</a>
-                            <span class="material-symbols-outlined favorite-icon" data-post-id="<?= $document['DocumentID'] ?>" data-post-type="document">favorite</span>
+                        
                         </div>
                     </div>
                 </div>
