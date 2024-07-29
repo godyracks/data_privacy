@@ -79,6 +79,7 @@
     }
     .input-container input {
         width: 80%;
+        height: 40px;
         padding: 10px 10px 10px 35px;
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -87,17 +88,18 @@
         position: relative;
         width: 90%;
         height: 30px;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
     }
     .full-width-input-container .icon2 {
         position: absolute;
-        top: 50%;
+        top: 100%;
         left: 10px;
         transform: translateY(-50%);
         color: #ccc;
     }
     .full-width-input-container input {
         width: 100%;
+        height: 40px;
         padding: 10px 10px 10px 35px;
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -128,6 +130,22 @@
         .cont-left-side, .cont-right-side {
             width: 100%;
         }
+        .input-container input {
+        width: 70%;
+        height: 40px;
+      
+    }
+    .input-container {
+
+position: relative;
+flex: 1;
+margin-bottom: 10px;
+margin-right: 0;
+width: 100%;
+}
+.full-width-input-container input {
+        width: 95%;
+        height: 40px;
     }
 </style>
 
