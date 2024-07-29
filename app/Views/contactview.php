@@ -29,10 +29,13 @@
         height: auto;
     }
     .social-links {
-        position: absolute;
-        bottom: 20px;
+        position: relative;
+        bottom: 0;
         left: 20px;
         display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-top: 20px;
         gap: 10px;
     }
     .social-links a {
@@ -51,7 +54,7 @@
         margin:  0 auto;
     }
     .cont-right-side p {
-        margin-bottom: 20px;
+        margin-bottom: 40px;
         font-size: 14px;
         color: #555;
     }
@@ -61,9 +64,11 @@
         gap: 10px;
     }
     .input-container {
+
         position: relative;
         flex: 1;
         margin-bottom: 10px;
+        margin-right: 3px;
     }
     .input-container .icons {
         position: absolute;
@@ -73,15 +78,16 @@
         color: #ccc;
     }
     .input-container input {
-        width: 100%;
+        width: 80%;
         padding: 10px 10px 10px 35px;
         border: 1px solid #ccc;
         border-radius: 4px;
     }
     .full-width-input-container {
         position: relative;
-        width: 100%;
-        margin-bottom: 10px;
+        width: 90%;
+        height: 30px;
+        margin-bottom: 20px;
     }
     .full-width-input-container .icon2 {
         position: absolute;
@@ -97,7 +103,7 @@
         border-radius: 4px;
     }
     .textarea {
-        width: 100%;
+        width: 94%;
         padding: 10px;
         margin-bottom: 10px;
         border: 1px solid #ccc;
@@ -130,10 +136,13 @@
         <div class="cont-left-side">
             <img src="<?= base_url('public/images/global.jpg') ?>" alt="Contact Image">
             <div class="social-links">
-                <!-- <a href="#"><span class="material-symbols-outlined">in</span></a>
-                <a href="#"><span class="material-symbols-outlined">whatsapp</span></a> -->
-                <!-- <a href="#"><span class="material-symbols-outlined">mail</span></a> -->
-            </div>
+            <!-- <p>Social Links</p> -->
+     
+            <a target="_blank" href="https://www.linkedin.com/in/sivasakthi-vajjiravelu-571792195?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            <a  target="_blank"  href="https://wa.me/447436199290?text=Hello%2C%20I%20have%20a%20question%21" class="social-icon" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+       </div>     
         </div>
         <div class="cont-right-side">
             <h2>GET IN TOUCH</h2>
