@@ -136,7 +136,7 @@ location_on
         <p>&copy; 2024 Biometric Data Privacy. All rights reserved.</p>
     </div>
 </footer>
-
+<script async data-id="7958313294" id="chatling-embed-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
  <script>
  document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menuToggle');
