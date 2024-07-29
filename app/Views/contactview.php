@@ -113,7 +113,7 @@
         height: 100px;
     }
     .send-button {
-        width: 100%;
+        width: 97%;
         padding: 15px;
         background-color: blue;
         color: white;
