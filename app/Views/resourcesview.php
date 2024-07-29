@@ -63,9 +63,12 @@
     }
 
     @media (max-width: 768px) {
-        resources-container {
-            width: 70%;
+        .resources-container {
+            width: 80%;
             margin: 0 auto;
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+            background-color: transparent;
+            margin-top: 10px;
         }
         .resource-item {
             flex-direction: column;
