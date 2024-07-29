@@ -14,36 +14,21 @@ class LiveSearchController extends Controller
         $searchModel = new SearchIndexModel();
         $results = $searchModel->like('Content', $query)->findAll();
 
-        // Process results to handle delimited content
-        foreach ($results as &$result) {
-            // Split content using the delimiter
-            $result['Content'] = $this->processContent($result['Content']);
+        $processedResults = [];
+        foreach ($results as $result) {
+            $contentParts = explode('###', $result['Content']);
+            $title = $contentParts[0] ?? '';
+            $firstLine = isset($contentParts[1]) ? explode('.', strip_tags($contentParts[1]))[0] . '.' : '';
+
+            // Check if the query is in the title or the rest of the content
+            if (stripos($title, $query) !== false || (isset($contentParts[1]) && stripos($contentParts[1], $query) !== false)) {
+                $processedResults[] = [
+                    'title' => $title,
+                    'content' => $firstLine,
+                ];
+            }
         }
 
-        return $this->response->setJSON($results);
-    }
-
-    private function processContent($content)
-    {
-        // Split content using the delimiter
-        $parts = explode('###', $content);
-        
-        // Ensure we have at least one part
-        if (count($parts) > 1) {
-            // Extract different parts of the content
-            $contentText = $parts[0];
-            $videoUrl = $parts[1] ?? '';
-            $imageUrl = $parts[2] ?? '';
-            $date = $parts[3] ?? '';
-
-            return [
-                'text' => $contentText,
-                'videoUrl' => $videoUrl,
-                'imageUrl' => $imageUrl,
-                'date' => $date
-            ];
-        }
-
-        return ['text' => $content];
+        return $this->response->setJSON($processedResults);
     }
 }
