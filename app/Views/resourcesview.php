@@ -4,7 +4,7 @@
 <style>
  
     .resources-container {
-        width: 80%;
+        width: 90%;
         max-width: 1200px;
         margin: 50px auto;
         padding: 20px;
@@ -12,6 +12,7 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
         border: 1px solid #ddd;
+        line-height: 1.6;
     }
     .resources-container h1 {
         text-align: center;
@@ -59,6 +60,26 @@
     }
     .download-button:hover {
         background-color: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+        resources-container {
+            width: 70%;
+            margin: 0 auto;
+        }
+        .resource-item {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .resource-item video, .resource-item img {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+        .resource-details {
+            text-align: center;
+        }
     }
 </style>
 
