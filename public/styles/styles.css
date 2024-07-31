@@ -274,7 +274,8 @@ h1, h2, h3, h4, h5, h6 {
         margin: 0 auto;
 
     }
-}/* Base styles for testimonials */
+}
+/* Base styles for testimonials */
 .testimonials {
     display: flex;
     flex-direction: column;
@@ -368,10 +369,21 @@ h1, h2, h3, h4, h5, h6 {
     padding: 5px;
 }
 
-.stars {
+.testimonial-right h3 {
+    position: relative;
+    top: 20px;
+    bottom: 0;
+}
+
+.testimonial-cards-wrapper .testimonial-right p {
+    font-size: 12px;
+    
+}
+
+.testimonial-right .stars {
     display: flex;
     align-items: center;
-    margin: 2px 0;
+    margin: 0;
 }
 
 /* Responsive styles for screens with max-width of 769px */
@@ -385,7 +397,7 @@ h1, h2, h3, h4, h5, h6 {
         margin: 10px; /* Remove margin for better fit on small screens */
     }
 
-    .chevron {
+    .test-chevron {
         font-size: 36px; /* Adjust size */
         padding: 8px; /* Adjust padding */
     }
@@ -398,6 +410,7 @@ h1, h2, h3, h4, h5, h6 {
         right: 10px; /* Ensure visibility */
     }
 }
+
 
 /* wwdo */
 .what-we-do {

@@ -12,11 +12,10 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         display: none;
         margin-top: 5px;
-      
     }
 
     .search-results .result-item {
-        padding: 10px;
+        padding: 0; /* Remove padding here */
         border-bottom: 1px solid #eee;
     }
 
@@ -33,13 +32,40 @@
     }
 
     .search-results .result-item a {
+        display: block;
         text-decoration: none;
-        color: inherit; /* Inherit color from parent */
-        display: block; /* Make the entire result-item clickable */
+        color: inherit;
+        padding: 10px;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
     }
 
     .search-results .result-item a:hover {
-        background-color: #f0f0f0; /* Highlight on hover */
+        background-color: #f0f0f0;
+    }
+
+    .search-container {
+        position: relative;
+    }
+
+    .search-bar {
+        display: flex;
+        align-items: center;
+    }
+
+    .search-bar .search-input {
+        flex: 1;
+    }
+
+    .search-bar .search-icon, .search-bar .clear-icon {
+        cursor: pointer;
+    }
+
+    .default-message {
+        padding: 10px;
+        text-align: center;
+        color: #888;
     }
 </style>
 
@@ -82,20 +108,20 @@
                             const resultItem = document.createElement('div');
                             resultItem.className = 'result-item';
 
-                            // Ensure item.type is defined and construct URL accordingly
-                            if (item.type && item.title) {
+                            // Ensure item.Type and item.ReferenceID are defined and construct URL accordingly
+                            if (item.Type && item.ReferenceID && item.Content) {
                                 let url = '';
-                                const titleHyphenated = item.title.toLowerCase().replace(/\s+/g, '-');
+                                const titleHyphenated = item.Content.toLowerCase().replace(/\s+/g, '-');
 
-                                switch(item.type.toLowerCase()) {
+                                switch(item.Type.toLowerCase()) {
                                     case 'law':
-                                        url = `/view-more/law/${item.id}/${titleHyphenated}`;
+                                        url = `/view-more/law/${item.ReferenceID}/${titleHyphenated}`;
                                         break;
                                     case 'document':
-                                        url = `/view-more/document/${item.id}/${titleHyphenated}`;
+                                        url = `/view-more/document/${item.ReferenceID}/${titleHyphenated}`;
                                         break;
                                     case 'case study':
-                                        url = `/view-more/case-studies/${item.id}`;
+                                        url = `/view-more/case-studies/${item.ReferenceID}/${titleHyphenated}`;
                                         break;
                                     default:
                                         url = '#'; // Fallback URL
@@ -103,14 +129,14 @@
 
                                 resultItem.innerHTML = `
                                     <a href="${url}" target="_blank">
-                                        <h4>${item.title}</h4>
-                                        <p>${item.content}</p>
+                                        <h4>${item.Content}</h4>
                                     </a>
                                 `;
                             } else {
                                 resultItem.innerHTML = `
-                                    <h4>${item.title || 'Untitled'}</h4>
-                                    <p>${item.content || 'No content available'}</p>
+                                    <a href="#">
+                                        <h4>${item.Content || 'Untitled'}</h4>
+                                    </a>
                                 `;
                             }
                             resultsDiv.appendChild(resultItem);

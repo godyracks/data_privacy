@@ -1,4 +1,3 @@
-
 <section class="testimonials">
 <h2 class="testimonial-title">See What Our Users Say</h2>
 <span class="material-symbols-outlined test-chevron chevron-left">chevron_left</span>
@@ -12,7 +11,7 @@
                     </div>
                 </div>
                 <div class="testimonial-right">
-                    <h3>John Doe</h3>
+                    <h3>Aarav Patel</h3>
                     <div class="stars">
                         <span class="material-symbols-outlined">star</span>
                         <span class="material-symbols-outlined">star</span>
@@ -20,7 +19,7 @@
                         <span class="material-symbols-outlined">star</span>
                         <span class="material-symbols-outlined">star_half</span>
                     </div>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+                    <p>This portal offers comprehensive insights into biometric data privacy laws. It's a crucial resource for staying informed and compliant.</p>
                 </div>
             </div>
             <div class="testimonial-card">
@@ -30,7 +29,7 @@
                     </div>
                 </div>
                 <div class="testimonial-right">
-                    <h3>Jane Smith</h3>
+                    <h3>Emily Watson</h3>
                     <div class="stars">
                         <span class="material-symbols-outlined">star</span>
                         <span class="material-symbols-outlined">star</span>
@@ -38,7 +37,7 @@
                         <span class="material-symbols-outlined">star</span>
                         <span class="material-symbols-outlined">star_half</span>
                     </div>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+                    <p>A reliable source for understanding UK’s biometric data regulations. The information is well-organized and easy to navigate.</p>
                 </div>
             </div>
             <div class="testimonial-card">
@@ -48,7 +47,7 @@
                     </div>
                 </div>
                 <div class="testimonial-right">
-                    <h3>Anna Johnson</h3>
+                    <h3>Priya Sharma</h3>
                     <div class="stars">
                         <span class="material-symbols-outlined">star</span>
                         <span class="material-symbols-outlined">star</span>
@@ -56,7 +55,7 @@
                         <span class="material-symbols-outlined">star</span>
                         <span class="material-symbols-outlined">star_half</span>
                     </div>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+                    <p>Essential for anyone dealing with biometric data in India. The portal covers all the latest updates and compliance guidelines.</p>
                 </div>
             </div>
             <div class="testimonial-card">
@@ -66,7 +65,7 @@
                     </div>
                 </div>
                 <div class="testimonial-right">
-                    <h3>Michael Brown</h3>
+                    <h3>James Brown</h3>
                     <div class="stars">
                         <span class="material-symbols-outlined">star</span>
                         <span class="material-symbols-outlined">star</span>
@@ -74,7 +73,7 @@
                         <span class="material-symbols-outlined">star</span>
                         <span class="material-symbols-outlined">star_half</span>
                     </div>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+                    <p>Impressed by the depth of information on UK biometric laws. It’s a valuable tool for legal professionals and data handlers.</p>
                 </div>
             </div>
         </div>

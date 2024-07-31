@@ -210,7 +210,7 @@
 </style>
 
 
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <div class="view-more-container">
     <div class="left-part">
         <div class="image-container">
