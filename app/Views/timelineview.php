@@ -76,7 +76,7 @@
 .modal {
     display: none;
     position: fixed;
-    z-index: 10003;
+    z-index: 1003;
     padding-top: 100px;
     left: 0;
     top: 0;
