@@ -164,8 +164,9 @@ class Dashboard extends BaseController
             'Title' => $this->request->getPost('Title'),
             'Type' => $this->request->getPost('Type'),
             'URL' => $this->request->getPost('URL'),
+            'Description' => $this->request->getPost('Description'),
             'Date' => $this->request->getPost('Date'),
-            'Image' => $imagePath
+           'Image' => $imagePath
         ];
         $resourceModel->save($data);
         return redirect()->to('/sivasakthi-dashboard');
@@ -364,6 +365,7 @@ public function updateResource($id)
         'Type' => $this->request->getPost('Type'),
         'URL' => $this->request->getPost('URL'),
         'Date' => $this->request->getPost('Date'),
+        'Description' => $this->request->getPost('Description'),
         'Image' => $imagePath
     ];
     $resourceModel->update($id, $data);

@@ -7,5 +7,5 @@ class ResourceModel extends Model
 {
     protected $table      = 'Resources';
     protected $primaryKey = 'ResourceID';
-    protected $allowedFields = ['CountryID', 'Title', 'Type', 'URL', 'Date', 'Image'];
+    protected $allowedFields = ['CountryID', 'Title', 'Type', 'URL', 'Date','Image', 'Description'];
 }

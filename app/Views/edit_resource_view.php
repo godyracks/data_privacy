@@ -21,6 +21,8 @@
 
         <label for="Date" class="form-label">Date:</label>
         <input type="date" name="Date" value="<?= esc($resource['Date']) ?>" class="form-input" required>
+        <label for="URL" class="form-label">Description:</label>
+        <input type="text" name="Description" value="<?= esc($resource['Description']) ?>" class="form-input" required>
 
         <label for="Image" class="form-label">Image:</label>
         <input type="file" name="Image" class="form-input">

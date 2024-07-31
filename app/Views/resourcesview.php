@@ -2,7 +2,6 @@
 
 <?= $this->section('content') ?>
 <style>
- 
     .resources-container {
         width: 90%;
         max-width: 1200px;
@@ -91,48 +90,40 @@
 
     <div class="resource-section" id="videos">
         <h2>Videos</h2>
-        <div class="resource-item">
-            <video controls>
-                <source src="video1.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="resource-details">
-                <h3>Video Title 1</h3>
-                <p>Description of Video 1. This video covers...</p>
-            </div>
-        </div>
-        <div class="resource-item">
-            <video controls>
-                <source src="video2.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="resource-details">
-                <h3>Video Title 2</h3>
-                <p>Description of Video 2. This video explains...</p>
-            </div>
-        </div>
-        <!-- Add more video resources as needed -->
+        <?php foreach ($resources as $resource): ?>
+            <?php if ($resource['Type'] == 'Video'): ?>
+                <div class="resource-item">
+                    <?php if (strpos($resource['URL'], 'youtube.com') !== false || strpos($resource['URL'], 'youtu.be') !== false): ?>
+                        <iframe width="200" height="150" src="<?= $resource['URL'] ?>" frameborder="0" allowfullscreen></iframe>
+                    <?php else: ?>
+                        <video controls>
+                            <source src="<?= $resource['URL'] ?>" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    <?php endif; ?>
+                    <div class="resource-details">
+                        <h3><?= $resource['Title'] ?></h3>
+                        <p><?= $resource['Description'] ?? 'No description available.' ?></p>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
     </div>
 
     <div class="resource-section" id="whitepapers">
-        <h2>Whitepapers</h2>
-        <div class="resource-item">
-            <img src="whitepaper1.jpg" alt="Whitepaper 1">
-            <div class="resource-details">
-                <h3>Whitepaper Title 1</h3>
-                <p>Summary of Whitepaper 1. This whitepaper discusses...</p>
-                <a class="download-button" href="whitepaper1.pdf" download>Download</a>
-            </div>
-        </div>
-        <div class="resource-item">
-            <img src="whitepaper2.jpg" alt="Whitepaper 2">
-            <div class="resource-details">
-                <h3>Whitepaper Title 2</h3>
-                <p>Summary of Whitepaper 2. This whitepaper covers...</p>
-                <a class="download-button" href="whitepaper2.pdf" download>Download</a>
-            </div>
-        </div>
-        <!-- Add more whitepaper resources as needed -->
+        <h2>External Links</h2>
+        <?php foreach ($resources as $resource): ?>
+            <?php if ($resource['Type'] == 'Whitepaper'): ?>
+                <div class="resource-item">
+                    <img src="<?= base_url('' . $resource['Image']) ?>" alt="<?= $resource['Title'] ?>">
+                    <div class="resource-details">
+                        <h3><?= $resource['Title'] ?></h3>
+                        <p><?= $resource['Description'] ?? 'No description available.' ?></p>
+                        <a target="_blank" class="download-button" href="<?= $resource['URL'] ?>" download>Visit Link</a>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
     </div>
 </div>
 

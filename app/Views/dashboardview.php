@@ -211,6 +211,7 @@ h1, h2 {
         </select>
         <input type="text" name="URL" placeholder="URL">
         <input type="date" name="Date" required>
+        <input type="text" name="Description" placeholder="Enter brief description">
         <input type="file" name="Image" accept="image/*">
         <button type="submit">Add Resource</button>
     </form>
