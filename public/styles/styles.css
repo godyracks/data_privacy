@@ -389,26 +389,47 @@ h1, h2, h3, h4, h5, h6 {
 /* Responsive styles for screens with max-width of 769px */
 @media (max-width: 769px) {
     .testimonials {
-        padding: 0 20px; /* Add padding for better spacing */
+        padding: 0 10px; /* Add padding for better spacing */
     }
 
     .testimonial-card {
         flex: 0 0 50%; /* Each card takes full width of the container */
-        margin: 10px; /* Remove margin for better fit on small screens */
+        margin: 1px;
+        max-width: 300px;
+    }
+    .testimonial-cards-wrapper {
+        overflow: hidden;
+        width: 80%;
+        max-width: 320px; /* Adjust based on design needs */
+        position: relative; /* Ensure the chevrons position properly */
     }
 
-    .test-chevron {
-        font-size: 36px; /* Adjust size */
-        padding: 8px; /* Adjust padding */
-    }
 
-    .chevron-left {
-        left: 10px; /* Ensure visibility */
-    }
+  .test-chevron {
+    cursor: pointer;
+    font-size: 28px;
+    color: var(--hightlights); /* Blue color for the chevrons */
+    background-color: #ffffff; /* White circular background */
+    border-radius: 50%;
+    padding: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    user-select: none;
+    position: absolute;
+    top: 65%;
+    transform: translateY(-50%);
+    z-index: 10; /* Ensure it's above other elements */
+}
 
-    .chevron-right {
-        right: 10px; /* Ensure visibility */
-    }
+.chevron-left {
+    left: 10px; /* Adjust to fit within container */
+}
+
+.chevron-right {
+    right: 10px; /* Adjust to fit within container */
+}
 }
 
 
