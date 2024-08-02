@@ -14,7 +14,7 @@
 }
     .view-more-container {
         display: flex;
-        gap: 20px;
+        /* gap: 20px; */
         margin-top: 20px;
     }
 
@@ -37,6 +37,7 @@
         width: 100%;
         height: auto;
         border-radius: 10px;
+
     }
 
     .date-container {
@@ -173,14 +174,19 @@
     @media screen and (max-width: 769px) {
         .view-more-container {
             flex-direction: column;
-            gap: 20px;
+            /* gap: 20px; */
+            margin: 0;
         }
 
         .left-part,
         .right-part {
             flex: none;
             width: 100%;
-            max-width: 100%;
+            max-width: 80%;
+            margin: 0 auto;
+        }
+        .image-container{
+            width: 100%;
         }
 
         .image-container img {
