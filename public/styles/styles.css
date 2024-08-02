@@ -1186,6 +1186,31 @@ h1, h2, h3, h4, h5, h6 {
         overflow: hidden;
         border-radius: 8px;
     }
+    .card-content h3 {
+        margin: 2px 0;
+        color: var(--big-title);
+        font-size: 13px;
+    }
+    .card-content p {
+        font-size: 11px;
+    }
+    .card-footer a{
+        font-size: 11px;
+       
+    }
+    .card-footer{
+        margin-top: 0 auto;
+        bottom: 0;
+    }
+    .doc-content h3{
+        font-size: 12px;
+    }
+        .doc-content p{
+            font-size: 11px;
+}
+.doc-footer a{
+    font-size: 11px;
+}
 }
 
 /* Timeline */
