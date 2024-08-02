@@ -113,6 +113,8 @@
             border-radius: 4px; 
             border: 1px solid #ccc; 
             transition: border-color 0.3s ease; font-size: 16px;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
 
     .review {
@@ -254,6 +256,7 @@
         .right-part h2{
             font-size: 14px;
             color: #333;
+            margin-top: 40px;
         }
         .right-part .similar-posts .similar-post h3{
             font-size: 13px;
@@ -264,7 +267,8 @@
         }
         .image-container {
     width: auto;
-    max-width: 98%;
+    max-width: 120%;
+    margin: 0;
     height: 300px;
     overflow: hidden; /* Ensure content does not overflow the container */
 }
@@ -284,12 +288,13 @@
             margin-top: 10px; /* Adjust spacing for mobile */
         }
         .content-container{
-            margin-bottom: 20px;
+            margin-bottom: 80px;
             margin-right: 0;
             margin-left: -10px;
         }
         .reviews-container {
-            margin-left: -10px;
+            margin-left: -20px;
+            
         }
         .title-container{
             font-size: 11px;
@@ -297,6 +302,7 @@
         .reviews-container h2{
             font-size: 14px;
             margin-top: 2px;
+            margin-left: -10px;
         }
     
         .submit-review  a{
@@ -309,7 +315,9 @@
         .review-form {
             margin-top: 20px;
         }
-
+        .similar-posts{
+            margin-top: 50px;
+        }
         .similar-post {
             padding: 10px; /* Add some padding for touch devices */
             border-radius: 4px; /* Make it visually appealing */
