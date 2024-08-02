@@ -236,7 +236,11 @@
         .view-more-container {
             flex-direction: column;
             /* gap: 20px; */
+            gap: 0;
             margin: 0;
+            margin-top: 10px;
+            margin-left: 0;
+            margin-right: 0;
         }
 
         .left-part,
@@ -245,6 +249,7 @@
             width: 100%;
             max-width: 80%;
             margin: 0 auto;
+            padding: 2px;
         }
         .right-part h2{
             font-size: 14px;
@@ -277,6 +282,14 @@
         .content-container,
         .reviews-container {
             margin-top: 10px; /* Adjust spacing for mobile */
+        }
+        .content-container{
+            margin-bottom: 20px;
+            margin-right: 0;
+            margin-left: -10px;
+        }
+        .reviews-container {
+            margin-left: -10px;
         }
         .title-container{
             font-size: 11px;
