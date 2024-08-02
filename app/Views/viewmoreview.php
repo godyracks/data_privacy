@@ -23,6 +23,9 @@
         max-width: 70%;
         padding: 20px;
     }
+    .left-part .title-container h1{
+        font-size: 20px;
+    }
 
     .right-part {
         flex: 3; /* 30% width */
@@ -33,12 +36,26 @@
         padding: 20px;
     }
 
-    .image-container img {
-        width: 100%;
-        height: auto;
-        border-radius: 10px;
-
+    .right-part h2{
+        margin-bottom: 1px;
+        font-size: 16px;
+        color: #333;
     }
+
+    .image-container {
+    width: auto;
+    max-width: 90%;
+    height: 400px;
+    overflow: hidden; /* Ensure content does not overflow the container */
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintains aspect ratio while filling the container */
+    border-radius: 10px;
+}
+
 
     .date-container {
         margin-top: 10px;
@@ -68,15 +85,35 @@
 
     .content-container {
         margin-top: 20px;
+        font-size: 15px;
+        line-height: 1.3rem;
     }
 
   
-
+.reviews-container{
+    width: 97%;
+    margin: 0 auto;
+    margin-top: 40px; 
+    padding: 20px; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    background-color: #f9f9f9;
+}
     .reviews-container h2 {
+        margin-top: 2px;
         margin-bottom: 20px; /* Spacing below the title */
-        font-size: 24px; /* Title size */
+        font-size: 20px; /* Title size */
         color: #333; /* Dark color for contrast */
     }
+    .reviews-container textarea{
+            width: 95%; 
+            margin: 0 auto;
+            height: 180px; 
+            padding: 10px; 
+            border-radius: 4px; 
+            border: 1px solid #ccc; 
+            transition: border-color 0.3s ease; font-size: 16px;
+        }
 
     .review {
         margin-bottom: 20px; /* Space between reviews */
@@ -117,10 +154,16 @@
 
     .review-form label {
         font-weight: bold; /* Bold labels for better visibility */
-        margin-bottom: 5px; /* Space below labels */
+        margin-bottom: 15px; /* Space below labels */
     }
 
- 
+    .submit-review  a{
+            color: #007bff;
+            font-weight: bold;
+        }
+        .submit-review p, a{
+            font-size: 12px;
+        }
 
     /* Change border color on focus for textarea */
     .review-form textarea:focus {
@@ -153,17 +196,35 @@
     .review-form button:hover {
         background-color: #357AE8; /* Darker button on hover */
     }
-
+.submit-review label{
+    margin-bottom: 8px;
+}
     .similar-posts {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 5px;
     }
 
     .similar-post {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        /* gap: 2px; */
+        padding: 10px;
+        border-radius: 4px; /* Make it visually appealing */
+        background: #f9f9f9; /* Light background for contrast */
+      
+       
+    }
+    .similar-post h3{
+        font-size: 12px;
+        margin-bottom: 1px;
+    }
+    .similar-post p{
+        font-size: 11px;
+    }
+    .similar-post a{
+        color: #007bff;
+        font-size: 10px;
     }
 
     .divider {
@@ -185,15 +246,30 @@
             max-width: 80%;
             margin: 0 auto;
         }
-        .image-container{
-            width: 100%;
+        .right-part h2{
+            font-size: 14px;
+            color: #333;
         }
+        .right-part .similar-posts .similar-post h3{
+            font-size: 13px;
+            margin-bottom: 1px;
+        }
+        .right-part .similar-posts .similar-post p{
+            font-size: 12px;
+        }
+        .image-container {
+    width: auto;
+    max-width: 98%;
+    height: 300px;
+    overflow: hidden; /* Ensure content does not overflow the container */
+}
 
-        .image-container img {
-            width: 100%; /* Ensure the image fills the container */
-            height: auto;
-            border-radius: 10px;
-        }
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintains aspect ratio while filling the container */
+    border-radius: 10px;
+}
 
         .date-container,
         .title-container,
@@ -202,7 +278,21 @@
         .reviews-container {
             margin-top: 10px; /* Adjust spacing for mobile */
         }
-
+        .title-container{
+            font-size: 11px;
+        }
+        .reviews-container h2{
+            font-size: 14px;
+            margin-top: 2px;
+        }
+    
+        .submit-review  a{
+            color: #007bff;
+            font-weight: bold;
+        }
+        .submit-review p, a{
+            font-size: 12px;
+        }
         .review-form {
             margin-top: 20px;
         }
@@ -242,7 +332,7 @@
         </div>
         
    
-        <div class="reviews-container" style="margin-top: 40px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+        <div class="reviews-container" style="">
             <h2>Reviews</h2>
             <div class="submit-review">
                 <h2>Submit Your Review</h2>
@@ -250,8 +340,9 @@
                     <input type="hidden" name="post_id" value="<?= esc($contentID) ?>">
                     <input type="hidden" name="post_type" value="<?= esc($type) ?>">
                     <label for="review_text">Review:</label>
-                    <textarea name="content" class="review-text" required style="width: 100%; height: 180px; padding: 10px; border-radius: 4px; border: 1px solid #ccc; transition: border-color 0.3s ease; font-size: 16px;"></textarea>
-
+                    <br>
+                    <textarea name="content" class="review-text" required style=""></textarea>
+                    <br>
                     <label for="rating">Rating:</label>
                     <div class="rating" id="rating">
                         <span class="material-symbols-outlined star" data-value="1">star_half</span>
