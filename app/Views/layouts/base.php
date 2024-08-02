@@ -7,7 +7,7 @@
     <title>Biometric Data Laws | Compare UK and India Biometric Data Privacy Laws</title>
     <meta name="description" content="Compare biometric data laws between the UK and India with interactive maps, timelines, and comprehensive resources. Stay informed on data privacy with our information hub.">
     <meta name="keywords" content="biometric data laws, UK biometric laws, India biometric laws, data privacy, interactive maps, timelines, data privacy resources, information hub">
-    
+    <meta name="google-site-verification" content="dojvnoZK4QeyT2i4eIQP7nql9EXW9q2u8TtQjD0MUBY" />
     <!-- Open Graph Metadata for Social Media -->
     <meta property="og:title" content="Biometric Data Laws | Compare UK and India Biometric Data Privacy Laws">
     <meta property="og:description" content="Compare biometric data laws between the UK and India with interactive maps, timelines, and comprehensive resources. Stay informed on data privacy with our information hub.">
