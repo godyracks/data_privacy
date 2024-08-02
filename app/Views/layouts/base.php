@@ -13,13 +13,13 @@
     <meta property="og:description" content="Compare biometric data laws between the UK and India with interactive maps, timelines, and comprehensive resources. Stay informed on data privacy with our information hub.">
     <meta property="og:url" content="https://biometricdataprivacylaws.com">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://biometricdataprivacylaws.com/public/images/biometric-logo2.png">
+    <meta property="og:image" content="https://biometricdataprivacylaws.com/public/images/biometric-logo.png">
     
     <!-- Twitter Metadata -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Biometric Data Laws | Compare UK and India Biometric Data Privacy Laws">
     <meta name="twitter:description" content="Compare biometric data laws between the UK and India with interactive maps, timelines, and comprehensive resources. Stay informed on data privacy with our information hub.">
-    <meta name="twitter:image" content="https://biometricdataprivacylaws.com/public/images/biometric-logo2.png">
+    <meta name="twitter:image" content="https://biometricdataprivacylaws.com/public/images/biometric-logo.png">
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
