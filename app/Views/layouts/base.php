@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEB6RCH84C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SEB6RCH84C');
+</script>
     <title>Biometric Data Laws | Compare UK and India Biometric Data Privacy Laws</title>
     <meta name="description" content="Compare biometric data laws between the UK and India with interactive maps, timelines, and comprehensive resources. Stay informed on data privacy with our information hub.">
     <meta name="keywords" content="biometric data laws, UK biometric laws, India biometric laws, data privacy, interactive maps, timelines, data privacy resources, information hub">
