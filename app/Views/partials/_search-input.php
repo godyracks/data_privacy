@@ -34,7 +34,7 @@
     .search-results .result-item a {
         display: block;
         text-decoration: none;
-        color: inherit;
+        color: black;
         padding: 10px;
         box-sizing: border-box;
         width: 100%;
@@ -82,87 +82,94 @@
 </div>
 
 <script>
-    const API_URL = '<?= getenv('SEARCH_API_URL') ?>';
+const API_URL = '<?= site_url('live-search/search') ?>'; // Ensure this is correct
 
-    document.getElementById('clearSearch').addEventListener('click', function() {
-        document.getElementById('searchInput').value = '';
+document.getElementById('clearSearch').addEventListener('click', function() {
+    document.getElementById('searchInput').value = '';
+    document.getElementById('clearSearch').style.display = 'none';
+    document.getElementById('searchResults').style.display = 'none';
+});
+
+document.getElementById('searchInput').addEventListener('input', function() {
+    const query = this.value;
+
+    if (query.length > 0) {
+        document.getElementById('clearSearch').style.display = 'block';
+        document.getElementById('searchResults').style.display = 'block';
+
+        fetch(`${API_URL}?query=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Debugging: Check the data structure
+
+                const resultsDiv = document.getElementById('searchResults');
+                resultsDiv.innerHTML = '';
+
+                if (data.length > 0) {
+                    data.forEach(item => {
+                        const resultItem = document.createElement('div');
+                        resultItem.className = 'result-item';
+
+                        // Ensure item.Type and item.ReferenceID are defined
+                        if (item.Type && item.ReferenceID && item.title) {
+                            let url = '';
+                            const titleHyphenated = item.title.toLowerCase().replace(/\s+/g, '-'); // Use item.title
+
+                            switch (item.Type.toLowerCase()) {
+                                case 'law':
+                                    url = `/view-more/law/${item.ReferenceID}/${titleHyphenated}`;
+                                    break;
+                                case 'document':
+                                    url = `/view-more/document/${item.ReferenceID}/${titleHyphenated}`;
+                                    break;
+                                case 'case study':
+                                    url = `/view-more/case-studies/${item.ReferenceID}/${titleHyphenated}`;
+                                    break;
+                                default:
+                                    url = '#'; // Fallback URL
+                            }
+
+                            resultItem.innerHTML = `
+                                <a href="${url}" target="_blank">
+                                    <h4>${item.title || 'Untitled'}</h4> <!-- Use item.title here -->
+                                </a>
+                            `;
+                        } else {
+                            resultItem.innerHTML = `
+                                <a href="#">
+                                    <h4>${item.title || 'Untitled'}</h4>
+                                </a>
+                            `;
+                        }
+                        resultsDiv.appendChild(resultItem);
+                    });
+                } else {
+                    resultsDiv.innerHTML = '<p class="default-message">No results found</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching search results:', error);
+                document.getElementById('searchResults').innerHTML = '<p class="default-message">An error occurred while searching</p>';
+            });
+    } else {
         document.getElementById('clearSearch').style.display = 'none';
         document.getElementById('searchResults').style.display = 'none';
-    });
+    }
+});
 
-    document.getElementById('searchInput').addEventListener('input', function() {
-        const query = this.value;
+document.getElementById('closeResults').addEventListener('click', function() {
+    document.getElementById('searchResults').style.display = 'none';
+});
 
-        if (query.length > 0) {
-            document.getElementById('clearSearch').style.display = 'block';
-            document.getElementById('searchResults').style.display = 'block';
+document.getElementById('searchInput').addEventListener('focus', function() {
+    document.getElementById('searchResults').style.display = 'block';
+});
 
-            fetch(`${API_URL}?query=${encodeURIComponent(query)}`)
-                .then(response => response.json())
-                .then(data => {
-                    const resultsDiv = document.getElementById('searchResults');
-                    resultsDiv.innerHTML = '';
-
-                    if (data.length > 0) {
-                        data.forEach(item => {
-                            const resultItem = document.createElement('div');
-                            resultItem.className = 'result-item';
-
-                            // Ensure item.Type and item.ReferenceID are defined and construct URL accordingly
-                            if (item.Type && item.ReferenceID && item.Content) {
-                                let url = '';
-                                const titleHyphenated = item.Content.toLowerCase().replace(/\s+/g, '-');
-
-                                switch(item.Type.toLowerCase()) {
-                                    case 'law':
-                                        url = `/view-more/law/${item.ReferenceID}/${titleHyphenated}`;
-                                        break;
-                                    case 'document':
-                                        url = `/view-more/document/${item.ReferenceID}/${titleHyphenated}`;
-                                        break;
-                                    case 'case study':
-                                        url = `/view-more/case-studies/${item.ReferenceID}/${titleHyphenated}`;
-                                        break;
-                                    default:
-                                        url = '#'; // Fallback URL
-                                }
-
-                                resultItem.innerHTML = `
-                                    <a href="${url}" target="_blank">
-                                        <h4>${item.Content}</h4>
-                                    </a>
-                                `;
-                            } else {
-                                resultItem.innerHTML = `
-                                    <a href="#">
-                                        <h4>${item.Content || 'Untitled'}</h4>
-                                    </a>
-                                `;
-                            }
-                            resultsDiv.appendChild(resultItem);
-                        });
-                    } else {
-                        resultsDiv.innerHTML = '<p class="default-message">No results found</p>';
-                    }
-                });
-        } else {
-            document.getElementById('clearSearch').style.display = 'none';
-            document.getElementById('searchResults').style.display = 'none';
-        }
-    });
-
-    document.getElementById('closeResults').addEventListener('click', function() {
+document.addEventListener('click', function(event) {
+    const searchContainer = document.querySelector('.search-container');
+    if (!searchContainer.contains(event.target)) {
         document.getElementById('searchResults').style.display = 'none';
-    });
+    }
+});
 
-    document.getElementById('searchInput').addEventListener('focus', function() {
-        document.getElementById('searchResults').style.display = 'block';
-    });
-
-    document.addEventListener('click', function(event) {
-        const searchContainer = document.querySelector('.search-container');
-        if (!searchContainer.contains(event.target)) {
-            document.getElementById('searchResults').style.display = 'none';
-        }
-    });
 </script>
