@@ -20,6 +20,10 @@ $routes->get('/google-login', 'GoogleAuthController::login');
 $routes->get('/google-callback', 'GoogleAuthController::callback');
 $routes->get('/profile', 'Profile::index');
 $routes->get('terms-and-conditions', 'Terms::index');
+$routes->get('/testimonials', 'Testimonials::index');
+// $routes->get('/login_prompt', 'Testimonials::loginPrompt');
+$routes->post('/testimonials/submitTestimonial', 'Testimonials::submitTestimonial');
+
 $routes->get('privacy-policy', 'PrivacyPolicy::index');
 $routes->get('/sivasakthi-dashboard', 'Dashboard::index');
 $routes->post('sivasakthi-dashboard/add-country', 'Dashboard::addCountry');
