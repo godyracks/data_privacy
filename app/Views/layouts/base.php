@@ -106,6 +106,7 @@
     <main>
         <?= $this->renderSection('content') ?>
         <?= $this->include('partials/_scroll-top') ?>
+   
     </main>
 
     <footer class="footer">
@@ -137,6 +138,7 @@
                     <?php else: ?>
                         <li><a href="<?= base_url('auth') ?>">Login</a></li>
                     <?php endif; ?>
+                    <li><a href="<?= base_url('testimonials') ?>">Testimonials</a></li>
                     <li><a href="<?= base_url('terms-and-conditions') ?>">Ts & Co.</a></li>
                     <li><a href="<?= base_url('privacy-policy') ?>">Privacy Policy</a></li>
                 </ul>
