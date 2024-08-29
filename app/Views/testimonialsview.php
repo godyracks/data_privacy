@@ -3,6 +3,7 @@
 <?= $this->section('content') ?>
 
 <style>
+    
     .cta-section {
         text-align: center;
         padding: 40px;
@@ -80,11 +81,19 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        margin-top: 30px;
         transition: background-color 0.3s ease;
     }
 
     .submit-review:hover {
         background-color: #45a049;
+    }
+    .char-count {
+        text-align: right;
+        font-size: 14px;
+        color: #666;
+        margin-top: -45px;
+        margin-right: 60px;
     }
 
     .hero-section {
@@ -146,7 +155,7 @@
 </style>
 
 <section class="hero-section">
-    <div class="hero-overlay"></div> <!-- Overlay -->
+    <div class="hero-overlay"></div> 
     <div class="hero-content">
         <h1>What Our Users Say</h1>
         <p>Real feedback from our happy users. Join them and share your experience!</p>
@@ -155,7 +164,7 @@
 
 <section class="cta-section">
     <h2>We’d Love to Hear From You!</h2>
-    <button id="reviewBtn" class="cta-button">Leave a Review</button>
+    <button id="reviewBtn" class="cta-button">Say Something...</button>
 
     <?php if (session()->get('isLoggedIn')): ?>
         <div class="review-form" id="reviewForm" style="display:none;">
@@ -172,13 +181,16 @@
                     <span class="material-symbols-outlined star" data-value="5">star_half</span>
                 </div>
 
-                <textarea name="review" placeholder="Write your review here..." required></textarea>
-                <button type="submit" class="submit-review">Submit Review</button>
+                <textarea name="review" placeholder="Write your feedback here..." required maxlength="143"></textarea>
+                <div class="char-count">
+                    <span id="charCount">143</span> remaining
+                </div>
+                <button type="submit" class="submit-review">Submit Feedback</button>
             </form>
         </div>
     <?php else: ?>
         <!-- Display the Google login message if the user is not logged in -->
-        <p>Please <a href="<?= site_url('/google-login') ?>">continue with Google</a> to submit a review.</p>
+        <p>Please <a href="<?= site_url('/google-login') ?>">continue with Google</a> to submit a feedback.</p>
     <?php endif; ?>
 </section>
 
@@ -201,7 +213,7 @@ document.getElementById("reviewBtn").addEventListener("click", function() {
 
     } else {
         reviewForm.style.display = "none";
-        this.textContent = "Leave a Review"; // Reset button text
+        this.textContent = "Say Something..."; // Reset button text
 
         // Reset button styles
         this.style.backgroundColor = "#ff5722"; // Original background color
@@ -241,9 +253,16 @@ testimonialForm.addEventListener('submit', function(e) {
     }
 
     // Custom alert for successful submission
-    alert("Thank you for your review!\nURL says: Review successfully submitted.");
+    alert("Thank you for your feedback!\n Feedback successfully submitted.");
 });
 
+const textarea = document.querySelector('textarea[name="review"]');
+const charCount = document.getElementById('charCount');
+
+textarea.addEventListener('input', function() {
+    const remaining = 143 - this.value.length;
+    charCount.textContent = remaining;
+});
 </script>
 
 <?= $this->endSection() ?>
