@@ -23,6 +23,7 @@ $routes->get('terms-and-conditions', 'Terms::index');
 $routes->get('/testimonials', 'Testimonials::index');
 // $routes->get('/login_prompt', 'Testimonials::loginPrompt');
 $routes->post('/testimonials/submitTestimonial', 'Testimonials::submitTestimonial');
+$routes->get('panel/fetch-laws-and-case-studies/(:num)', 'PanelController::fetchLawsAndCaseStudies/$1');
 
 $routes->get('privacy-policy', 'PrivacyPolicy::index');
 $routes->get('/sivasakthi-dashboard', 'Dashboard::index');
