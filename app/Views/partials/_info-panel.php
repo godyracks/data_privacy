@@ -104,7 +104,7 @@
     </div>
     <div class="info-content" id="info-content">
         <div class="tabs">
-            <button class="tab-button active" data-tab="overview">Overview</button>
+            <button class="tab-button active" data-tab="overview">Country</button>
             <button class="tab-button" data-tab="specific-laws">Specific Laws</button>
             <button class="tab-button" data-tab="case-studies">Case Studies</button>
         </div>
