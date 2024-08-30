@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <style>
     /* Add this CSS to the existing styles.css */
-  
+
     .tab-content {
         display: none;
     }
@@ -14,29 +14,26 @@
 
     .tab-link.active {
         font-weight: bold;
-        text-decoration: underline;
+        text-decoration: none; /* Remove underline from active tab */
     }
 
-
     .profile-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: transparent;
-    /* border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
-    padding: 20px;
-    transition: transform 0.3s ease;
-}
+        max-width: 800px;
+        margin: 0 auto;
+        background: transparent;
+        padding: 20px;
+        transition: transform 0.3s ease;
+    }
 
-.profile-container:hover {
-    transform: translateY(-2px);
-}
+    .profile-container:hover {
+        transform: translateY(-2px);
+    }
 
-.profile-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+    .profile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
     .profile-nav {
         margin: 20px 0;
@@ -44,7 +41,7 @@
 
     .profile-nav a {
         margin-right: 15px;
-        text-decoration: none;
+        text-decoration: none; /* Remove underline from links */
         color: #007BFF;
         transition: color 0.3s;
     }
@@ -157,121 +154,104 @@
     </header>
     <nav class="profile-nav">
         <a href="#favorites" class="tab-link active">Favorites</a>
-        <a href="#settings" class="tab-link">Settings</a>
+        <a href="#feedback" class="tab-link">Drop Feedback</a>
         <a href="#logout" class="tab-link" id="logoutLink">Logout</a>
     </nav>
     <main class="profile-main">
-    <section id="favorites" class="tab-content active">
-    <h2>Your Favorites</h2>
-    <?php if (empty($favorites)): ?>
-        <p>You have no favorites yet.</p>
-    <?php else: ?>
-        <?php foreach ($favorites as $favorite): ?>
-            <div class="favorite-item">
-                <a href="<?= site_url('view-more/'.$favorite['post_type'] . '/' . $favorite['post_id'] . '/' . url_title($favorite['details']['Title'], '-', true)) ?>" class="favorite-link">
-                    <img src="<?= base_url($favorite['details']['Image']) ?>" class="favorite-image" style="width: 50px; height: auto; border-radius: 5px;">
-                    <div class="favorite-info">
-                        <h3 class="favorite-title"><?= esc($favorite['details']['Title']) ?></h3>
-                        <p class="favorite-time"><?= esc($favorite['details']['Date']) ?></p>
+        <section id="favorites" class="tab-content active">
+            <h2>Your Favorites</h2>
+            <?php if (empty($favorites)): ?>
+                <p>You have no favorites yet.</p>
+            <?php else: ?>
+                <?php foreach ($favorites as $favorite): ?>
+                    <div class="favorite-item">
+                        <a href="<?= site_url('view-more/'.$favorite['post_type'] . '/' . $favorite['post_id'] . '/' . url_title($favorite['details']['Title'], '-', true)) ?>" class="favorite-link">
+                            <img src="<?= base_url($favorite['details']['Image']) ?>" class="favorite-image" style="width: 50px; height: auto; border-radius: 5px;">
+                            <div class="favorite-info">
+                                <h3 class="favorite-title"><?= esc($favorite['details']['Title']) ?></h3>
+                                <p class="favorite-time"><?= esc($favorite['details']['Date']) ?></p>
+                            </div>
+                        </a>
+                        <a href="<?= base_url('/profile/deleteFavorite/' . esc($favorite['post_id']) . '/' . esc($favorite['post_type'])) ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this article? This action is permanent.');">
+                            <span class="material-symbols-outlined">delete_forever</span>
+                            Delete
+                        </a>
                     </div>
-                </a>
-                <a href="<?= base_url('/profile/deleteFavorite/' . esc($favorite['post_id']) . '/' . esc($favorite['post_type'])) ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this article? This action is permanent.');">
-                    <span class="material-symbols-outlined">delete_forever</span>
-                    Delete
-                </a>
-            </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
-</section>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </section>
 
-
-
-
-        <section id="settings" class="tab-content">
-            <h2>Settings</h2>
-            <p>Manage your profile settings here.</p>
-            <!-- Add settings options here -->
+        <section id="feedback" class="tab-content">
+            <h2>Drop Feedback</h2>
+            <p><a href="<?= site_url('testimonials') ?>">Click here</a> to leave feedback about our service.</p>
         </section>
     </main>
 </div>
 
 <div class="overlay" id="overlay"></div>
 <div class="logout-confirmation" id="logoutConfirmation">
-    <p>Are you sure you want to log out, dear user? Please confirm!</p>
+    <p>Log out? Please confirm!</p>
     <button id="confirmLogout">Yes, log me out</button>
     <button id="cancelLogout">No, I want to stay</button>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-    const deleteButtons = document.querySelectorAll('.delete-btn');
-    const tabLinks = document.querySelectorAll('.tab-link');
-    const tabContents = document.querySelectorAll('.tab-content');
-    const logoutLink = document.getElementById('logoutLink');
-    const logoutConfirmation = document.getElementById('logoutConfirmation');
-    const overlay = document.getElementById('overlay');
-    const confirmLogout = document.getElementById('confirmLogout');
-    const cancelLogout = document.getElementById('cancelLogout');
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const logoutLink = document.getElementById('logoutLink');
+        const logoutConfirmation = document.getElementById('logoutConfirmation');
+        const overlay = document.getElementById('overlay');
+        const confirmLogout = document.getElementById('confirmLogout');
+        const cancelLogout = document.getElementById('cancelLogout');
 
-    document.addEventListener('DOMContentLoaded', () => {
-    const deleteLinks = document.querySelectorAll('.delete-btn');
+        // Handle delete button clicks
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent the default link behavior
+                const deleteConfirmation = confirm("Are you sure you want to delete this article? This action is permanent.");
 
-    deleteLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent the default link behavior
-            const deleteConfirmation = confirm("Are you sure you want to delete this article? This action is permanent.");
-
-            if (deleteConfirmation) {
-                // Proceed with the deletion
-                window.location.href = link.getAttribute('href'); // Redirect to the delete route
-            }
+                if (deleteConfirmation) {
+                    // Proceed with the deletion
+                    window.location.href = button.getAttribute('href'); // Redirect to the delete route
+                }
+            });
         });
-    });
 
-    // Optionally, show success/error messages
-    const message = '<?= session()->getFlashdata('message') ?>';
-    const error = '<?= session()->getFlashdata('error') ?>';
+        // Handle tab switching
+        tabLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
 
-    if (message) {
-        alert(message); // Show success message
-    } else if (error) {
-        alert(error); // Show error message
-    }
-});
+                // Remove active class from all links and contents
+                tabLinks.forEach(link => link.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
 
-    // Handle tab switching
-    tabLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+                // Add active class to the clicked link and corresponding content
+                link.classList.add('active');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+
+        // Handle logout confirmation
+        logoutLink.addEventListener('click', (e) => {
             e.preventDefault();
-            const targetId = link.getAttribute('href').substring(1);
+            overlay.style.display = 'block';
+            logoutConfirmation.style.display = 'block';
+        });
 
-            // Remove active class from all links and contents
-            tabLinks.forEach(link => link.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
+        confirmLogout.addEventListener('click', () => {
+            // Perform the logout action, e.g., redirect to the logout route
+            window.location.href = '/logout';
+        });
 
-            // Add active class to the clicked link and corresponding content
-            link.classList.add('active');
-            document.getElementById(targetId).classList.add('active');
+        cancelLogout.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            logoutConfirmation.style.display = 'none';
         });
     });
-
-    // Handle logout confirmation
-    logoutLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        overlay.style.display = 'block';
-        logoutConfirmation.style.display = 'block';
-    });
-
-    confirmLogout.addEventListener('click', () => {
-        // Perform the logout action, e.g., redirect to the logout route
-        window.location.href = '/logout';
-    });
-
-    cancelLogout.addEventListener('click', () => {
-        overlay.style.display = 'none';
-        logoutConfirmation.style.display = 'none';
-    });
-});
-
 </script>
+
 <?= $this->endSection() ?>
