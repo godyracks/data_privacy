@@ -25,7 +25,7 @@ class LiveSearchController extends Controller
         $results = [];
 
         foreach ($documents as $document) {
-            $hyphenatedTitle = strtolower(str_replace(' ', '-', $document['DocumentName']));
+            $hyphenatedTitle = $this->sanitizeTitle($document['DocumentName']);
             $results[] = [
                 'title' => $document['DocumentName'],
                 'hyphenated_title' => $hyphenatedTitle,
@@ -35,7 +35,7 @@ class LiveSearchController extends Controller
         }
 
         foreach ($caseStudies as $caseStudy) {
-            $hyphenatedTitle = strtolower(str_replace(' ', '-', $caseStudy['Title']));
+            $hyphenatedTitle = $this->sanitizeTitle($caseStudy['Title']);
             $results[] = [
                 'title' => $caseStudy['Title'],
                 'hyphenated_title' => $hyphenatedTitle,
@@ -45,7 +45,7 @@ class LiveSearchController extends Controller
         }
 
         foreach ($laws as $law) {
-            $hyphenatedTitle = strtolower(str_replace(' ', '-', $law['LawName']));
+            $hyphenatedTitle = $this->sanitizeTitle($law['LawName']);
             $results[] = [
                 'title' => $law['LawName'],
                 'hyphenated_title' => $hyphenatedTitle,
@@ -55,5 +55,13 @@ class LiveSearchController extends Controller
         }
 
         return $this->response->setJSON($results);
+    }
+
+    private function sanitizeTitle($title)
+    {
+        // Remove special characters and replace spaces with hyphens
+        $title = preg_replace('/[^\w\s-]/', '', $title); // Remove non-alphanumeric characters, except hyphens and spaces
+        $title = preg_replace('/\s+/', '-', trim($title)); // Replace spaces with hyphens
+        return strtolower($title); // Convert to lowercase
     }
 }
