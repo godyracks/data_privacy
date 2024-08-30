@@ -1,46 +1,59 @@
 <?php
-
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
-use App\Models\SearchIndexModel;
+use App\Models\DocumentModel;
+use App\Models\CaseStudyModel;
+use App\Models\LawModel;
 
 class LiveSearchController extends Controller
 {
     public function search()
     {
-        // Fetch the query parameter from the request
         $query = $this->request->getVar('query');
+        
+        $documentModel = new DocumentModel();
+        $caseStudyModel = new CaseStudyModel();
+        $lawModel = new LawModel();
 
-        // Instantiate the search model and search for the query
-        $searchModel = new SearchIndexModel();
-        $results = $searchModel->like('Content', $query)->findAll();
+        // Fetch search results from each model
+        $documents = $documentModel->like('DocumentName', $query)->orLike('Description', $query)->findAll(5);
+        $caseStudies = $caseStudyModel->like('Title', $query)->orLike('Summary', $query)->findAll(5);
+        $laws = $lawModel->like('LawName', $query)->orLike('Description', $query)->findAll(5);
 
-        // Initialize an array to hold processed search results
-        $processedResults = [];
+        // Merge results and process them
+        $results = [];
 
-        // Iterate through the search results
-        foreach ($results as $result) {
-            // Split content at '###' delimiter
-            $contentParts = explode('###', $result['Content']);
-
-            // Get the title (first part of the content)
-            $title = $contentParts[0] ?? '';
-
-            // Get the first sentence after stripping HTML tags (second part of the content)
-            $firstLine = isset($contentParts[1]) ? explode('.', strip_tags($contentParts[1]))[0] . '.' : '';
-
-            // Check if the query exists in the title or content
-            if (stripos($title, $query) !== false || (isset($contentParts[1]) && stripos($contentParts[1], $query) !== false)) {
-                // Append the processed result to the array
-                $processedResults[] = [
-                    'title' => $title,
-                    'content' => $firstLine,
-                ];
-            }
+        foreach ($documents as $document) {
+            $hyphenatedTitle = strtolower(str_replace(' ', '-', $document['DocumentName']));
+            $results[] = [
+                'title' => $document['DocumentName'],
+                'hyphenated_title' => $hyphenatedTitle,
+                'Type' => 'Document',
+                'ReferenceID' => $document['DocumentID']
+            ];
         }
 
-        // Return the processed results as JSON response
-        return $this->response->setJSON($processedResults);
+        foreach ($caseStudies as $caseStudy) {
+            $hyphenatedTitle = strtolower(str_replace(' ', '-', $caseStudy['Title']));
+            $results[] = [
+                'title' => $caseStudy['Title'],
+                'hyphenated_title' => $hyphenatedTitle,
+                'Type' => 'Case Study',
+                'ReferenceID' => $caseStudy['CaseStudyID']
+            ];
+        }
+
+        foreach ($laws as $law) {
+            $hyphenatedTitle = strtolower(str_replace(' ', '-', $law['LawName']));
+            $results[] = [
+                'title' => $law['LawName'],
+                'hyphenated_title' => $hyphenatedTitle,
+                'Type' => 'Law',
+                'ReferenceID' => $law['LawID']
+            ];
+        }
+
+        return $this->response->setJSON($results);
     }
 }

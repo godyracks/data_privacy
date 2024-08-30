@@ -89,7 +89,6 @@ document.getElementById('clearSearch').addEventListener('click', function() {
     document.getElementById('clearSearch').style.display = 'none';
     document.getElementById('searchResults').style.display = 'none';
 });
-
 document.getElementById('searchInput').addEventListener('input', function() {
     const query = this.value;
 
@@ -111,19 +110,18 @@ document.getElementById('searchInput').addEventListener('input', function() {
                         resultItem.className = 'result-item';
 
                         // Ensure item.Type and item.ReferenceID are defined
-                        if (item.Type && item.ReferenceID && item.title) {
+                        if (item.Type && item.ReferenceID && item.hyphenated_title) {
                             let url = '';
-                            const titleHyphenated = item.title.toLowerCase().replace(/\s+/g, '-'); // Use item.title
 
                             switch (item.Type.toLowerCase()) {
-                                case 'law':
-                                    url = `/view-more/law/${item.ReferenceID}/${titleHyphenated}`;
-                                    break;
                                 case 'document':
-                                    url = `/view-more/document/${item.ReferenceID}/${titleHyphenated}`;
+                                    url = `/view-more/document/${item.ReferenceID}/${item.hyphenated_title}`;
                                     break;
                                 case 'case study':
-                                    url = `/view-more/case-studies/${item.ReferenceID}/${titleHyphenated}`;
+                                    url = `/view-more/case-study/${item.ReferenceID}/${item.hyphenated_title}`;
+                                    break;
+                                case 'law':
+                                    url = `/view-more/law/${item.ReferenceID}/${item.hyphenated_title}`;
                                     break;
                                 default:
                                     url = '#'; // Fallback URL
@@ -131,7 +129,7 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
                             resultItem.innerHTML = `
                                 <a href="${url}" target="_blank">
-                                    <h4>${item.title || 'Untitled'}</h4> <!-- Use item.title here -->
+                                    <h4>${item.title || 'Untitled'}</h4>
                                 </a>
                             `;
                         } else {
