@@ -1,72 +1,88 @@
 <style>
-    .search-results {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        max-height: 450px;
-        overflow-y: auto;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        display: none;
-        margin-top: 5px;
-    }
+/* Search Results Container */
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 450px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: none;
+    margin-top: 5px;
+    color: black !important;
+}
 
-    .search-results .result-item {
-        padding: 0; /* Remove padding here */
-        border-bottom: 1px solid #eee;
-    }
+/* Result Item */
+.search-results .result-item {
+    padding: 0; /* Remove padding */
+    border-bottom: 1px solid #eee;
+    color: black !important;
+}
 
-    .search-results .result-item:nth-child(odd) {
-        background-color: #f9f9f9;
-    }
+/* Alternate Background Colors for Result Items */
+.search-results .result-item:nth-child(odd) {
+    background-color: #f9f9f9;
+    color: black !important;
+}
 
-    .search-results .result-item:nth-child(even) {
-        background-color: #fff;
-    }
+.search-results .result-item:nth-child(even) {
+    background-color: #fff;
+    color: black !important;
+}
 
-    .search-results .result-item:last-child {
-        border-bottom: none;
-    }
+/* Remove Bottom Border for Last Item */
+.search-results .result-item:last-child {
+    border-bottom: none;
+}
 
-    .search-results .result-item a {
-        display: block;
-        text-decoration: none;
-        color: black;
-        padding: 10px;
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-    }
+/* Anchor Tag Styles */
+.search-results .result-item a {
+    display: block;
+    text-decoration: none;
+    color: black !important;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
 
-    .search-results .result-item a:hover {
-        background-color: #f0f0f0;
-    }
+/* Hover State for Links */
+.search-results .result-item a:hover {
+    background-color: #f0f0f0; /* Slightly different background on hover */
+}
 
-    .search-container {
-        position: relative;
-    }
+/* Search Container */
+.search-container {
+    position: relative;
+}
 
-    .search-bar {
-        display: flex;
-        align-items: center;
-    }
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+}
 
-    .search-bar .search-input {
-        flex: 1;
-    }
+/* Search Input */
+.search-bar .search-input {
+    flex: 1;
+}
 
-    .search-bar .search-icon, .search-bar .clear-icon {
-        cursor: pointer;
-    }
+/* Search Icons */
+.search-bar .search-icon, 
+.search-bar .clear-icon {
+    cursor: pointer;
+}
 
-    .default-message {
-        padding: 10px;
-        text-align: center;
-        color: #888;
-    }
+/* Default Message */
+.default-message {
+    padding: 10px;
+    text-align: center;
+    color: #888; /* Color for default message */
+}
 </style>
 
 <div class="search-container">

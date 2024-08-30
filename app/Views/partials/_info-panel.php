@@ -25,6 +25,15 @@
 .info-title {
     font-weight: bold;
 }
+.country-button{
+    border: black;
+    border-radius: 18px;
+    padding: 7px 15px;
+    background-color: grey;
+}
+.country-button:hover{
+    background-color: orange;
+}
 
 .panel-chevron {
     font-size: 24px;

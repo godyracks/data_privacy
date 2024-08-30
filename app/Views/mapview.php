@@ -17,8 +17,8 @@
         
         <h3 style="color: blue;">Major Legislation:</h3>
         <div id="modal-legislation" style="color: black;"></div>
-        <div id="modal-legislation-snippet"></div>
-        <a id="modal-legislation-link" style="display: none;" href="#" target="_blank">Read full law document</a>
+        <div id="modal-legislation-snippet" ></div>
+        <a id="modal-legislation-link" style="display: none; color:orange; text-decoration:none;" href="#" target="_blank">Read full law document</a>
 
         <h3 style="color: blue;">Recent Updates:</h3>
         <div id="modal-updates" style="color: black;"></div>
@@ -136,7 +136,7 @@
     const caseStudiesList = caseStudies.map((cs, index) => `
         <div>
             <strong>Case Study ${index + 1}:</strong> ${cs.Title}<br>
-            <a href="<?= site_url('view-more/case-study/') ?>${cs.CaseStudyID}/<?= url_title('${cs.Title}', '-', true) ?>" target="_blank">View More</a>
+            <a href="<?= site_url('view-more/case-study/') ?>${cs.CaseStudyID}/<?= url_title('${cs.Title}', '-', true) ?>" target="_blank"  style=" color:orange; text-decoration:none;">View More</a>
         </div>
     `).join('');
 
@@ -144,7 +144,7 @@
 
     const resources = countryId == 1 ? ukResources : indiaResources;
     const resourcesList = resources.map(r => `
-        <div style="text-decoration: underline;">
+        <div style="text-decoration: underline; color:orange">
             <a href="${r.URL}" target="_blank">${r.Title}</a>
         </div>
     `).join('');
