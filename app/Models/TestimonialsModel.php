@@ -19,13 +19,23 @@ class TestimonialsModel extends Model
         
         // Fetch all testimonials
         $testimonials = $this->findAll();
-
-        // Add profile image to each testimonial
+    
+        // Add profile image and email to each testimonial
         foreach ($testimonials as &$testimonial) {
-            $user = $userModel->getProfileImage($testimonial['user_id']);
-            $testimonial['profile_image'] = $user ? $user['profile_image'] : null;
+            $user = $userModel->where('google_id', $testimonial['user_id'])->first();
+    
+            // If user exists, add profile image and email to the testimonial
+            if ($user) {
+                $testimonial['profile_image'] = $user['profile_image'];
+                $testimonial['email'] = $user['email'];
+            } else {
+                // If no user found, set them to null
+                $testimonial['profile_image'] = null;
+                $testimonial['email'] = null;
+            }
         }
-
+    
         return $testimonials;
     }
+    
 }

@@ -12,9 +12,10 @@
                     </div>
                     <div class="testimonial-right">
                         <h3><?= esc($testimonial['username']) ?></h3>
+                        <p class="testimonial-email"><?= esc($testimonial['email']) ?></p>
                         <div class="stars">
                             <?php for ($i = 1; $i <= 5; $i++): ?>
-                                <span class="material-symbols-outlined"><?= $i <= $testimonial['stars'] ? 'star' : ($i == $testimonial['stars'] + 0.5 ? 'star_half' : 'star_border') ?></span>
+                                <span class="material-symbols-outlined star <?= $i <= $testimonial['stars'] ? 'filled' : 'empty' ?>">star</span>
                             <?php endfor; ?>
                         </div>
                         <p><?= esc($testimonial['review']) ?></p>
