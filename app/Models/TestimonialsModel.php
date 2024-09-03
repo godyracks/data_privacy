@@ -10,6 +10,8 @@ class TestimonialsModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = ['user_id', 'username', 'stars', 'review'];
     protected $useTimestamps = true;
+    protected $createdField = 'created_at'; 
+    protected $updatedField = 'updated_at';
 
     // Method to get testimonials with user profile images
     public function getTestimonialsWithImages()
