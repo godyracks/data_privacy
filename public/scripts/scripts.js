@@ -13,31 +13,59 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', checkSticky);
 });
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const testimonialCards = document.querySelector('.testimonial-cards');
+    const cards = Array.from(testimonialCards.children);
+    const dotsWrapper = document.querySelector('.dots-wrapper');
 
-    // Duplicate the cards to create a seamless loop
-    const cardsClone = testimonialCards.innerHTML;
-    testimonialCards.innerHTML += cardsClone;
+    // Create dots based on the number of cards
+    cards.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (index === 0) dot.classList.add('active');
+        dotsWrapper.appendChild(dot);
+    });
 
-    // Function to reset scroll animation
-    const resetScroll = () => {
-        testimonialCards.style.transition = 'none';
-        testimonialCards.style.transform = 'translateX(0)';
+    const dots = Array.from(dotsWrapper.children);
+    let currentIndex = 0;
 
-        // Force reflow to reset the animation properly
-        void testimonialCards.offsetWidth;
+    // Update active card and dot based on index
+    const updateActiveCard = (index) => {
+        cards.forEach(card => card.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
 
-        // Reapply transition and animate back to start
-        testimonialCards.style.transition = 'transform 30s linear infinite';
-        testimonialCards.style.transform = `translateX(-50%)`;
+        cards[index % cards.length].classList.add('active');
+        dots[index % dots.length].classList.add('active');
     };
 
-    // Reset when the animation completes to prevent gaps
-    testimonialCards.addEventListener('animationiteration', resetScroll);
+    // Auto-scroll function
+    const autoScroll = () => {
+        currentIndex++;
+        updateActiveCard(currentIndex);
+        testimonialCards.style.transform = `translateX(-${currentIndex * (cards[0].offsetWidth + 20)}px)`; // Adjust gap here
+
+        // Loop back to the start when reaching the end
+        if (currentIndex >= cards.length) {
+            setTimeout(() => {
+                testimonialCards.style.transition = 'none';
+                testimonialCards.style.transform = 'translateX(0)';
+                currentIndex = 0;
+                updateActiveCard(currentIndex);
+                requestAnimationFrame(() => {
+                    testimonialCards.style.transition = 'transform 0.5s ease-in-out';
+                });
+            }, 500);
+        }
+    };
+
+    // Set interval to auto-scroll every 3 seconds
+    setInterval(autoScroll, 3000);
+
+    // Initialize the first active card and dot
+    updateActiveCard(currentIndex);
 });
+
+
 
 
 

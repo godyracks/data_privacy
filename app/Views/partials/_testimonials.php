@@ -14,7 +14,7 @@
                         <h3><?= esc($testimonial['username']) ?></h3>
                         <p class="testimonial-email"><?= esc($testimonial['email']) ?></p>
                         <div class="stars">
-                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <?php for ($i = 1; $i <= 5; $i++): ?>
                                 <?php if ($i <= $testimonial['stars']): ?>
                                     <span class="material-symbols-outlined">star</span>
                                 <?php else: ?>
@@ -29,4 +29,5 @@
         </div>
     </div>
     <span class="material-symbols-outlined test-chevron chevron-right">chevron_right</span>
+    <div class="dots-wrapper"></div> <!-- Dots for progress tracking -->
 </section>

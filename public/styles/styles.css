@@ -291,6 +291,8 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 /* Base styles for testimonials */
+/* Base Styles */
+/* Container Styles */
 .testimonials {
     display: flex;
     flex-direction: column;
@@ -309,55 +311,81 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--big-title);
 }
 
+/* Chevron Navigation */
 .test-chevron {
-    display: none; /* Hides chevrons since they're no longer needed */
+    cursor: pointer;
+    font-size: 48px;
+    color: var(--hightlights);
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    user-select: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
 }
 
 .chevron-left {
-    left: 10px; /* Adjust to fit within container */
+    left: 10px;
 }
 
 .chevron-right {
-    right: 10px; /* Adjust to fit within container */
+    right: 10px;
 }
 
+/* Cards Wrapper */
 .testimonial-cards-wrapper {
     overflow: hidden;
     width: 100%;
-    max-width: 900px; /* Adjust based on design needs */
-    position: relative; /* Ensures the chevrons position properly */
+    max-width: 900px;
+    position: relative;
 }
 
 .testimonial-cards {
     display: flex;
-    gap: 20px; /* Space between cards */
-    transition: transform 0.3s ease-in-out;
-    animation: scroll-cards 30s linear infinite; /* Slowed down for better readability */
-    will-change: transform;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
 }
 
+/* Individual Card Styles */
 .testimonial-card {
     display: flex;
-    flex: 0 0 300px; /* Fixed width for each card */
-    min-width: 300px; /* Ensures all cards have a uniform width */
-    height: 177px; /* Card height */
+    flex: 0 0 300px;
+    height: auto;
     background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bottom shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #dddddd;
     border-radius: 16px;
     margin: 10px 0;
+    overflow: hidden;
+    transition: transform 0.5s, box-shadow 0.5s;
 }
 
+.testimonial-card.active {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Left Section (Image) */
 .testimonial-left {
-    flex-shrink: 0;
+    flex: 0 0 90px;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .testimonial-image {
-    width: 95px;
-    height: 85px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
     overflow: hidden;
-    border-radius: 30%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .testimonial-image img {
@@ -366,89 +394,78 @@ h1, h2, h3, h4, h5, h6 {
     object-fit: cover;
 }
 
+/* Right Section (Content) */
 .testimonial-right {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 5px;
+    padding: 10px;
+    flex: 1;
 }
 
 .testimonial-right h3 {
-    position: relative;
-    top: 10px;
-    bottom: 0;
+    margin: 0 0 5px;
+    font-size: 16px;
+    color: #333;
 }
 
-.testimonial-cards-wrapper .testimonial-right p {
+.testimonial-email {
     font-size: 12px;
+    color: #777;
+    margin-bottom: 5px;
 }
 
-.testimonial-right .stars {
+.stars {
     display: flex;
     align-items: center;
+    margin-bottom: 5px;
+}
+
+.testimonial-right p {
+    font-size: 14px;
+    color: #555;
     margin: 0;
-    margin-top: -10px;
-    bottom: 0;
 }
 
-.testimonial-right .testimonial-email {
-    margin-top: -10px;
-    bottom: 0;
+/* Dots for tracking progress */
+.dots-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
 }
 
-/* Optional: Keyframe animation for smooth, endless scroll */
-@keyframes scroll-cards {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%); /* Scroll halfway since we have a duplicate set */
-    }
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ddd;
+    transition: background-color 0.3s;
+    cursor: pointer;
 }
 
-/* Responsive styles for screens with max-width of 769px */
-@media (max-width: 769px) {
+.dot.active {
+    background-color: var(--hightlights);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
     .testimonials {
-        padding: 0 10px; /* Add padding for better spacing */
+        max-width: 100%;
+        padding: 0 10px;
     }
 
     .testimonial-card {
-        flex: 0 0 50%; /* Each card takes full width of the container */
-        margin: 1px;
-        max-width: 300px;
+        flex: 0 0 80%;
+        margin: 10px auto;
     }
 
-    .testimonial-cards-wrapper {
-        overflow: hidden;
-        width: 80%;
-        max-width: 320px; /* Adjust based on design needs */
-        position: relative; /* Ensures the chevrons position properly */
+    .testimonial-right h3 {
+        font-size: 14px;
     }
 
-    .test-chevron {
-        cursor: pointer;
-        font-size: 28px;
-        color: var(--hightlights); /* Blue color for the chevrons */
-        background-color: #ffffff; /* White circular background */
-        border-radius: 50%;
-        padding: 1px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        user-select: none;
-        position: absolute;
-        top: 65%;
-        transform: translateY(-50%);
-        z-index: 10; /* Ensure it's above other elements */
-    }
-
-    .chevron-left {
-        left: 10px; /* Adjust to fit within container */
-    }
-
-    .chevron-right {
-        right: 10px; /* Adjust to fit within container */
+    .testimonial-right p {
+        font-size: 12px;
     }
 }
 
