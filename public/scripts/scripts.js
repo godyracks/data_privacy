@@ -16,39 +16,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    const chevronLeft = document.querySelector('.chevron-left');
-    const chevronRight = document.querySelector('.chevron-right');
     const testimonialCards = document.querySelector('.testimonial-cards');
-    const cardWidth = document.querySelector('.testimonial-card').offsetWidth; // Dynamically get the width of a card
 
-    let currentIndex = 0;
-    const totalCards = testimonialCards.children.length;
+    // Duplicate the cards to create a seamless loop
+    const cardsClone = testimonialCards.innerHTML;
+    testimonialCards.innerHTML += cardsClone;
 
-    const updateTransform = () => {
-        testimonialCards.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    // Function to reset scroll animation
+    const resetScroll = () => {
+        testimonialCards.style.transition = 'none';
+        testimonialCards.style.transform = 'translateX(0)';
+
+        // Force reflow to reset the animation properly
+        void testimonialCards.offsetWidth;
+
+        // Reapply transition and animate back to start
+        testimonialCards.style.transition = 'transform 30s linear infinite';
+        testimonialCards.style.transform = `translateX(-50%)`;
     };
 
-    chevronLeft.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-        } else {
-            currentIndex = totalCards - 1; // Go to the last card
-        }
-        updateTransform();
-    });
-
-    chevronRight.addEventListener('click', () => {
-        const visibleCardsCount = Math.floor(testimonialCards.parentElement.offsetWidth / cardWidth);
-        const maxIndex = totalCards - visibleCardsCount;
-
-        if (currentIndex < maxIndex) {
-            currentIndex++;
-        } else {
-            currentIndex = 0; // Go back to the first card
-        }
-        updateTransform();
-    });
+    // Reset when the animation completes to prevent gaps
+    testimonialCards.addEventListener('animationiteration', resetScroll);
 });
+
+
 
 
 

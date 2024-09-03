@@ -310,21 +310,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .test-chevron {
-    cursor: pointer;
-    font-size: 48px;
-    color: var(--hightlights); /* Blue color for the chevrons */
-    background-color: #ffffff; /* White circular background */
-    border-radius: 50%;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    user-select: none;
-    position: absolute;
-    top: 65%;
-    transform: translateY(-50%);
-    z-index: 10; /* Ensure it's above other elements */
+    display: none; /* Hides chevrons since they're no longer needed */
 }
 
 .chevron-left {
@@ -339,24 +325,27 @@ h1, h2, h3, h4, h5, h6 {
     overflow: hidden;
     width: 100%;
     max-width: 900px; /* Adjust based on design needs */
-    position: relative; /* Ensure the chevrons position properly */
+    position: relative; /* Ensures the chevrons position properly */
 }
 
 .testimonial-cards {
     display: flex;
+    gap: 20px; /* Space between cards */
     transition: transform 0.3s ease-in-out;
-    width: fit-content; /* Ensure width fits the content */
+    animation: scroll-cards 30s linear infinite; /* Slowed down for better readability */
+    will-change: transform;
 }
 
 .testimonial-card {
     display: flex;
-    flex: 0 0 300px; /* Card width */
+    flex: 0 0 300px; /* Fixed width for each card */
+    min-width: 300px; /* Ensures all cards have a uniform width */
     height: 177px; /* Card height */
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bottom shadow */
     border: 1px solid #dddddd;
     border-radius: 16px;
-    margin: 10px 40px;
+    margin: 10px 0;
 }
 
 .testimonial-left {
@@ -392,19 +381,29 @@ h1, h2, h3, h4, h5, h6 {
 
 .testimonial-cards-wrapper .testimonial-right p {
     font-size: 12px;
-    
 }
 
 .testimonial-right .stars {
     display: flex;
     align-items: center;
     margin: 0;
-     margin-top: -10px;
-    bottom: 0;
-}
-.testimonial-right .testimonial-email{
     margin-top: -10px;
     bottom: 0;
+}
+
+.testimonial-right .testimonial-email {
+    margin-top: -10px;
+    bottom: 0;
+}
+
+/* Optional: Keyframe animation for smooth, endless scroll */
+@keyframes scroll-cards {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* Scroll halfway since we have a duplicate set */
+    }
 }
 
 /* Responsive styles for screens with max-width of 769px */
@@ -418,39 +417,39 @@ h1, h2, h3, h4, h5, h6 {
         margin: 1px;
         max-width: 300px;
     }
+
     .testimonial-cards-wrapper {
         overflow: hidden;
         width: 80%;
         max-width: 320px; /* Adjust based on design needs */
-        position: relative; /* Ensure the chevrons position properly */
+        position: relative; /* Ensures the chevrons position properly */
     }
 
+    .test-chevron {
+        cursor: pointer;
+        font-size: 28px;
+        color: var(--hightlights); /* Blue color for the chevrons */
+        background-color: #ffffff; /* White circular background */
+        border-radius: 50%;
+        padding: 1px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        user-select: none;
+        position: absolute;
+        top: 65%;
+        transform: translateY(-50%);
+        z-index: 10; /* Ensure it's above other elements */
+    }
 
-  .test-chevron {
-    cursor: pointer;
-    font-size: 28px;
-    color: var(--hightlights); /* Blue color for the chevrons */
-    background-color: #ffffff; /* White circular background */
-    border-radius: 50%;
-    padding: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    user-select: none;
-    position: absolute;
-    top: 65%;
-    transform: translateY(-50%);
-    z-index: 10; /* Ensure it's above other elements */
-}
+    .chevron-left {
+        left: 10px; /* Adjust to fit within container */
+    }
 
-.chevron-left {
-    left: 10px; /* Adjust to fit within container */
-}
-
-.chevron-right {
-    right: 10px; /* Adjust to fit within container */
-}
+    .chevron-right {
+        right: 10px; /* Adjust to fit within container */
+    }
 }
 
 
