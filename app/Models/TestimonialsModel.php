@@ -19,8 +19,8 @@ class TestimonialsModel extends Model
         // Initialize UserModel
         $userModel = new UserModel();
         
-        // Fetch all testimonials
-        $testimonials = $this->findAll();
+       // Fetch all testimonials ordered by created_at in descending order
+       $testimonials = $this->orderBy('created_at', 'DESC')->findAll();
     
         // Add profile image and email to each testimonial
         foreach ($testimonials as &$testimonial) {
