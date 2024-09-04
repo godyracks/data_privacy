@@ -291,8 +291,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 /* Base styles for testimonials */
-/* Base Styles */
-/* Container Styles */
+
 .testimonials {
     display: flex;
     flex-direction: column;
@@ -325,17 +324,17 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     user-select: none;
     position: absolute;
-    top: 50%;
+    top: 58%;
     transform: translateY(-50%);
     z-index: 10;
 }
 
 .chevron-left {
-    left: 10px;
+    left: 0;
 }
 
 .chevron-right {
-    right: 10px;
+    right: 0;
 }
 
 /* Cards Wrapper */
@@ -361,7 +360,7 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #dddddd;
     border-radius: 16px;
-    margin: 10px 0;
+    margin: 10px 10px;
     overflow: hidden;
     transition: transform 0.5s, box-shadow 0.5s;
 }
@@ -425,6 +424,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 14px;
     color: #555;
     margin: 0;
+    padding-right: 2px;
 }
 
 /* Dots for tracking progress */
@@ -467,6 +467,32 @@ h1, h2, h3, h4, h5, h6 {
     .testimonial-right p {
         font-size: 12px;
     }
+    /* Chevron Navigation */
+.test-chevron {
+    cursor: pointer;
+    font-size: 28px;
+    color: var(--hightlights);
+    background-color: #e2dddd;
+    border-radius: 50%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    user-select: none;
+    position: absolute;
+    top: 62%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.chevron-left {
+    left: 5px;
+}
+
+.chevron-right {
+    right: 5px;
+}
 }
 
 

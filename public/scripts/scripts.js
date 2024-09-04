@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dots = Array.from(dotsWrapper.children);
     let currentIndex = 0;
     let autoScrollInterval;
-    let isAnimating = false; // To prevent rapid scrolling
+    let isAnimating = false;
 
     // Update active card and dot based on index
     const updateActiveCard = (index) => {
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollToIndex = (index) => {
         if (isAnimating) return; // Prevent during animation
         isAnimating = true; // Block multiple clicks
-        testimonialCards.style.transition = 'transform 0.8s ease-in-out'; // Smoother and slower transition
+        testimonialCards.style.transition = 'transform 0.8s ease-in-out'; // Smooth transition
         testimonialCards.style.transform = `translateX(-${index * (cards[0].offsetWidth + 20)}px)`; // Adjust for card width + gap
         updateActiveCard(index);
 
@@ -57,48 +57,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Auto-scroll function
     const autoScroll = () => {
-        currentIndex++;
-        if (currentIndex >= cards.length) {
-            currentIndex = 0;
-        }
+        currentIndex = (currentIndex + 1) % cards.length; // Loop back to start
         scrollToIndex(currentIndex);
+    };
+
+    // Function to start the auto-scroll with interval
+    const startAutoScroll = () => {
+        clearInterval(autoScrollInterval); // Clear any existing interval
+        autoScrollInterval = setInterval(autoScroll, 5000); // Auto-scroll every 5 seconds
     };
 
     // Click event for right chevron
     chevronRight.addEventListener('click', () => {
         if (isAnimating) return; // Prevent rapid clicks
-        currentIndex++;
-        if (currentIndex >= cards.length) {
-            currentIndex = 0;
-        }
+        currentIndex = (currentIndex + 1) % cards.length; // Loop back to start
         scrollToIndex(currentIndex);
-        pauseAutoScroll();
+        resetAutoScroll(); // Reset the auto-scroll interval on interaction
     });
 
     // Click event for left chevron
     chevronLeft.addEventListener('click', () => {
         if (isAnimating) return; // Prevent rapid clicks
-        currentIndex--;
-        if (currentIndex < 0) {
-            currentIndex = cards.length - 1;
-        }
+        currentIndex = (currentIndex - 1 + cards.length) % cards.length; // Wrap around
         scrollToIndex(currentIndex);
-        pauseAutoScroll();
+        resetAutoScroll(); // Reset the auto-scroll interval on interaction
     });
 
-    // Set interval to auto-scroll every 5 seconds
-    const startAutoScroll = () => {
-        autoScrollInterval = setInterval(autoScroll, 5000); // Adjusted for slower auto-scrolling
+    // Function to reset auto-scroll interval
+    const resetAutoScroll = () => {
+        clearInterval(autoScrollInterval); // Stop the current interval
+        startAutoScroll(); // Restart auto-scroll after a pause
     };
-
-    // Pause auto-scrolling on chevron click and reset after 5 seconds
-    const pauseAutoScroll = () => {
-        clearInterval(autoScrollInterval);
-        setTimeout(startAutoScroll, 7000); // Restarts auto-scroll after 7 seconds
-    };
-
-    chevronLeft.addEventListener('click', pauseAutoScroll);
-    chevronRight.addEventListener('click', pauseAutoScroll);
 
     // Initialize auto-scrolling
     startAutoScroll();
@@ -106,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the first active card and dot
     scrollToIndex(currentIndex);
 });
+
 
 
 
