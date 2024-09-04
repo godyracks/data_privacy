@@ -349,12 +349,34 @@
     color: #468EEE; /* Change the color on hover for visual feedback */
 }
 
+/* Progress bar styling */
 #progress-bar {
-    width: 80%; /* Adjusts width to fill available space */
-    height: 10px; /* Adjust the height of the progress bar */
-    border-radius: 18px; /* Rounds the corners for a modern look */
-    background-color: orange; /* Light background to contrast with the progress */
+    width: 200px;              /* Adjust the width as needed */
+    height: 8px;               /* Adjust the height to make it visually appealing */
+    border-radius: 5px;        /* Rounded corners for a smooth look */
+    background-color: #ddd;    /* Background color when empty */
+    appearance: none;          /* Remove default styling in browsers */
+    margin-left: 10px;         /* Spacing between button and progress bar */
 }
+
+/* Change the color of the filled progress (for browsers that support it) */
+#progress-bar::-webkit-progress-value {
+    background-color: orange;  /* Fill color when progressing */
+    border-radius: 5px;        /* Rounded fill to match the bar */
+}
+
+/* For Firefox */
+#progress-bar::-moz-progress-bar {
+    background-color: orange;  /* Fill color for Firefox */
+    border-radius: 5px;
+}
+
+/* Edge/IE */
+#progress-bar::-ms-fill {
+    background-color: orange;  /* Fill color for Edge/IE */
+    border-radius: 5px;
+}
+
 
 .reading-time {
     margin-left: 10px; /* Adjusts space between the progress bar and the reading time */
