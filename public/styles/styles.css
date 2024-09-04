@@ -602,6 +602,7 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     align-items: flex-start;
     padding: 15px;
+ 
     padding-left: 40px;
     width: 70%;
     color: white;
@@ -664,6 +665,10 @@ h1, h2, h3, h4, h5, h6 {
         padding: 20px 10px;
         align-items: center;
         text-align: center;
+
+    }
+    .right-div p{
+        padding-right: 10px;
     }
 
     .buttons {
