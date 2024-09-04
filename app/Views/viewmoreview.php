@@ -249,9 +249,9 @@
         .right-part {
             flex: none;
             width: 100%;
-            max-width: 80%;
+            max-width: 95%;
             margin: 0 auto;
-            padding: 2px;
+            padding: 10px;
         }
         .right-part h2{
             font-size: 14px;
@@ -267,10 +267,11 @@
         }
         .image-container {
     width: auto;
-    max-width: 120%;
+    max-width: 100%;
     margin: 0;
-    height: 300px;
+    height: 220px;
     overflow: hidden; /* Ensure content does not overflow the container */
+    position: relative;
 }
 
 .image-container img {
@@ -278,6 +279,8 @@
     height: 100%;
     object-fit: cover; /* Maintains aspect ratio while filling the container */
     border-radius: 10px;
+    object-position: top; 
+    position: absolute;
 }
 
         .date-container,
@@ -290,10 +293,12 @@
         .content-container{
             margin-bottom: 80px;
             margin-right: 0;
-            margin-left: -10px;
+            padding: 5px;
+            font-size: 16px;
+            
         }
         .reviews-container {
-            margin-left: -20px;
+            padding: 5px;
             
         }
         .title-container{
@@ -302,7 +307,7 @@
         .reviews-container h2{
             font-size: 14px;
             margin-top: 2px;
-            margin-left: -10px;
+            margin-left: 0;
         }
     
         .submit-review  a{
@@ -324,6 +329,40 @@
             background: #f9f9f9; /* Light background for contrast */
         }
     }
+
+
+    .audio-player {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjusts the space between the buttons and progress bar */
+    margin-top: 10px;
+}
+
+.material-symbols-outlined {
+    font-size: 32px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#play-btn:hover,
+#pause-btn:hover {
+    color: #468EEE; /* Change the color on hover for visual feedback */
+}
+
+#progress-bar {
+    width: 80%; /* Adjusts width to fill available space */
+    height: 10px; /* Adjust the height of the progress bar */
+    border-radius: 18px; /* Rounds the corners for a modern look */
+    background-color: orange; /* Light background to contrast with the progress */
+}
+
+.reading-time {
+    margin-left: 10px; /* Adjusts space between the progress bar and the reading time */
+    font-size: 14px;   /* Font size of the reading time */
+    color: #555;       /* Text color for better visibility */
+}
+
+
 </style>
 
 
@@ -343,10 +382,21 @@
         <div class="social-icons">
             <a target="_blank" href="https://www.linkedin.com/in/sivasakthi-vajjiravelu-571792195?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
             <a  target="_blank"  href="https://wa.me/447436199290?text=Hello%2C%20I%20have%20a%20question%21" class="social-icon" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
+            <i class="fab fa-whatsapp"></i>
+        </a>
 
         </div>
+                <div class="audio-player">
+            <span id="play-btn" class="material-symbols-outlined" title="Play" aria-label="Play">play_circle</span>
+            <span id="pause-btn" class="material-symbols-outlined" title="Pause" aria-label="Pause" style="display: none;">pause_circle</span>
+            <progress id="progress-bar" value="0" max="100"></progress>
+            <span id="reading-time" class="reading-time"></span> 
+        </div>
+
+
+
+
+
         <div class="content-container">
             <!-- Directly output HTML content -->
             <?= $content['Description'] ?? $content['Summary'] ?? $content['KeyProvisions'] ?? '' ?>
@@ -448,6 +498,92 @@
     });
 });
 
+
+</script>
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const playBtn = document.getElementById('play-btn');
+    const pauseBtn = document.getElementById('pause-btn');
+    const progressBar = document.getElementById('progress-bar');
+    const contentContainer = document.querySelector('.content-container');
+    const readingTimeDisplay = document.getElementById('reading-time');
+    let utterance;
+    let isPaused = false;
+    let totalLength = contentContainer.innerText.length;
+    let charIndex = 0;
+
+    // Calculate and display the estimated reading time
+    function displayReadingTime() {
+        const words = contentContainer.innerText.split(/\s+/).length; // Count words
+        const averageWordsPerMinute = 180; // Average speaking rate (adjust as needed)
+        const estimatedMinutes = Math.ceil(words / averageWordsPerMinute); // Calculate estimated time in minutes
+        readingTimeDisplay.textContent = `${estimatedMinutes} min read`; // Display the estimated reading time
+    }
+
+    // Initialize the speech synthesis
+    function initializeSpeech() {
+        if (!utterance) {
+            utterance = new SpeechSynthesisUtterance(contentContainer.innerText);
+            utterance.onboundary = updateProgress;
+            utterance.onend = resetControls;
+        }
+    }
+
+    // Play button click
+    playBtn.addEventListener('click', () => {
+        initializeSpeech();
+        if (isPaused) {
+            speechSynthesis.resume();
+        } else {
+            speechSynthesis.speak(utterance);
+            progressBar.style.display = 'block';
+        }
+        isPaused = false;
+        toggleButtons();
+    });
+
+    // Pause button click
+    pauseBtn.addEventListener('click', () => {
+        speechSynthesis.pause();
+        isPaused = true;
+        toggleButtons();
+    });
+
+    // Update the progress based on the spoken characters
+    function updateProgress(event) {
+        if (event.name === 'word') {
+            charIndex = event.charIndex;
+            const progress = (charIndex / totalLength) * 100;
+            progressBar.value = progress;
+        }
+    }
+
+    // Toggle between play and pause buttons
+    function toggleButtons() {
+        playBtn.style.display = isPaused ? 'inline' : 'none';
+        pauseBtn.style.display = isPaused ? 'none' : 'inline';
+    }
+
+    // Reset controls when speech ends
+    function resetControls() {
+        playBtn.style.display = 'inline';
+        pauseBtn.style.display = 'none';
+        isPaused = false;
+        progressBar.style.display = 'none';
+        progressBar.value = 0;
+        utterance = null; // Reset the utterance so it can be initialized again
+    }
+
+    // Stop speech when navigating away or reloading
+    window.addEventListener('beforeunload', () => {
+        speechSynthesis.cancel();
+    });
+
+    // Display reading time on page load
+    displayReadingTime();
+});
 
 </script>
 
