@@ -1,5 +1,5 @@
 <style>
-    /* Slider Container */
+/* Slider Container */
 .hero {
     position: relative;
     height: 70vh;
@@ -17,7 +17,7 @@
     width: 100%;
     height: 100%;
     display: flex;
-    animation: slide 15s infinite; /* 15 seconds cycle */
+    transition: transform 1s ease-in-out; /* Smooth transition */
 }
 
 .slide {
@@ -25,33 +25,12 @@
     height: 100%;
     background-size: cover;
     background-position: center;
-    animation: zoomIn 5s infinite alternate; /* 5 seconds zoom effect */
+    transform: scale(1.1); /* Start zoomed out */
+    transition: transform 5s ease-in-out; /* Zoom effect timing */
 }
 
-/* Zoom Effect */
-@keyframes zoomIn {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1.1);
-    }
-}
-
-/* Slide Effect */
-@keyframes slide {
-    0% {
-        transform: translateX(0%);
-    }
-    33.33% {
-        transform: translateX(-100%);
-    }
-    66.66% {
-        transform: translateX(-200%);
-    }
-    100% {
-        transform: translateX(0%);
-    }
+.slide.active {
+    transform: scale(1); /* Zoom to original size */
 }
 
 /* Hero Overlay */
@@ -105,6 +84,7 @@
     background-color: darken(orange, 50%);
 }
 
+
 </style>
 <section class="hero">
     <div class="hero-overlay">
@@ -116,8 +96,55 @@
     </div>
     <!-- Slide images -->
     <div class="hero-slides">
-        <div class="slide" style="background-image: url('<?= base_url('public/images/hero1.jpg') ?>');"></div>
+        <div class="slide active" style="background-image: url('<?= base_url('public/images/hero1.jpg') ?>');"></div>
         <div class="slide" style="background-image: url('<?= base_url('public/images/hero2.jpg') ?>');"></div>
         <div class="slide" style="background-image: url('<?= base_url('public/images/hero3.jpg') ?>');"></div>
     </div>
 </section>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+    const slideInterval = 6000; // 6 seconds per slide
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+
+        // Shift the entire container to show the current slide
+        const slideWidth = slides[0].offsetWidth;
+        document.querySelector('.hero-slides').style.transform = `translateX(-${index * slideWidth}px)`;
+    }
+
+    function nextSlide() {
+        currentSlide++;
+
+        if (currentSlide >= slides.length) {
+            // Reset to the first slide without sliding back
+            currentSlide = 0;
+            document.querySelector('.hero-slides').style.transition = 'none'; // Disable transition
+            document.querySelector('.hero-slides').style.transform = 'translateX(0)';
+            
+            // Force reflow to apply the transition again
+            setTimeout(() => {
+                document.querySelector('.hero-slides').style.transition = 'transform 1s ease-in-out';
+                showSlide(currentSlide);
+            }, 10);
+        } else {
+            showSlide(currentSlide);
+        }
+    }
+
+    // Initial display
+    showSlide(currentSlide);
+
+    // Set interval to change slides
+    setInterval(nextSlide, slideInterval);
+});
+</script>
+
+
