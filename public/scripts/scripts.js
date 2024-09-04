@@ -96,6 +96,113 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollToIndex(currentIndex);
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+    const slideInterval = 6000; // 6 seconds per slide
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+
+        // Shift the entire container to show the current slide
+        const slideWidth = slides[0].offsetWidth;
+        document.querySelector('.hero-slides').style.transform = `translateX(-${index * slideWidth}px)`;
+    }
+
+    function nextSlide() {
+        currentSlide++;
+
+        if (currentSlide >= slides.length) {
+            // Reset to the first slide without sliding back
+            currentSlide = 0;
+            document.querySelector('.hero-slides').style.transition = 'none'; // Disable transition
+            document.querySelector('.hero-slides').style.transform = 'translateX(0)';
+            
+            // Force reflow to apply the transition again
+            setTimeout(() => {
+                document.querySelector('.hero-slides').style.transition = 'transform 1s ease-in-out';
+                showSlide(currentSlide);
+            }, 10);
+        } else {
+            showSlide(currentSlide);
+        }
+    }
+
+    // Initial display
+    showSlide(currentSlide);
+
+    // Set interval to change slides
+    setInterval(nextSlide, slideInterval);
+});
+
+particlesJS('particles-js', {
+    "particles": {
+      "number": {
+        "value": 80,  // Increased number of particles
+        "density": {
+          "enable": true,
+          "value_area": 800
+        }
+      },
+      "color": {
+        "value": "#ffffff"
+      },
+      "shape": {
+        "type": "circle",
+        "stroke": {
+          "width": 0,
+          "color": "#000000"
+        },
+        "polygon": {
+          "nb_sides": 5
+        }
+      },
+      "opacity": {
+        "value": 0.6,  // Slightly higher opacity for more visibility
+        "random": true,
+        "anim": {
+          "enable": false
+        }
+      },
+      "size": {
+        "value": 4,  // Increased size for better recognition
+        "random": true,
+        "anim": {
+          "enable": false
+        }
+      },
+      "line_linked": {
+        "enable": false
+      },
+      "move": {
+        "enable": true,
+        "speed": 0.8,  // Reduced speed for a calmer effect
+        "direction": "none",
+        "random": true,
+        "straight": false,
+        "out_mode": "out",
+        "bounce": false
+      }
+    },
+    "interactivity": {
+      "detect_on": "canvas",
+      "events": {
+        "onhover": {
+          "enable": false
+        },
+        "onclick": {
+          "enable": false
+        }
+      }
+    },
+    "retina_detect": true
+  });
+
 
 
 

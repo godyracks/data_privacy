@@ -12,6 +12,7 @@
 
   gtag('config', 'G-SEB6RCH84C');
 </script>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <title>Biometric Data Laws | Compare UK and India Biometric Data Privacy Laws</title>
     <meta name="description" content="Compare biometric data laws between the UK and India with interactive maps, timelines, and comprehensive resources. Stay informed on data privacy with our information hub.">
     <meta name="keywords" content="biometric data laws, UK biometric laws, India biometric laws, data privacy, interactive maps, timelines, data privacy resources, information hub">
