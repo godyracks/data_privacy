@@ -6,7 +6,7 @@
     --nav-link-active-color: #FF5722;
     --body-bg: #F5F5F5;
     --button-color: #FFAC0C;
-    --blue-overlay: rgba(0, 51, 102, 0.7);
+    --blue-overlay: rgba(0, 51, 102, 0.5);
     --footer-bg: #202124;
     --big-title: #202124;
     --input-bg: rgba(206, 199, 199, 0.4);
@@ -163,37 +163,76 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-
-/* Hero Section Styles */
+/* Slider Container */
 .hero {
     position: relative;
-    background-size: cover;
-    background-position: center;
     height: 70vh;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #ffffff;
+    background-attachment: fixed; /* Adds a parallax effect to the background */
+    background-size: cover;
 }
 
+.hero-slides {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    transition: transform 1s ease-in-out; /* Smooth transition */
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.1); /* Start zoomed out */
+    transition: transform 5s ease-in-out; /* Zoom effect timing */
+}
+
+.slide.active {
+    transform: scale(1); /* Zoom to original size */
+}
+
+/* Hero Overlay */
 .hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--blue-overlay); 
+    background: var(--blue-overlay);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: start;
+    z-index: 2; /* Above slides */
 }
 
-.hero-content {
+/* .hero-content {
     position: relative;
-    z-index: 1; 
+    z-index: 3; 
     max-width: 800px;
-    
+} */
+.hero-content {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease forwards 1.5s; /* Delays the animation until the zoom finishes */
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hero h1 {
@@ -208,7 +247,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 30px;
-    color:   #FFFFFF; /* Use link color for text */
+    color: #FFFFFF;
 }
 
 .cta-button {
@@ -216,15 +255,16 @@ h1, h2, h3, h4, h5, h6 {
     padding: 15px 30px;
     font-size: 1rem;
     color: #ffffff;
-    background-color: var(--button-color); /* Use button color */
+    background-color: var(--button-color);
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
 .cta-button:hover {
-    background-color: darken(orange, 50%); /* Darken button color on hover */
+    background-color: darken(orange, 50%);
 }
+
 
 /* Highlight Section Styles */
 .highlights{

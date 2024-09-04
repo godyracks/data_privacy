@@ -1,75 +1,10 @@
 <style>
-/* Slider Container */
 .hero {
-    position: relative;
-    height: 70vh;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-}
-
-.hero-slides {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    transition: transform 1s ease-in-out; /* Smooth transition */
-}
-
-.slide {
-    min-width: 100%;
-    height: 100%;
+    background-attachment: fixed; /* Adds a parallax effect to the background */
     background-size: cover;
-    background-position: center;
-    transform: scale(1.1); /* Start zoomed out */
-    transition: transform 5s ease-in-out; /* Zoom effect timing */
 }
-
-.slide.active {
-    transform: scale(1); /* Zoom to original size */
-}
-
-/* Hero Overlay */
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--blue-overlay);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: start;
-    z-index: 2; /* Above slides */
-}
-
-.hero-content {
-    position: relative;
-    z-index: 3; 
-    max-width: 800px;
-}
-
-.hero h1 {
-    font-size: 2.8rem;
-    font-weight: 800;
-    margin-bottom: 20px;
-    line-height: 1.2;
-    color: #FFFFFF; 
-}
-
-.hero p {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 30px;
-    color: #FFFFFF;
-}
-
 .cta-button {
+    position: relative;
     display: inline-block;
     padding: 15px 30px;
     font-size: 1rem;
@@ -77,16 +12,54 @@
     background-color: var(--button-color);
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    overflow: hidden;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Adds depth */
+}
+.cta-button:hover {
+    background-color: darken(var(--button-color), 20%);
+    transform: translateY(-3px); /* Creates a "lift" effect */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Increases the shadow on hover */
 }
 
-.cta-button:hover {
-    background-color: darken(orange, 50%);
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    .cta-button {
+        padding: 12px 24px;
+       
+    }
+
+    .hero-content .cta-button{
+        width: auto;
+        margin: 0 auto;
+        margin-left: 140px;
+    }
+}
+.hero-content {
+    backdrop-filter: blur(1px); /* Adds a glassy, frosted effect */
+    background: rgba(255, 255, 255, 0.1); /* Light transparency to enhance readability */
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border to define edges */
+}
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Behind the overlay and content */
+    pointer-events: none; /* Ensures particles don't interfere with user interactions */
 }
 
 
 </style>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
 <section class="hero">
+<div id="particles-js"></div>
     <div class="hero-overlay">
         <div class="hero-content">
             <h1>Explore Biometric Data Privacy Laws: <br>UK vs. India</h1>
@@ -146,5 +119,70 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(nextSlide, slideInterval);
 });
 </script>
+<script>
+particlesJS('particles-js', {
+  "particles": {
+    "number": {
+      "value": 80,  // Increased number of particles
+      "density": {
+        "enable": true,
+        "value_area": 800
+      }
+    },
+    "color": {
+      "value": "#ffffff"
+    },
+    "shape": {
+      "type": "circle",
+      "stroke": {
+        "width": 0,
+        "color": "#000000"
+      },
+      "polygon": {
+        "nb_sides": 5
+      }
+    },
+    "opacity": {
+      "value": 0.6,  // Slightly higher opacity for more visibility
+      "random": true,
+      "anim": {
+        "enable": false
+      }
+    },
+    "size": {
+      "value": 4,  // Increased size for better recognition
+      "random": true,
+      "anim": {
+        "enable": false
+      }
+    },
+    "line_linked": {
+      "enable": false
+    },
+    "move": {
+      "enable": true,
+      "speed": 0.8,  // Reduced speed for a calmer effect
+      "direction": "none",
+      "random": true,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": {
+        "enable": false
+      },
+      "onclick": {
+        "enable": false
+      }
+    }
+  },
+  "retina_detect": true
+});
+</script>
+
 
 
