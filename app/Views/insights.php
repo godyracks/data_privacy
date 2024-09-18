@@ -178,120 +178,234 @@
     </div>
     </div>
     <script>
-        // Data for the charts
-        const ukComplaintsData = <?php echo json_encode($uk_complaints); ?>;
-        const ukPenaltiesData = <?php echo json_encode($uk_penalties); ?>;
-        const ukComplianceData = <?php echo json_encode($uk_compliance); ?>;
-        const ukOutcomeData = <?php echo json_encode($uk_outcome); ?>;
+      document.addEventListener("DOMContentLoaded", function() {
+    console.log("Document loaded");
 
-        // Debug statements to check the data
-        console.log("UK Complaints Data:", ukComplaintsData);
-        console.log("UK Penalties Data:", ukPenaltiesData);
-        console.log("UK Compliance Data:", ukComplianceData);
-        console.log("UK Outcome Data:", ukOutcomeData);
+    // Data from PHP
+    const ukComplaintsData = <?php echo json_encode($uk_complaints); ?>;
+    const ukPenaltiesData = <?php echo json_encode($uk_penalties); ?>;
+    const ukComplianceData = <?php echo json_encode($uk_compliance); ?>;
+    const ukOutcomeData = <?php echo json_encode($uk_outcome); ?>;
+    
+    console.log("UK Complaints Data:", ukComplaintsData);
+    console.log("UK Penalties Data:", ukPenaltiesData);
+    console.log("UK Compliance Data:", ukComplianceData);
+    console.log("UK Outcome Data:", ukOutcomeData);
 
-        // Create complaints chart
-        const ctxComplaints = document.getElementById('complaintsChart').getContext('2d');
-        new Chart(ctxComplaints, {
-            type: 'line',
-            data: {
-                labels: ukComplaintsData.map(data => data.Year),
-                datasets: [{
-                    label: 'Data Protection Complaints',
-                    data: ukComplaintsData.map(data => data.Complaints),
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderWidth: 1
-                }]
+    // Get context for each chart
+    const ctxComplaints = document.getElementById('complaintsChart').getContext('2d');
+    const ctxPenalties = document.getElementById('penaltiesChart').getContext('2d');
+    const ctxCompliance = document.getElementById('complianceChart').getContext('2d');
+    const ctxOutcome = document.getElementById('outcomeChart').getContext('2d');
+
+    // Chart for UK Complaints
+    new Chart(ctxComplaints, {
+        type: 'line',
+        data: {
+            labels: ukComplaintsData.map(data => data.Year),
+            datasets: [{
+                label: 'Complaints',
+                data: ukComplaintsData.map(data => data.Complaints),
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: false,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += context.parsed.y;
+                            }
+                            return label;
+                        }
+                    }
+                }
             },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: true },
-                    tooltip: { callbacks: { label: function(tooltipItem) { return tooltipItem.dataset.label + ': ' + tooltipItem.raw; } } }
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Year'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Complaints'
+                    }
                 }
             }
-        });
+        }
+    });
 
-        // Debug statement to confirm chart creation
-        console.log("Complaints Chart created successfully");
-
-        // Create penalties chart
-        const ctxPenalties = document.getElementById('penaltiesChart').getContext('2d');
-        new Chart(ctxPenalties, {
-            type: 'bar',
-            data: {
-                labels: ukPenaltiesData.map(data => data.Year),
-                datasets: [{
-                    label: 'Monetary Penalties (£ millions)',
-                    data: ukPenaltiesData.map(data => data.Penalties),
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }]
+    // Chart for UK Penalties
+    new Chart(ctxPenalties, {
+        type: 'bar',
+        data: {
+            labels: ukPenaltiesData.map(data => data.Year),
+            datasets: [{
+                label: 'Penalties (in million GBP)',
+                data: ukPenaltiesData.map(data => data.Penalties),
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += context.parsed.y;
+                            }
+                            return label;
+                        }
+                    }
+                }
             },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: true },
-                    tooltip: { callbacks: { label: function(tooltipItem) { return tooltipItem.dataset.label + ': £' + tooltipItem.raw; } } }
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Year'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Penalties (in million GBP)'
+                    }
                 }
             }
-        });
+        }
+    });
 
-        // Debug statement to confirm chart creation
-        console.log("Penalties Chart created successfully");
-
-        // Create compliance chart
-        const ctxCompliance = document.getElementById('complianceChart').getContext('2d');
-        new Chart(ctxCompliance, {
-            type: 'line',
-            data: {
-                labels: ukComplianceData.map(data => data.Year),
-                datasets: [{
-                    label: 'Compliance Rates (%)',
-                    data: ukComplianceData.map(data => data.Compliance),
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderWidth: 1
-                }]
+    // Chart for UK Compliance
+    new Chart(ctxCompliance, {
+        type: 'line',
+        data: {
+            labels: ukComplianceData.map(data => data.Year),
+            datasets: [{
+                label: 'Compliance Rate (%)',
+                data: ukComplianceData.map(data => data.Compliance),
+                borderColor: 'rgba(153, 102, 255, 1)',
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                fill: false,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += context.parsed.y;
+                            }
+                            return label;
+                        }
+                    }
+                }
             },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: true },
-                    tooltip: { callbacks: { label: function(tooltipItem) { return tooltipItem.dataset.label + ': ' + tooltipItem.raw + '%'; } } }
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Year'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Compliance Rate (%)'
+                    }
                 }
             }
-        });
+        }
+    });
 
-        // Debug statement to confirm chart creation
-        console.log("Compliance Chart created successfully");
-
-        // Create outcome chart
-        const ctxOutcome = document.getElementById('outcomeChart').getContext('2d');
-        new Chart(ctxOutcome, {
-            type: 'bar',
-            data: {
-                labels: ukOutcomeData.map(data => data.Year),
-                datasets: [{
-                    label: 'Outcome Decisions',
-                    data: ukOutcomeData.map(data => data.Decisions),
-                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                    borderColor: 'rgba(153, 102, 255, 1)',
-                    borderWidth: 1
-                }]
+    // Chart for UK Outcome
+    new Chart(ctxOutcome, {
+        type: 'bar',
+        data: {
+            labels: ukOutcomeData.map(data => data.Year),
+            datasets: [{
+                label: 'Outcome Decisions',
+                data: ukOutcomeData.map(data => data.Decisions),
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += context.parsed.y;
+                            }
+                            return label;
+                        }
+                    }
+                }
             },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: true },
-                    tooltip: { callbacks: { label: function(tooltipItem) { return tooltipItem.dataset.label + ': ' + tooltipItem.raw; } } }
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Year'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Outcome Decisions'
+                    }
                 }
             }
-        });
+        }
+    });
+});
 
-        // Debug statement to confirm chart creation
-        console.log("Outcome Chart created successfully");
     </script>
     <?= $this->endSection() ?>
