@@ -29,7 +29,10 @@
             text-align: center;
             margin-top: 20px;
         }
- 
+ .charts{
+    max-width: 800px;
+    margin: 0 auto;
+ }
 </style>
 
 <h2>UK Biometric Data</h2>
@@ -159,7 +162,7 @@
     </div>
 
 
-
+<div class="charts">
     <h2>Data Protection Complaints (UK, 2018-2023)</h2>
     <div>
         <canvas id="complaintsChart" width="400" height="200"></canvas>
@@ -172,6 +175,7 @@
     </div>
     <div>
         <canvas id="outcomeChart" width="400" height="200"></canvas>
+    </div>
     </div>
     <script>
         // Data for the charts
