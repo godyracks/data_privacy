@@ -45,6 +45,56 @@ class Insights extends BaseController
             ['Year' => '2022/23', 'Aadhaar Generated (in Crore)' => 136.65, 'Cumulative Aadhaar Generated (in Crore)' => 136.65, 'Authentication Transactions (in Crore)' => 2_291.97, 'Cumulative Authentication Transactions (in Crore)' => 9_486.48]
         ];
 
+        // Data for UK biometric statistics
+        $data['uk_complaints'] = [
+            ['Year' => '2019/20', 'Complaints' => 39000],
+            ['Year' => '2020/21', 'Complaints' => 36343],
+            ['Year' => '2021/22', 'Complaints' => 33753],
+            ['Year' => '2022/23', 'Complaints' => 39721],
+            ['Year' => '2023/24', 'Complaints' => 41500],
+        ];
+
+        $data['uk_penalties'] = [
+            ['Year' => '2019/20', 'Penalties' => 1.3],
+            ['Year' => '2020/21', 'Penalties' => 3.5],
+            ['Year' => '2021/22', 'Penalties' => 5.2],
+            ['Year' => '2022/23', 'Penalties' => 6.3],
+            ['Year' => '2023/24', 'Penalties' => 7.0],
+        ];
+
+        $data['uk_compliance'] = [
+            ['Year' => '2019/20', 'Compliance' => 82],
+            ['Year' => '2020/21', 'Compliance' => 85],
+            ['Year' => '2021/22', 'Compliance' => 87],
+            ['Year' => '2022/23', 'Compliance' => 90],
+            ['Year' => '2023/24', 'Compliance' => 92],
+        ];
+
+        $data['uk_outcome'] = [
+            ['Year' => '2019/20', 'Decisions' => 39724],
+            ['Year' => '2020/21', 'Decisions' => 39332],
+            ['Year' => '2021/22', 'Decisions' => 37342],
+            ['Year' => '2022/23', 'Decisions' => 35332],
+            ['Year' => '2023/24', 'Decisions' => 33000],
+        ];
+
+        // Data for India biometric statistics
+        $data['india_enrolment'] = [
+            ['Year' => '2018-19', 'Enrolment' => 123.57],
+            ['Year' => '2019-20', 'Enrolment' => 125.79],
+            ['Year' => '2020-21', 'Enrolment' => 129.04],
+            ['Year' => '2021-22', 'Enrolment' => 132.96],
+            ['Year' => '2022-23', 'Enrolment' => 136.65],
+        ];
+
+        $data['india_authentication'] = [
+            ['Year' => '2018-19', 'Transactions' => 1080.47],
+            ['Year' => '2019-20', 'Transactions' => 1113.54],
+            ['Year' => '2020-21', 'Transactions' => 1413.40],
+            ['Year' => '2021-22', 'Transactions' => 1771.00],
+            ['Year' => '2022-23', 'Transactions' => 2291.97],
+        ];
+
         return view('insights', $data);
     }
 }

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SEB6RCH84C"></script>
 <script>
@@ -69,7 +71,7 @@
             <!-- Navigation Links -->
             <nav class="nav-links">
                 <a href="<?= base_url('/') ?>" class="nav-link <?= uri_string() == '' ? 'active' : '' ?>">Home</a>
-                <a href="<?= base_url('features') ?>" class="nav-link <?= uri_string() == 'features' ? 'active' : '' ?>">Features</a>
+                <a href="<?= base_url('insights') ?>" class="nav-link <?= uri_string() == 'insights' ? 'active' : '' ?>">Insights</a>
                 <a href="<?= base_url('map') ?>" class="nav-link <?= uri_string() == 'map' ? 'active' : '' ?>">Map</a>
                 <a href="<?= base_url('timeline') ?>" class="nav-link <?= uri_string() == 'timeline' ? 'active' : '' ?>">Timeline</a>
                 <a href="<?= base_url('search') ?>" class="nav-link <?= uri_string() == 'search' ? 'active' : '' ?>">Search</a>
@@ -87,7 +89,7 @@
             <div class="modal-nav" id="modalNav">
                 <span class="material-symbols-outlined modal-close" id="menuClose">close</span>
                 <a href="<?= base_url('/') ?>" class="nav-link <?= uri_string() == '' ? 'active' : '' ?>">Home</a>
-                <a href="<?= base_url('features') ?>" class="nav-link <?= uri_string() == 'features' ? 'active' : '' ?>">Features</a>
+                <a href="<?= base_url('insights') ?>" class="nav-link <?= uri_string() == 'insights' ? 'active' : '' ?>">Insights</a>
                 <a href="<?= base_url('map') ?>" class="nav-link <?= uri_string() == 'map' ? 'active' : '' ?>">Map</a>
                 <a href="<?= base_url('timeline') ?>" class="nav-link <?= uri_string() == 'timeline' ? 'active' : '' ?>">Timeline</a>
                 <a href="<?= base_url('search') ?>" class="nav-link <?= uri_string() == 'search' ? 'active' : '' ?>">Search</a>
