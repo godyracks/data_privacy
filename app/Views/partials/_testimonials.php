@@ -16,7 +16,7 @@
                         <div class="stars">
                             <?php for ($i = 1; $i <= 5; $i++): ?>
                                 <?php if ($i <= $testimonial['stars']): ?>
-                                    <span class="material-symbols-outlined">star</span>
+                                    <span class="material-symbols-outlined full-star">star</span>
                                 <?php else: ?>
                                     <span class="material-symbols-outlined">star_half</span>
                                 <?php endif; ?>
